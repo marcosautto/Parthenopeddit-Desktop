@@ -71,6 +71,8 @@ public class CoursePageController implements Initializable {
     @FXML
     public Button writePostButton;
 
+    public int courseId;
+
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
@@ -97,13 +99,14 @@ public class CoursePageController implements Initializable {
 
     }
 
-    public void transferMessage(int courseId) {
+    public void transferMessage(int course_Id) {
         //Display the message
         Mockdatabase mockdatabase = new Mockdatabase();
 
         // 1. Wrap the ObservableList in a FilteredList (initially display all data).
 
-        Course mCourse = mockdatabase.courses_table.stream().filter(course -> course.getCourseId() == courseId).collect(Collectors.toList()).get(0);
+        Course mCourse = mockdatabase.courses_table.stream().filter(course -> course.getCourseId() == course_Id).collect(Collectors.toList()).get(0);
+        courseId = mCourse.getCourseId();
         courseNameTitleLabel.setText(mCourse.getName());
         average_liking_score_ratingbar.setRating(mCourse.getAverageLikingScore());
         average_difficulty_score_ratingbar.setRating(mCourse.getAverageDifficultyScore());
@@ -113,6 +116,11 @@ public class CoursePageController implements Initializable {
 
         courseReviewController.getInstance().sendReviews(mCourse.getReviews());
         coursePostController.getInstance().sendPosts(mCourse.getPosts());
+
+    }
+
+    public void writeReview(){
+
 
 
     }

@@ -40,5 +40,6 @@ public class Mockdatabase {
         courses_table.addAll(course1, course2);
         course1.getPosts().addAll(post1, post2);
         course1.getReviews().addAll(review1, review2);
+        course1.setReviewsCount(course1.getReviews().size());
     }
 }

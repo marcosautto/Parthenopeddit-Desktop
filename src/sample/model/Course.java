@@ -26,7 +26,7 @@ public class Course {
         this.average_liking_score = average_liking_score;
         follower_number = 0;
         this.average_difficulty_score = average_difficulty_score;
-        reviews_count = 0;
+        reviews_count = reviews.size();
     }
 
     public int getCourseId() {
@@ -44,6 +44,7 @@ public class Course {
     public int getPostsNum() { return posts_num; }
     public Integer getFollowerNumber() { return follower_number; }
     public double getAverageLikingScore() { return average_liking_score; }
+    public void setReviewsCount(int reviews_count){ this.reviews_count = reviews_count; }
     public Integer getReviewsCount() { return reviews_count; }
     public double getAverageDifficultyScore() { return average_difficulty_score; }
     public ObservableList<Post> getPosts(){ return posts; }

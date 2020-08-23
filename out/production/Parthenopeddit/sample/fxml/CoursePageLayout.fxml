@@ -25,12 +25,12 @@
          <children>
             <VBox prefHeight="200.0" spacing="5.0">
                <children>
-                  <Label text="Average enjoyment score" textFill="WHITE">
+                  <Label text="Average enjoyment score:" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Rating fx:id="average_liking_score_ratingbar" />
+                  <Rating fx:id="average_liking_score_ratingbar" partialRating="true" />
                </children>
                <HBox.margin>
                   <Insets />
@@ -48,7 +48,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Rating fx:id="average_difficulty_score_ratingbar" />
+                  <Rating fx:id="average_difficulty_score_ratingbar" partialRating="true" />
                </children>
                <padding>
                   <Insets left="30.0" />

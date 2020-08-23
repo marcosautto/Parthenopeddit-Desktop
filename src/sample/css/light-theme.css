@@ -1,0 +1,23 @@
+.button {
+    -fx-background-color: #006FFF;
+    -fx-text-fill: #FFFFFF;
+}
+
+.button-red {
+    -fx-background-color: #FF545D;
+    -fx-text-fill: #FFFFFF;
+}
+
+.background-pane{
+    -fx-background-color: #595959;
+}
+
+.background-panel{
+    -fx-background-color: #006FFF;
+    -fx-text-fill: #FFFFFF;
+}
+
+.background-content{
+    -fx-background-color: #FFFFFF;
+    -fx-text-fill: #000000;
+}
