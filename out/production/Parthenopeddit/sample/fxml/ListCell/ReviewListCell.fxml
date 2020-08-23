@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import org.controlsfx.control.Rating?>
+
+<AnchorPane fx:id="anchorPane" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <image>
+            <Image url="@../../img/profiledefault.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="usernameLabel" layoutX="80.0" layoutY="14.0" text="Username" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="courseNameLabel" layoutX="80.0" layoutY="40.0" text="course" />
+      <Label fx:id="timestampLabel" layoutX="319.0" layoutY="17.0" text="01/01/1970" AnchorPane.rightAnchor="80.0" AnchorPane.topAnchor="15.0" />
+      <VBox layoutX="80.0" layoutY="78.0" prefWidth="100.0" spacing="20.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="78.0">
+         <children>
+            <VBox prefWidth="100.0">
+               <children>
+                  <Label text="Gradimento:" />
+                  <Rating fx:id="average_liking_score_ratingbar" />
+               </children>
+            </VBox>
+            <VBox prefWidth="100.0">
+               <children>
+                  <Label text="Difficoltà:" />
+                  <Rating fx:id="average_difficulty_score_ratingbar" />
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+      <TextArea fx:id="reviewContentTextArea" layoutX="65.0" layoutY="228.0" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="220.0" />
+      <HBox alignment="CENTER" layoutX="16.0" layoutY="486.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="420.0">
+         <children>
+            <Label fx:id="commentLabel" text="0" />
+            <JFXButton fx:id="commentButton" />
+            <Label fx:id="upvoteLabel" text="0">
+               <HBox.margin>
+                  <Insets left="300.0" />
+               </HBox.margin>
+            </Label>
+            <JFXButton fx:id="upvoteButton" />
+            <Label fx:id="downvoteLabel" text="0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Label>
+            <JFXButton fx:id="downvoteButton" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

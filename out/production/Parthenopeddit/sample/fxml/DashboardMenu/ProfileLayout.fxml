@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="750.0" prefWidth="990.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ProfileController">
+   <children>
+      <Label layoutX="69.0" layoutY="37.0" text="Profile" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/profiledefault.png" />
+               </image>
+            </ImageView>
+            <Label text="Username" textFill="WHITE">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
