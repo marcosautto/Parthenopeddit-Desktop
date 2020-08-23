@@ -6,6 +6,12 @@ import sample.model.*;
 
 public class Mockdatabase {
 
+    private static Mockdatabase instance;
+    public static Mockdatabase getInstance() {
+        return instance;
+    }
+
+
     public ObservableList<User> users_table = FXCollections.observableArrayList();
     public ObservableList<Course> courses_table = FXCollections.observableArrayList();
     public ObservableList<Post> posts_table = FXCollections.observableArrayList();
@@ -35,7 +41,7 @@ public class Mockdatabase {
 
 
     public Mockdatabase(){
-
+        instance = this;
         users_table.addAll(user1, user2);
         courses_table.addAll(course1, course2);
         course1.getPosts().addAll(post1, post2);

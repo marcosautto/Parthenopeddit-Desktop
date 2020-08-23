@@ -24,6 +24,8 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+        Mockdatabase mockdatabase = new Mockdatabase();
+
         Parent root = FXMLLoader.load(getClass().getResource("fxml/LoginLayout.fxml"));
         primaryStage.setTitle("Parthenopeddit Desktop - Login");
         primaryStage.setScene(new Scene(root, 700, 600));

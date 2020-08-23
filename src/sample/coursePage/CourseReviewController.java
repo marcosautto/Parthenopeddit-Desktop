@@ -29,7 +29,6 @@ public class CourseReviewController implements Initializable {
 
         instance = this;
         reviewObservableList = FXCollections.observableArrayList();
-        Mockdatabase mockdatabase = new Mockdatabase();
 
         //add some Students
         reviewObservableList.addAll(

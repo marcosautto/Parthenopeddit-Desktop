@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
+import java.util.stream.Collectors;
 
 public class DashboardController {
 
@@ -24,6 +25,7 @@ public class DashboardController {
     }
 
     private Main Main;
+    private Mockdatabase Mockdatabase;
     private CoursePageController coursePageController;
 
     public void setMain(Main Main) {
@@ -74,13 +76,29 @@ public class DashboardController {
 
 
    public void courseSelected(int courseId) throws IOException {
-
+       System.out.println(Mockdatabase.
+               getInstance().
+               courses_table.
+               stream()
+               .filter(course -> course.getCourseId() == courseId)
+               .collect(Collectors.toList())
+               .get(0)
+               .getReviews()
+               .size()+ " in dashboardctrl");
        Node node;
        node = (Node)FXMLLoader.load(getClass().getResource("fxml/CoursePageLayout.fxml"));
        secondPane.getChildren().setAll(node);
 
        CoursePageController.getInstance().transferMessage(courseId);
-
    }
+
+    public void writeReview(int courseId) throws IOException {
+
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/NewReviewLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        NewReviewController.getInstance().transferMessage(courseId);
+    }
 
 }

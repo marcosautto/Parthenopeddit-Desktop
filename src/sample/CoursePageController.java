@@ -29,6 +29,17 @@ public class CoursePageController implements Initializable {
         return instance;
     }
 
+    private DashboardController DashboardController;
+
+    private Mockdatabase Mockdatabase;
+
+
+    public void setDashboardController(DashboardController dashboardController) {
+        this.DashboardController = dashboardController;
+
+        // Add observable list data to the table
+    }
+
     @FXML
     public TabPane tabPane;
 
@@ -100,12 +111,8 @@ public class CoursePageController implements Initializable {
     }
 
     public void transferMessage(int course_Id) {
-        //Display the message
-        Mockdatabase mockdatabase = new Mockdatabase();
 
-        // 1. Wrap the ObservableList in a FilteredList (initially display all data).
-
-        Course mCourse = mockdatabase.courses_table.stream().filter(course -> course.getCourseId() == course_Id).collect(Collectors.toList()).get(0);
+        Course mCourse = Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course_Id).collect(Collectors.toList()).get(0);
         courseId = mCourse.getCourseId();
         courseNameTitleLabel.setText(mCourse.getName());
         average_liking_score_ratingbar.setRating(mCourse.getAverageLikingScore());
@@ -114,13 +121,14 @@ public class CoursePageController implements Initializable {
         average_difficulty_score_label.setText(mCourse.getAverageDifficultyScore() + " / 5");
         reviews_count_label.setText(Integer.toString(mCourse.getReviewsCount()));
 
-        courseReviewController.getInstance().sendReviews(mCourse.getReviews());
-        coursePostController.getInstance().sendPosts(mCourse.getPosts());
+        CourseReviewController.getInstance().sendReviews(mCourse.getReviews());
+        System.out.println(mCourse.getReviews().size());
+        CoursePostController.getInstance().sendPosts(mCourse.getPosts());
 
     }
 
-    public void writeReview(){
-
+    public void writeReview() throws IOException {
+        DashboardController.getInstance().writeReview(courseId);
 
 
     }
