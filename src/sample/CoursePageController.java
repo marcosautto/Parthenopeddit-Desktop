@@ -82,7 +82,12 @@ public class CoursePageController implements Initializable {
     @FXML
     public Button writePostButton;
 
+    @FXML
+    public Button test;
+
     public int courseId;
+
+    public boolean followed = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -108,6 +113,8 @@ public class CoursePageController implements Initializable {
             System.out.println("unable to load tab2");
         }
 
+        handleFollow();
+
     }
 
     public void transferMessage(int course_Id) {
@@ -129,7 +136,22 @@ public class CoursePageController implements Initializable {
 
     public void writeReview() throws IOException {
         DashboardController.getInstance().writeReview(courseId);
+    }
 
+    public void handleFollow(){
+        //API
+        //        //se è true, allora il corso è seguito e premendo il pulsante il corso viene lasciato
 
+        if(followed){
+            writeReviewButton.setDisable(true);
+            writePostButton.setDisable(true);
+            followButton.setText("Segui corso");
+            followed = false;
+        } else {
+            writeReviewButton.setDisable(false);
+            writePostButton.setDisable(false);
+            followButton.setText("Lascia corso");
+            followed = true;
+        }
     }
 }
