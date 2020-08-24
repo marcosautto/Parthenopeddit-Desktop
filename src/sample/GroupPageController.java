@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import sample.groupPage.GroupAdminController;
 import sample.groupPage.GroupPostController;
@@ -18,6 +15,7 @@ import sample.model.GroupMember;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -125,6 +123,12 @@ public class GroupPageController implements Initializable {
             System.out.println("unable to load tab3");
         }
 
+        //if(groupAdmins.stream().anyMatch(admin -> admin.getUserId() == "marcosautto")){
+        //    inviteButton.setDisable(false);
+        //} else{
+        //    inviteButton.setDisable(true);
+        //}
+
 
     }
 
@@ -148,10 +152,32 @@ public class GroupPageController implements Initializable {
     }
 
     public void handleLeave(){
+        if(groupMembers.stream().anyMatch(user -> user.getUserId() == "marcosautto")){
 
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Lascia gruppo");
+            alert.setHeaderText("Vuoi davvero lasciare il gruppo " + group.getName() + "?");
+            alert.setResizable(false);
+            alert.setContentText("Seleziona un'opzione.");
+            Optional<ButtonType> result = alert.showAndWait();
+            if(!result.isPresent()) {
+                alert.close();
+            }
+            // alert is exited, no button has been pressed.
+            else if(result.get() == ButtonType.OK){
+                //TODO: API remove user from group
+            }
+            //oke button is pressed
+            else if(result.get() == ButtonType.CANCEL)
+                alert.close();
+            // cancel button is pressed
+
+        }
     }
 
     public void handleInvite(){
-        
+        if(groupAdmins.stream().anyMatch(admin -> admin.getUserId() == "user1")){
+            //Invite
+        }
     }
 }
