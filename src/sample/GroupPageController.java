@@ -150,7 +150,7 @@ public class GroupPageController implements Initializable {
 
     }
 
-    public void handleLeave(){
+    public void handleLeave() throws IOException {
         if(groupMembers.stream().anyMatch(user -> user.getUserId() == "marcosautto")){
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -165,6 +165,7 @@ public class GroupPageController implements Initializable {
             // alert is exited, no button has been pressed.
             else if(result.get() == ButtonType.OK){
                 //TODO: API remove user from group
+                DashboardController.getInstance().groupFXML(null);
             }
             //oke button is pressed
             else if(result.get() == ButtonType.CANCEL)

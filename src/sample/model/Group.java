@@ -24,4 +24,10 @@ public class Group extends Board {
     public ObservableList<GroupMember> getMembers(){ return members; }
     public ObservableList<GroupInvite> getInvites(){ return invites; }
 
+    public void addGroupInvite(GroupInvite groupInvite){ invites.add(groupInvite);}
+    public void addGroupMember(User user){
+        GroupMember groupMember = new GroupMember(user.getId(), super.getBoardId(), "24/08/2020", false, user, this);
+        members.add(groupMember);
+    }
+
 }

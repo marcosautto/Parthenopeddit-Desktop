@@ -42,4 +42,5 @@ public class User {
     public ObservableList<GroupInvite> getGroupInvites(){ return group_invites; }
 
     public void addGroup(Group group){ groups.add(group);}
+    public void addGroupInvite(GroupInvite groupInvite){ group_invites.add(groupInvite);}
 }

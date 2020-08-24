@@ -49,6 +49,10 @@ public class DashboardController {
         loadFxml(event, "fxml/DashboardMenu/GroupLayout.fxml");
     }
 
+    public void groupInviteFXML(ActionEvent event) throws IOException {
+        loadFxml(event, "fxml/DashboardMenu/GroupInviteLayout.fxml");
+    }
+
     public void infoFXML(ActionEvent event) throws IOException {
         loadFxml(event, "fxml/DashboardMenu/InfoLayout.fxml");
     }

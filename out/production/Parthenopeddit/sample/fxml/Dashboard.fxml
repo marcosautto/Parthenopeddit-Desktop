@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DashboardController">
    <children>
       <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #006FFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefWidth="100.0" spacing="30.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0">
                <children>
                   <JFXButton fx:id="homeButton" onAction="#homeFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Home" textFill="#006fff" />
-                  <JFXButton fx:id="profileButton" layoutX="2.0" layoutY="143.0" onAction="#profileFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Profile" textFill="#006fff" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0" />
-                  <JFXButton fx:id="courseButton" layoutX="10.0" layoutY="80.0" onAction="#courseFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Courses" textFill="#006fff" />
-                  <JFXButton fx:id="groupButton" layoutX="10.0" layoutY="150.0" onAction="#groupFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Groups" textFill="#006fff" />
+                  <JFXButton fx:id="profileButton" layoutX="2.0" layoutY="143.0" onAction="#profileFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Profilo" textFill="#006fff" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0" />
+                  <JFXButton fx:id="courseButton" layoutX="10.0" layoutY="80.0" onAction="#courseFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Corsi" textFill="#006fff" />
+                  <JFXButton fx:id="groupButton" layoutX="10.0" layoutY="150.0" onAction="#groupFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Gruppi" textFill="#006fff" />
+                  <JFXButton fx:id="groupInviteButton" mnemonicParsing="false" onAction="#groupInviteFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="I tuoi inviti" textFill="#006fff" />
                   <JFXButton fx:id="infoButton" onAction="#infoFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Info" textFill="#006fff" />
                </children>
             </VBox>

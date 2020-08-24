@@ -36,6 +36,7 @@ public class Mockdatabase {
     public Group group1 = new Group(2, "CS Memes", "24/08/2020", noGroupMember, noGroupInvite);
     public Group group2 = new Group(3, "Studenti L-21", "24/08/2020", noGroupMember, noGroupInvite);
     public Group group3 = new Group(4, "Scienziati", "24/08/2020", noGroupMember, noGroupInvite);
+    public Group group4 = new Group(5, "Deals", "24/08/2020", noGroupMember, noGroupInvite);
 
     //USER
     public ObservableList<Course> u1_courses = FXCollections.observableArrayList(course1, course2);
@@ -43,9 +44,12 @@ public class Mockdatabase {
 
     //
 
+
     public User user1 = new User("marcosautto", "Marco Sautto", "23/08/2020", noContent, noPosts, noComments, noReview, u1_courses, u1_groups, noGroupInvite);
     public User user2 = new User("francescobottino", "Francesco Bottino", "23/08/2020", noContent, noPosts, noComments, noReview, noCourse, u1_groups, noGroupInvite);
     public User user3 = new User("andrealombardi", "Andrea Lombardi", "24/08/2020", noContent, noPosts, noComments, noReview, noCourse, u1_groups, noGroupInvite);
+
+    public GroupInvite groupInvite1_u1 = new GroupInvite(user2.getId(), user1.getId(), group4.getId(), "24/08/2020", user2, user1, group4);
 
     public GroupMember u1_member = new GroupMember(user1.getId(), group1.getBoardId(), "24/08/2020", true, user1, group1);
     public GroupMember u2_member = new GroupMember(user2.getId(), group1.getBoardId(), "24/08/2020", false, user2, group1);
@@ -66,12 +70,15 @@ public class Mockdatabase {
         instance = this;
         users_table.addAll(user1, user2);
         courses_table.addAll(course1, course2);
-        groups_table.addAll(group1, group2, group3);
+        groups_table.addAll(group1, group2, group3,group4);
         course1.getPosts().addAll(post1, post2);
         course1.getReviews().addAll(review1, review2);
         course1.setReviewsCount(course1.getReviews().size());
 
         group1.getMembers().addAll(u1_member, u2_member, u3_member);
         user1.addGroup(group3);
+
+        user1.addGroupInvite(groupInvite1_u1);
+        group1.addGroupInvite(groupInvite1_u1);
     }
 }
