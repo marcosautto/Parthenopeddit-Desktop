@@ -58,16 +58,23 @@ public class Mockdatabase {
     public ObservableList<GroupMember> tempMembers = FXCollections.observableArrayList();
 
     public Post post1 = new Post("First post", Post.CONTENT.COURSE, user1, "This is the first post here", 0);
-    public Post post2 = new Post("Second post", Post.CONTENT.COURSE, user1, "This is the first post here", 0);
-
-
+    public Post post2 = new Post("Second post", Post.CONTENT.COURSE, user1, "This is the first post here", 1);
+    public Post post3 = new Post("Third post", Post.CONTENT.COURSE, user2, "A regà bongiorno", 1);
+    public Post post4 = new Post("Autostop", Post.CONTENT.COURSE, user1, "This is the first post here", 2);
 
     public Review review1 = new Review("This is sheet","01/01/1970", user1.getId(), user1, noComments, 2, 0, course1.getCourseId(), 5, 3, course1);
-    public Review review2 = new Review("This is sheet2","01/01/1970", user2.getId(), user1, noComments, 5, 2, course1.getCourseId(), 2, 4, course1);
+    public Review review2 = new Review("This is sheet2","01/01/1970", user2.getId(), user2, noComments, 5, 2, course1.getCourseId(), 2, 4, course1);
+    public Review review3 = new Review("This is sheet3","01/01/1970", user1.getId(), user1, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
+    public Review review4 = new Review("Blue jeans","01/01/1970", user2.getId(), user2, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
 
+    //USER
+    public ObservableList<Post> u1_post = FXCollections.observableArrayList(post1, post2, post4);
+    public ObservableList<Review> u1_review = FXCollections.observableArrayList(review1, review3);
+    //
 
     public Mockdatabase(){
         instance = this;
+        posts_table.addAll(post1, post2, post3, post4);
         users_table.addAll(user1, user2);
         courses_table.addAll(course1, course2);
         groups_table.addAll(group1, group2, group3,group4);
@@ -76,6 +83,8 @@ public class Mockdatabase {
         course1.setReviewsCount(course1.getReviews().size());
 
         group1.getMembers().addAll(u1_member, u2_member, u3_member);
+        user1.addPosts(u1_post);
+        user1.addReviews(u1_review);
         user1.addGroup(group3);
 
         user1.addGroupInvite(groupInvite1_u1);

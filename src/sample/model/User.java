@@ -40,7 +40,12 @@ public class User {
     public ObservableList<Course> getFollowedCourses(){ return followed_courses; }
     public ObservableList<Group> getGroups(){ return groups; }
     public ObservableList<GroupInvite> getGroupInvites(){ return group_invites; }
+    public String getDisplayName(){ return display_name; }
 
+    //USER
     public void addGroup(Group group){ groups.add(group);}
     public void addGroupInvite(GroupInvite groupInvite){ group_invites.add(groupInvite);}
+    public void addPosts(ObservableList<Post> posts){ published_posts.addAll(posts);}
+    public void addReviews(ObservableList<Review> reviews){ published_reviews.addAll(reviews);}
+
 }

@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import sample.model.User;
+import sample.profilePage.UserPostController;
+import sample.profilePage.UserReviewController;
 
 import java.io.IOException;
 
@@ -31,6 +34,10 @@ public class DashboardController {
         this.Main = Main;
 
         // Add observable list data to the table
+    }
+
+    public static DashboardController getInstance() {
+        return instance;
     }
 
     public void homeFXML(ActionEvent event) throws IOException {
@@ -73,11 +80,6 @@ public class DashboardController {
         usernameLabel.setText(message);
     }
 
-    public static DashboardController getInstance() {
-        return instance;
-    }
-
-
    public void courseSelected(int courseId) throws IOException {
        Node node;
        node = (Node)FXMLLoader.load(getClass().getResource("fxml/CoursePageLayout.fxml"));
@@ -101,6 +103,18 @@ public class DashboardController {
         secondPane.getChildren().setAll(node);
 
         NewReviewController.getInstance().transferMessage(courseId);
+    }
+
+    public void showUserPost(User user) throws IOException {
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/UserPostLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+    }
+
+    public void showUserReview(User user) throws IOException {
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/UserReviewLayout.fxml"));
+        secondPane.getChildren().setAll(node);
     }
 
 }

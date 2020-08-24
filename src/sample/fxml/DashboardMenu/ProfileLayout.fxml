@@ -55,7 +55,7 @@
                               <Insets bottom="8.0" top="8.0" />
                            </padding>
                         </JFXButton>
-                        <JFXButton fx:id="showUserReviewButton" layoutX="90.0" layoutY="183.0" mnemonicParsing="false" prefWidth="200.0" stylesheets="@../../css/light-theme.css" text="Visualizza le tue recensioni">
+                        <JFXButton fx:id="showUserReviewButton" layoutX="90.0" layoutY="183.0" mnemonicParsing="false" onAction="#showUserReview" prefWidth="200.0" stylesheets="@../../css/light-theme.css" text="Visualizza le tue recensioni">
                            <padding>
                               <Insets bottom="8.0" top="8.0" />
                            </padding>
