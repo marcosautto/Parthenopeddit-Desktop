@@ -87,7 +87,7 @@ public class DashboardController {
         node = (Node)FXMLLoader.load(getClass().getResource("fxml/GroupPageLayout.fxml"));
         secondPane.getChildren().setAll(node);
 
-        //GroupPageController.getInstance().transferMessage(groupId);
+        GroupPageController.getInstance().transferMessage(groupId);
    }
 
     public void writeReview(int courseId) throws IOException {

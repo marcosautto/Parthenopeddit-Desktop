@@ -44,9 +44,13 @@ public class Mockdatabase {
     //
 
     public User user1 = new User("marcosautto", "Marco Sautto", "23/08/2020", noContent, noPosts, noComments, noReview, u1_courses, u1_groups, noGroupInvite);
-    public User user2 = new User("francescobottino", "Francesco Bottino", "23/08/2020", noContent, noPosts, noComments, noReview, noCourse, noGroups, noGroupInvite);
+    public User user2 = new User("francescobottino", "Francesco Bottino", "23/08/2020", noContent, noPosts, noComments, noReview, noCourse, u1_groups, noGroupInvite);
+    public User user3 = new User("andrealombardi", "Andrea Lombardi", "24/08/2020", noContent, noPosts, noComments, noReview, noCourse, u1_groups, noGroupInvite);
 
     public GroupMember u1_member = new GroupMember(user1.getId(), group1.getBoardId(), "24/08/2020", true, user1, group1);
+    public GroupMember u2_member = new GroupMember(user2.getId(), group1.getBoardId(), "24/08/2020", false, user2, group1);
+    public GroupMember u3_member = new GroupMember(user3.getId(), group1.getBoardId(), "24/08/2020", false, user3, group1);
+
     public ObservableList<GroupMember> tempMembers = FXCollections.observableArrayList();
 
     public Post post1 = new Post("First post", Post.CONTENT.COURSE, user1, "This is the first post here", 0);
@@ -67,7 +71,7 @@ public class Mockdatabase {
         course1.getReviews().addAll(review1, review2);
         course1.setReviewsCount(course1.getReviews().size());
 
-        group1.getMembers().add(u1_member);
+        group1.getMembers().addAll(u1_member, u2_member, u3_member);
         user1.addGroup(group3);
     }
 }

@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -19,6 +20,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 public class GroupPageController implements Initializable {
 
@@ -71,7 +74,7 @@ public class GroupPageController implements Initializable {
     public Label adminLabel;
 
     @FXML
-    public Label userLabel;
+    public Label memberLabel;
 
     @FXML
     public Button leaveButton;
@@ -80,6 +83,12 @@ public class GroupPageController implements Initializable {
     public Button inviteButton;
 
     public int groupId;
+    
+    public Group group;
+
+    public ObservableList<GroupMember> groupMembers;
+    public ObservableList<GroupMember> groupAdmins;
+    public ObservableList<GroupMember> groupUsers;
 
     public boolean followed = false;
 
@@ -121,21 +130,28 @@ public class GroupPageController implements Initializable {
 
     public void transferMessage(int group_Id) {
 
-        Group mGroup = Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == group_Id).collect(Collectors.toList()).get(0);
+        group = Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == group_Id).collect(toList()).get(0);
+        groupMembers = group.getMembers();
+        groupAdmins = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
+        groupUsers = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
 
-        ObservableList<GroupMember> groupMembers = mGroup.getMembers();
-        ObservableList<GroupMember> groupAdmins = (ObservableList<GroupMember>) mGroup.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.toList());
-        ObservableList<GroupMember> groupUsers = (ObservableList<GroupMember>) mGroup.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.toList());
-
-        groupId = mGroup.getId();
-        groupNameTitleLabel.setText(mGroup.getName());
-        createdOnLabel.setText(mGroup.getCreatedOn());
+        groupId = group.getId();
+        groupNameTitleLabel.setText(group.getName());
+        createdOnLabel.setText(group.getCreatedOn());
         adminLabel.setText(Integer.toString(groupAdmins.size()));
-        userLabel.setText(Integer.toString(groupUsers.size()));
+        memberLabel.setText(Integer.toString(groupMembers.size()));
 
-        GroupPostController.getInstance().sendPosts(mGroup.getPosts());
+        GroupPostController.getInstance().sendPosts(group.getPosts());
         GroupAdminController.getInstance().sendAdmins(groupAdmins);
         GroupUserController.getInstance().sendUsers(groupUsers);
 
+    }
+
+    public void handleLeave(){
+
+    }
+
+    public void handleInvite(){
+        
     }
 }

@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import sample.PostListViewController;
+import sample.UserListViewController;
 import sample.api.Mockdatabase;
+import sample.model.GroupMember;
 import sample.model.Post;
 
 import java.net.URL;
@@ -15,24 +17,25 @@ import java.util.ResourceBundle;
 public class GroupUserController implements Initializable {
 
     @FXML
-    private ListView<Post> postListView;
+    private ListView<GroupMember> userListView;
 
-    private ObservableList<Post> postObservableList;
+    private ObservableList<GroupMember> userObservableList;
 
-    private static GroupPostController instance;
+
+    private static GroupUserController instance;
     // static method to get instance of view
-    public static GroupPostController getInstance() {
+    public static GroupUserController getInstance() {
         return instance;
     }
 
-    public GroupPostController()  {
+    public GroupUserController()  {
 
         instance = this;
-        postObservableList = FXCollections.observableArrayList();
+        userObservableList = FXCollections.observableArrayList();
         Mockdatabase mockdatabase = new Mockdatabase();
 
         //add some Students
-        postObservableList.addAll(
+        userObservableList.addAll(
         );
 
 
@@ -45,8 +48,8 @@ public class GroupUserController implements Initializable {
 
     }
 
-    public void sendPosts(ObservableList<Post> posts){
-        postListView.setItems(posts);
-        postListView.setCellFactory(postListView -> new PostListViewController());
+    public void sendUsers(ObservableList<GroupMember> users){
+        userListView.setItems(users);
+        userListView.setCellFactory(postListView -> new UserListViewController());
     }
 }
