@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import sample.Api.Mockdatabase;
+import sample.api.Mockdatabase;
 import sample.PostListViewController;
 import sample.model.Post;
 

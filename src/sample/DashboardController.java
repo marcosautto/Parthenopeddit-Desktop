@@ -8,7 +8,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
-import java.util.stream.Collectors;
 
 public class DashboardController {
 
@@ -24,7 +23,7 @@ public class DashboardController {
     }
 
     private Main Main;
-    private sample.Api.Mockdatabase Mockdatabase;
+    private sample.api.Mockdatabase Mockdatabase;
     private CoursePageController CoursePageController;
     private GroupPageController GroupPageController;
 

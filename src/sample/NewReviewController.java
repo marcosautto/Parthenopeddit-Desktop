@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import org.controlsfx.control.Rating;
-import sample.Api.Mockdatabase;
+import sample.api.Mockdatabase;
 import sample.model.Course;
 import sample.model.Review;
 

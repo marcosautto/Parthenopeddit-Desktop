@@ -1,4 +1,4 @@
-package sample.Api;
+package sample.api;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,6 +14,7 @@ public class Mockdatabase {
 
     public ObservableList<User> users_table = FXCollections.observableArrayList();
     public ObservableList<Course> courses_table = FXCollections.observableArrayList();
+    public ObservableList<Group> groups_table = FXCollections.observableArrayList();
     public ObservableList<Post> posts_table = FXCollections.observableArrayList();
     public ObservableList<Review> review_table = FXCollections.observableArrayList();
 
@@ -61,6 +62,7 @@ public class Mockdatabase {
         instance = this;
         users_table.addAll(user1, user2);
         courses_table.addAll(course1, course2);
+        groups_table.addAll(group1, group2, group3);
         course1.getPosts().addAll(post1, post2);
         course1.getReviews().addAll(review1, review2);
         course1.setReviewsCount(course1.getReviews().size());

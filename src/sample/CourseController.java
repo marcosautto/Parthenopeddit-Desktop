@@ -7,11 +7,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
-import sample.Api.Mockdatabase;
+import sample.api.Mockdatabase;
 import sample.model.Course;
-import sample.model.Group;
-import sample.model.GroupInvite;
-import sample.model.GroupMember;
 
 import java.io.IOException;
 import java.net.URL;

@@ -29,7 +29,7 @@ public class CoursePageController implements Initializable {
 
     private DashboardController DashboardController;
 
-    private sample.Api.Mockdatabase Mockdatabase;
+    private sample.api.Mockdatabase Mockdatabase;
 
 
     public void setDashboardController(DashboardController dashboardController) {
