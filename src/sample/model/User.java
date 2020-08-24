@@ -31,4 +31,15 @@ public class User {
     }
 
     public String getId(){ return id; }
+
+
+    public ObservableList<Content> getPublishedContent(){ return published_content; }
+    public ObservableList<Post> getPublishedPosts(){ return published_posts; }
+    public ObservableList<Comment> getPublishedComments(){ return published_comments; }
+    public ObservableList<Review> getPublishedReviews(){ return published_reviews; }
+    public ObservableList<Course> getFollowedCourses(){ return followed_courses; }
+    public ObservableList<Group> getGroups(){ return groups; }
+    public ObservableList<GroupInvite> getGroupInvites(){ return group_invites; }
+
+    public void addGroup(Group group){ groups.add(group);}
 }

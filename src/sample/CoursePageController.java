@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,7 +16,6 @@ import sample.model.Course;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class CoursePageController implements Initializable {
@@ -31,7 +29,7 @@ public class CoursePageController implements Initializable {
 
     private DashboardController DashboardController;
 
-    private Mockdatabase Mockdatabase;
+    private sample.Api.Mockdatabase Mockdatabase;
 
 
     public void setDashboardController(DashboardController dashboardController) {

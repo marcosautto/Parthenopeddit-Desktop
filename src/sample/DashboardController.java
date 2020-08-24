@@ -4,7 +4,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
@@ -25,8 +24,9 @@ public class DashboardController {
     }
 
     private Main Main;
-    private Mockdatabase Mockdatabase;
-    private CoursePageController coursePageController;
+    private sample.Api.Mockdatabase Mockdatabase;
+    private CoursePageController CoursePageController;
+    private GroupPageController GroupPageController;
 
     public void setMain(Main Main) {
         this.Main = Main;
@@ -76,20 +76,19 @@ public class DashboardController {
 
 
    public void courseSelected(int courseId) throws IOException {
-       System.out.println(Mockdatabase.
-               getInstance().
-               courses_table.
-               stream()
-               .filter(course -> course.getCourseId() == courseId)
-               .collect(Collectors.toList())
-               .get(0)
-               .getReviews()
-               .size()+ " in dashboardctrl");
        Node node;
        node = (Node)FXMLLoader.load(getClass().getResource("fxml/CoursePageLayout.fxml"));
        secondPane.getChildren().setAll(node);
 
        CoursePageController.getInstance().transferMessage(courseId);
+   }
+
+   public void groupSelected(int groupId) throws IOException{
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/GroupPageLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        //GroupPageController.getInstance().transferMessage(groupId);
    }
 
     public void writeReview(int courseId) throws IOException {

@@ -1,12 +1,17 @@
 package sample;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import sample.Api.Mockdatabase;
+import sample.model.Course;
 import sample.model.Group;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -17,15 +22,20 @@ public class GroupController implements Initializable {
 
     private ObservableList<Group> groupObservableList;
 
+    private Mockdatabase Mockdatabase;
+
+    private DashboardController DashboardController;
+
     public GroupController(){
 
         groupObservableList = FXCollections.observableArrayList();
 
         //add some Students
+
+        System.out.println(Mockdatabase.getInstance().user1.getGroups().size());
+
         groupObservableList.addAll(
-                new Group("CS Memes", "22/08/2020"),
-                new Group("Studenti L-21", "10/08/2017")
-        );
+                Mockdatabase.getInstance().user1.getGroups());
 
     }
 
@@ -33,6 +43,23 @@ public class GroupController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         groupListView.setItems(groupObservableList);
         groupListView.setCellFactory(postListView -> new GroupListViewController());
+
+        groupListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Group>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Group> observable, Group oldValue, Group newValue) {
+                // Your action here
+                System.out.println("Selected item: " + newValue.getName());
+
+                //DashboardController dashboardController = new DashboardController();
+
+                try {
+                    DashboardController.getInstance().groupSelected(newValue.getId());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 }

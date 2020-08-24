@@ -10,7 +10,7 @@ public class Group extends Board {
     private int members_num;
     private String created_on;
 
-    public Group(int id, String name, String created_on) {
+    public Group(int id, String name, String created_on, ObservableList<GroupMember> members, ObservableList<GroupInvite> invites) {
         super(id, name, "group");
         members_num = members.size();
         this.created_on = created_on;

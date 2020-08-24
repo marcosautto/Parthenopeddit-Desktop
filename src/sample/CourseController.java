@@ -7,7 +7,11 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import sample.Api.Mockdatabase;
 import sample.model.Course;
+import sample.model.Group;
+import sample.model.GroupInvite;
+import sample.model.GroupMember;
 
 import java.io.IOException;
 import java.net.URL;
@@ -22,6 +26,8 @@ public class CourseController implements Initializable {
 
     private DashboardController dashboardController;
 
+    private Mockdatabase mockdatabase;
+
     public void setDashboardController(DashboardController dashboardController) {
         this.dashboardController = dashboardController;
 
@@ -32,11 +38,11 @@ public class CourseController implements Initializable {
 
         courseObservableList = FXCollections.observableArrayList();
 
+        Mockdatabase.getInstance().user1.getFollowedCourses();
+
         //add some Students
         courseObservableList.addAll(
-                new Course("Programmazione 3", 3.5, 2.0, 0),
-                new Course("Terminali Mobili e Multimedialità", 4.5, 1.5, 1)
-        );
+                Mockdatabase.getInstance().user1.getFollowedCourses());
 
     }
 
