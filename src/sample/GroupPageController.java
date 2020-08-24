@@ -123,13 +123,6 @@ public class GroupPageController implements Initializable {
             System.out.println("unable to load tab3");
         }
 
-        //if(groupAdmins.stream().anyMatch(admin -> admin.getUserId() == "marcosautto")){
-        //    inviteButton.setDisable(false);
-        //} else{
-        //    inviteButton.setDisable(true);
-        //}
-
-
     }
 
     public void transferMessage(int group_Id) {
@@ -144,6 +137,12 @@ public class GroupPageController implements Initializable {
         createdOnLabel.setText(group.getCreatedOn());
         adminLabel.setText(Integer.toString(groupAdmins.size()));
         memberLabel.setText(Integer.toString(groupMembers.size()));
+
+        if(groupAdmins.stream().anyMatch(admin -> admin.getUserId() == "marcosautto")){
+            inviteButton.setDisable(false);
+        } else{
+            inviteButton.setDisable(true);
+        }
 
         GroupPostController.getInstance().sendPosts(group.getPosts());
         GroupAdminController.getInstance().sendAdmins(groupAdmins);
