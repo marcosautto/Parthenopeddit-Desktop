@@ -26,7 +26,6 @@ public class HomeController implements Initializable {
     public HomeController()  {
 
         postObservableList = FXCollections.observableArrayList();
-        Mockdatabase mockdatabase = new Mockdatabase();
 
         //add some Students
         postObservableList.addAll(

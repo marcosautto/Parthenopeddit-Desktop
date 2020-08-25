@@ -103,6 +103,8 @@ public class PostPageController implements Initializable {
         post = Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == post_id).collect(Collectors.toList()).get(0);
 
         System.out.println(post.getId());
+        System.out.println(post.getComments().size());
+
 
         titleLabel.setText(post.getTitle());
         authorLabel.setText(post.getAuthorId());
@@ -151,6 +153,7 @@ public class PostPageController implements Initializable {
             commentObservableList.addAll(
                  post.getComments()
             );
+            System.out.println(post.getComments().size());
         commentListView.setItems(commentObservableList);
         commentListView.setCellFactory(postListView -> new CommentListViewController());
         } else
@@ -158,7 +161,7 @@ public class PostPageController implements Initializable {
 
     }
 
-    private void sendComment(){
+    public void sendComment(){
         if(!commentTextArea.getText().isEmpty()){
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -167,6 +170,8 @@ public class PostPageController implements Initializable {
             Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, post.getId());
 
             Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
+
+            commentTextArea.clear();
         }
     }
 
