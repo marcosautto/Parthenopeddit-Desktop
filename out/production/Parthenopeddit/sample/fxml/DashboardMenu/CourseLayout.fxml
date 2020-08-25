@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="750.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
+<AnchorPane prefHeight="750.0" prefWidth="990.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CourseController">
     <children>
         <Label layoutX="14.0" layoutY="14.0" text="Corsi" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="0.0">
             <font>

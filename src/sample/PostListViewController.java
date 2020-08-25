@@ -23,6 +23,9 @@ public class PostListViewController extends ListCell<Post> {
         private Label boardLabel;
 
         @FXML
+        private Label timestampLabel;
+
+        @FXML
         private TextArea postBodyTextArea;       //Uso la TextArea e non le Label per gestire meglio i testi multilinea
 
         @FXML
@@ -78,6 +81,7 @@ public class PostListViewController extends ListCell<Post> {
                 titleLabel.setText(post.getTitle());
                 authorLabel.setText(post.getAuthorId());
                 boardLabel.setText(post.getPostedToBoard().getName());
+                timestampLabel.setText(post.getTimestamp());
                 if(post.getPostedToBoardId() == 1)
                     boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
                 else if(post.getPostedToBoard().getType() == "course")

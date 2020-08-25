@@ -20,3 +20,7 @@
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #000000;
 }
+
+.list-cell {
+    -fx-padding: 20px;
+}
