@@ -89,6 +89,17 @@ public class ReviewListViewController extends ListCell<Review> {
             commentLabel.setText(Integer.toString(review.getComments().size()));
             upvoteLabel.setText(Integer.toString(review.getUpvote()));
             downvoteLabel.setText(Integer.toString(review.getDownvote()));
+            courseNameLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
+
+
+            courseNameLabel.setOnMouseClicked(e ->{
+                try {
+                    DashboardController.getInstance().courseSelected(review.getReviewedCourseId());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+
+            });
 
             setText(null);
             setGraphic(anchorPane);
