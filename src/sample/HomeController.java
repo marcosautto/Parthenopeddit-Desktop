@@ -16,24 +16,12 @@ import java.util.ResourceBundle;
 public class HomeController implements Initializable {
 
     @FXML
-    Button button;
-
-    @FXML
-    Label shoesLabel;
-
-    @FXML
     private ListView<Post> homeListView;
 
     private ObservableList<Post> postObservableList;
 
     private Mockdatabase Mockdatabase;
 
-    @FXML
-    private void buttonClick(){
-        shoesLabel.setVisible(true);
-
-
-    }
 
     public HomeController()  {
 
