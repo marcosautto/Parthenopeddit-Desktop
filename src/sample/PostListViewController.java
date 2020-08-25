@@ -20,10 +20,10 @@ public class PostListViewController extends ListCell<Post> {
         private Label authorLabel;
 
         @FXML
-        private Label contentLabel;
+        private Label boardLabel;
 
         @FXML
-        private TextArea postContentTextArea;       //Uso la TextArea e non le Label per gestire meglio i testi multilinea
+        private TextArea postBodyTextArea;       //Uso la TextArea e non le Label per gestire meglio i testi multilinea
 
         @FXML
         private Label commentLabel;
@@ -72,18 +72,20 @@ public class PostListViewController extends ListCell<Post> {
 
                 titleLabel.setText(post.getTitle());
                 authorLabel.setText(post.getAuthorId());
-                postContentTextArea.setText(post.getPostContent());
+                boardLabel.setText(post.getPostedToBoard().getName());
+                if(post.getPostedToBoardId() == 1)
+                    boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
+                else if(post.getPostedToBoard().getType() == "course")
+                    boardLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
+                else
+                    boardLabel.setStyle("-fx-background-color: #FF545D; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
+
+                postBodyTextArea.setText(post.getBody());
                 upvoteLabel.setText(Integer.toString(post.getUpvote()));
                 downvoteLabel.setText(Integer.toString(post.getDownvote()));
+                commentLabel.setText(Integer.toString(post.getCommentsNum()));
                 //contentLabel.setText(post.get);
 
-                if(post.getContent().equals(Post.CONTENT.HOME)) {
-                    contentLabel.setText("Home");
-                } else if(post.getContent().equals(Post.CONTENT.GROUP)) {
-                    contentLabel.setText("Group");
-                } else {
-                    contentLabel.setText("Course");
-                }
 
                 setText(null);
                 setGraphic(anchorPane);

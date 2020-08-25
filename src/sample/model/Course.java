@@ -16,7 +16,6 @@ public class Course extends Board {
 
     public Course(String name, double average_liking_score, double average_difficulty_score, int id) {
         super(id, name, "course");
-        //courseId = courseIdAct++;
         this.average_liking_score = average_liking_score;
         follower_number = 0;
         this.average_difficulty_score = average_difficulty_score;

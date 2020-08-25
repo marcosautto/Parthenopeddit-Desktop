@@ -28,19 +28,20 @@ public class Mockdatabase {
     public ObservableList<GroupMember> noGroupMember = FXCollections.observableArrayList();
 
 
-    public Course course1 = new Course("Programmazione 3", 4.5, 3.5, 0);
-    public Course course2 = new Course("Terminali mobili e multimedialità", 5.0, 2.5, 1);
+    public Course course1 = new Course("Programmazione 3", 4.5, 3.5, 11);
+    public Course course2 = new Course("Terminali mobili e multimedialità", 5.0, 2.5, 12);
 
 
 
-    public Group group1 = new Group(2, "CS Memes", "24/08/2020", noGroupMember, noGroupInvite);
-    public Group group2 = new Group(3, "Studenti L-21", "24/08/2020", noGroupMember, noGroupInvite);
-    public Group group3 = new Group(4, "Scienziati", "24/08/2020", noGroupMember, noGroupInvite);
-    public Group group4 = new Group(5, "Deals", "24/08/2020", noGroupMember, noGroupInvite);
+    public Group group1 = new Group(1, "Generale", "24/08/2020", noGroupMember, noGroupInvite);
+    public Group group2 = new Group(2, "CS Memes", "24/08/2020", noGroupMember, noGroupInvite);
+    public Group group3 = new Group(3, "Studenti L-21", "24/08/2020", noGroupMember, noGroupInvite);
+    public Group group4 = new Group(4, "Scienziati", "24/08/2020", noGroupMember, noGroupInvite);
+    public Group group5 = new Group(5, "Deals", "24/08/2020", noGroupMember, noGroupInvite);
 
     //USER
     public ObservableList<Course> u1_courses = FXCollections.observableArrayList(course1, course2);
-    public ObservableList<Group> u1_groups = FXCollections.observableArrayList(group1, group2);
+    public ObservableList<Group> u1_groups = FXCollections.observableArrayList(group2, group3);
 
     //
 
@@ -57,15 +58,15 @@ public class Mockdatabase {
 
     public ObservableList<GroupMember> tempMembers = FXCollections.observableArrayList();
 
-    public Post post1 = new Post("First post", Post.CONTENT.COURSE, user1, "This is the first post here", 0);
-    public Post post2 = new Post("Second post", Post.CONTENT.COURSE, user1, "This is the first post here", 1);
-    public Post post3 = new Post("Third post", Post.CONTENT.COURSE, user2, "A regà bongiorno", 1);
-    public Post post4 = new Post("Autostop", Post.CONTENT.COURSE, user1, "This is the first post here", 2);
+    public Post post1 = new Post(0,"First post", "25/08/2020", user1.getId(), user1, "This is the first post here", group1, 1, 2, 0, noComments);
+    public Post post2 = new Post(1, "Second post", "25/08/2020", user1.getId(), user1, "This is the first post here", group1, 1, 5, 1, noComments);
+    public Post post3 = new Post(2, "Third post", "25/08/2020", user2.getId(), user2, "A regà bongiorno", group2, 2, 1, 10, noComments);
+    public Post post4 = new Post(3, "Autostop", "25/08/2020", user1.getId(), user1, "This is the first post here", course1, 11, 10, 0, noComments);
 
-    public Review review1 = new Review("This is sheet","01/01/1970", user1.getId(), user1, noComments, 2, 0, course1.getCourseId(), 5, 3, course1);
-    public Review review2 = new Review("This is sheet2","01/01/1970", user2.getId(), user2, noComments, 5, 2, course1.getCourseId(), 2, 4, course1);
-    public Review review3 = new Review("This is sheet3","01/01/1970", user1.getId(), user1, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
-    public Review review4 = new Review("Blue jeans","01/01/1970", user2.getId(), user2, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
+    public Review review1 = new Review(10,"This is sheet","01/01/1970", user1.getId(), user1, noComments, 2, 0, course1.getCourseId(), 5, 3, course1);
+    public Review review2 = new Review(11,"This is sheet2","01/01/1970", user2.getId(), user2, noComments, 5, 2, course1.getCourseId(), 2, 4, course1);
+    public Review review3 = new Review(12, "This is sheet3","01/01/1970", user1.getId(), user1, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
+    public Review review4 = new Review(13,"Blue jeans","01/01/1970", user2.getId(), user2, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
 
     //USER
     public ObservableList<Post> u1_post = FXCollections.observableArrayList(post1, post2, post4);
@@ -75,9 +76,10 @@ public class Mockdatabase {
     public Mockdatabase(){
         instance = this;
         posts_table.addAll(post1, post2, post3, post4);
+        review_table.addAll(review1, review2, review3, review4);
         users_table.addAll(user1, user2);
         courses_table.addAll(course1, course2);
-        groups_table.addAll(group1, group2, group3,group4);
+        groups_table.addAll(group2, group3, group4, group5);
         course1.getPosts().addAll(post1, post2);
         course1.getReviews().addAll(review1, review2);
         course1.setReviewsCount(course1.getReviews().size());
@@ -85,7 +87,7 @@ public class Mockdatabase {
         group1.getMembers().addAll(u1_member, u2_member, u3_member);
         user1.addPosts(u1_post);
         user1.addReviews(u1_review);
-        user1.addGroup(group3);
+        user1.addGroup(group4);
 
         user1.addGroupInvite(groupInvite1_u1);
         group1.addGroupInvite(groupInvite1_u1);

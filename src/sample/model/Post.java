@@ -1,68 +1,28 @@
 package sample.model;
 
-public class Post /*extends Content*/ {
+import javafx.collections.ObservableList;
+
+public class Post extends Content {
 
     //TODO: optimize extends
 
-        private static int postIdAct = 0;
-        private int postId;
         private String title;
-        private String authorId;
-        private User author;
-        private String postContent;
-        private int upvote;
-        private int downvote;
-        private CONTENT content;
         private int posted_to_board_id;
+        private Board posted_to_board;
 
-    public enum CONTENT {
-        HOME,
-        GROUP,
-        COURSE
-    }
-
-        public Post(String title, CONTENT content, User author, String postContent, int idBoard) {
-            postId = postIdAct++;
+        public Post(int id, String title, String timestamp, String authorId, User author, String body, Board board, int idBoard, int upvotes, int downvotes, ObservableList<Comment> comments) {
+            super(id, body, timestamp, authorId, "post", author, upvotes, downvotes, comments);
             this.title = title;
-            this.content = content;
-            this.authorId = author.getId();
-            this.author = author;
-            this.postContent = postContent;
-            upvote = 0;
-            downvote = 0;
+            this.posted_to_board = board;
             this.posted_to_board_id = idBoard;
         }
 
-        public int getPostId() {
-            return postId;
-        }
+        public String getTitle() { return title; }
 
-        public String getTitle() {
-            return title;
-        }
+        public void setTitle(String title) { this.title = title; }
 
-        public void setTitle(String title) {
-            this.title = title;
-        }
+        public Board getPostedToBoard(){ return posted_to_board; }
 
-        public CONTENT getContent() {
-            return content;
-        }
-
-        public void setContent(CONTENT content) {
-            this.content = content;
-        }
-
-        public String getAuthorId() { return authorId; }
-
-        public void setAuthorId(String authorId) {
-            this.authorId = authorId;
-        }
-
-        public String getPostContent(){ return postContent; }
-
-        public int getUpvote(){ return upvote; }
-
-        public int getDownvote(){ return downvote; }
+        public int getPostedToBoardId(){ return posted_to_board_id; }
 
 }

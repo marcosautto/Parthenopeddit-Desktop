@@ -26,6 +26,8 @@ public class HomeController implements Initializable {
 
     private ObservableList<Post> postObservableList;
 
+    private Mockdatabase Mockdatabase;
+
     @FXML
     private void buttonClick(){
         shoesLabel.setVisible(true);
@@ -40,13 +42,7 @@ public class HomeController implements Initializable {
 
         //add some Students
         postObservableList.addAll(
-                new Post("John Doe", Post.CONTENT.HOME, mockdatabase.user1, "This is the first post",0),
-                new Post("Jane Doe", Post.CONTENT.HOME, mockdatabase.user2, "Second post here", 0),
-                new Post("Donte Dunigan", Post.CONTENT.GROUP, mockdatabase.user1, "LOLOLOLOLOLOLOLOLOLOLOLLOLOLOLOLOLOLOLOLLOLOLOLOLOLOLOLOLLO LOLOOLOLOLOLOLLLOLOLOLOLOLOLOLOLOLOLOLOLOLOLLOLOLOLOLOLOLOLOLLOLOLOL OLOLOLOLOLLOLOLOOLOLOLOLOLLL OLOLOLOLOLOLOLOLO LOLOLOLOLOL LOLO LOLOLOLOLOLOLLOLOLOLOLOLOLOLOLLOL OLOOLOLOLOLOLLLOLOLO2", 0),
-                new Post("Gavin Genna", Post.CONTENT.COURSE, mockdatabase.user2, "heilà", 0),
-                new Post("Darin Dear", Post.CONTENT.GROUP, mockdatabase.user1, "Shazam", 0),
-                new Post("Pura Petty", Post.CONTENT.HOME, mockdatabase.user2, "Lana del rey", 0),
-                new Post("Herma Hines", Post.CONTENT.HOME, mockdatabase.user1, "Optimus prime", 0)
+                Mockdatabase.getInstance().posts_table
         );
 
 
