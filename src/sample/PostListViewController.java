@@ -75,6 +75,7 @@ public class PostListViewController extends ListCell<Post> {
                 postContentTextArea.setText(post.getPostContent());
                 upvoteLabel.setText(Integer.toString(post.getUpvote()));
                 downvoteLabel.setText(Integer.toString(post.getDownvote()));
+                //contentLabel.setText(post.get);
 
                 if(post.getContent().equals(Post.CONTENT.HOME)) {
                     contentLabel.setText("Home");
