@@ -14,12 +14,54 @@
          <children>
             <VBox alignment="CENTER" prefWidth="100.0" spacing="30.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0">
                <children>
-                  <JFXButton fx:id="homeButton" onAction="#homeFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Home" textFill="#006fff" />
-                  <JFXButton fx:id="profileButton" layoutX="2.0" layoutY="143.0" onAction="#profileFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Profilo" textFill="#006fff" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0" />
-                  <JFXButton fx:id="courseButton" layoutX="10.0" layoutY="80.0" onAction="#courseFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Corsi" textFill="#006fff" />
-                  <JFXButton fx:id="groupButton" layoutX="10.0" layoutY="150.0" onAction="#groupFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Gruppi" textFill="#006fff" />
-                  <JFXButton fx:id="groupInviteButton" mnemonicParsing="false" onAction="#groupInviteFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Inviti" textFill="#006fff" />
-                  <JFXButton fx:id="infoButton" onAction="#infoFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Info" textFill="#006fff" />
+                  <JFXButton fx:id="homeButton" graphicTextGap="10.0" onAction="#homeFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Home" textFill="#006fff">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/home-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="profileButton" graphicTextGap="10.0" layoutX="2.0" layoutY="143.0" onAction="#profileFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Profilo" textFill="#006fff" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/profile-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="courseButton" graphicTextGap="10.0" layoutX="10.0" layoutY="80.0" onAction="#courseFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Corsi" textFill="#006fff">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/course-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="groupButton" graphicTextGap="10.0" layoutX="10.0" layoutY="150.0" onAction="#groupFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Gruppi" textFill="#006fff">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/group-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="groupInviteButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#groupInviteFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Inviti" textFill="#006fff">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/invite-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
+                  <JFXButton fx:id="infoButton" graphicTextGap="10.0" onAction="#infoFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Info" textFill="#006fff">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/info-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                </children>
             </VBox>
             <AnchorPane layoutX="1.0" layoutY="1.0" prefHeight="430.0" prefWidth="60.0" />
@@ -56,7 +98,14 @@
                         <Insets bottom="10.0" />
                      </padding>
                   </VBox>
-                  <JFXButton fx:id="logoutButton" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #ff483b;" text="Logout" textFill="WHITE" />
+                  <JFXButton fx:id="logoutButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #ff483b;" text="Logout" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/logout-white-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                </children>
             </VBox>
          </children>

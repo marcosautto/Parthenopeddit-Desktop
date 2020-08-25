@@ -44,13 +44,20 @@
                         <Insets top="10.0" />
                      </VBox.margin>
                   </CheckBox>
-                  <JFXButton fx:id="loginButton" defaultButton="true" onAction="#loginClicked" style="-fx-background-color: #006FFF;" text="Login" textFill="WHITE">
+                  <JFXButton fx:id="loginButton" defaultButton="true" graphicTextGap="10.0" onAction="#loginClicked" style="-fx-background-color: #006FFF;" text="Login" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="100.0" top="20.0" />
                      </VBox.margin>
                      <padding>
                         <Insets bottom="5.0" left="20.0" right="20.0" top="5.0" />
                      </padding>
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/login-white-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </JFXButton>
                </children>
             </VBox>
