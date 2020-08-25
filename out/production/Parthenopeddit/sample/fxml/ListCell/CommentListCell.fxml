@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<?import com.jfoenix.controls.JFXButton?>
 <AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <VBox prefWidth="100.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
@@ -35,19 +35,40 @@
                                 <Insets right="10.0" />
                             </padding>
                         </Label>
-                        <JFXButton fx:id="commentJFXButton" mnemonicParsing="false" style="-fx-background-color: #006FFF;" text="Commenta" textFill="WHITE" />
+                        <JFXButton fx:id="commentButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #006FFF;" text="Commenta" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/comment-white-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                         <Label fx:id="upvoteLabel" text="0">
                             <padding>
                                 <Insets left="400.0" right="10.0" />
                             </padding>
                         </Label>
-                        <JFXButton fx:id="upvoteJFXButton" mnemonicParsing="false" style="-fx-background-color: #006FFF;" text="Upvote" textFill="WHITE" />
+                        <JFXButton fx:id="upvoteButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #006FFF;" text="Upvote" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/upvote-white-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                         <Label fx:id="downvoteLabel" text="0">
                             <padding>
                                 <Insets left="20.0" right="10.0" />
                             </padding>
                         </Label>
-                        <JFXButton fx:id="downvoteJFXButton" mnemonicParsing="false" style="-fx-background-color: #FF545D;" text="Downvote" textFill="WHITE" />
+                        <JFXButton fx:id="downvoteButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #FF545D;" text="Downvote" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../icons/downvote-white-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></JFXButton>
                     </children>
                     <VBox.margin>
                         <Insets bottom="10.0" />

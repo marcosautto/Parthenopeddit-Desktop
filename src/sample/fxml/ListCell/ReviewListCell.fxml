@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextArea?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
-<?import org.controlsfx.control.Rating?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
 
-<AnchorPane fx:id="anchorPane" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPane" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
          <image>
@@ -45,20 +41,50 @@
       <TextArea fx:id="reviewContentTextArea" layoutX="65.0" layoutY="228.0" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="220.0" />
       <HBox alignment="CENTER" layoutX="16.0" layoutY="486.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="420.0">
          <children>
-            <Label fx:id="commentLabel" text="0" />
-            <JFXButton fx:id="commentButton" />
+            <Label fx:id="commentLabel" text="0">
+               <padding>
+                  <Insets right="10.0" />
+               </padding></Label>
+            <JFXButton fx:id="commentButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #006FFF;" text="Commenta" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/comment-white-64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
             <Label fx:id="upvoteLabel" text="0">
                <HBox.margin>
                   <Insets left="300.0" />
                </HBox.margin>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
             </Label>
-            <JFXButton fx:id="upvoteButton" />
+            <JFXButton fx:id="upvoteButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #006FFF;" text="Upvote" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/upvote-white-64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
             <Label fx:id="downvoteLabel" text="0">
                <HBox.margin>
-                  <Insets left="10.0" />
+                  <Insets />
                </HBox.margin>
+               <padding>
+                  <Insets left="20.0" right="10.0" />
+               </padding>
             </Label>
-            <JFXButton fx:id="downvoteButton" />
+            <JFXButton fx:id="downvoteButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #FF545D;" text="Downvote" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../icons/downvote-white-64px.png" />
+                     </image>
+                  </ImageView>
+               </graphic></JFXButton>
          </children>
       </HBox>
    </children>
