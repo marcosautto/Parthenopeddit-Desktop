@@ -11,7 +11,22 @@ import sample.model.Post;
 
 import java.io.IOException;
 
-public class PostListViewController extends ListCell<Post> {
+public class CommentListViewController {
+    /*
+    package sample;
+
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import sample.model.Post;
+
+import java.io.IOException;
+
+    public class PostListViewController extends ListCell<Post> {
 
         @FXML
         private Label titleLabel;
@@ -118,16 +133,6 @@ public class PostListViewController extends ListCell<Post> {
                     }
                 });
 
-                anchorPane.setOnMouseClicked(e ->{
-                    try {
-                        DashboardController.getInstance().postSelected(post.getPostedToBoardId());
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                    }
-                });
-
-
-
 
                 setText(null);
                 setGraphic(anchorPane);
@@ -135,8 +140,10 @@ public class PostListViewController extends ListCell<Post> {
 
         }
 
+    }
+
+
+
+
+*/
 }
-
-
-
-

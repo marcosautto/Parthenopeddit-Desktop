@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import sample.PostListViewController;
 import sample.UserListViewController;
 import sample.api.Mockdatabase;
@@ -89,7 +86,10 @@ public class GroupUserController implements Initializable {
     }
 
     public void sendUsers(ObservableList<GroupMember> users){
-        userListView.setItems(users);
-        userListView.setCellFactory(postListView -> new UserListViewController());
+        if(users.size() > 0){
+            userListView.setItems(users);
+            userListView.setCellFactory(postListView -> new UserListViewController());
+        } else
+            userListView.setPlaceholder(new Label("Non ci sono utenti in questo gruppo."));
     }
 }

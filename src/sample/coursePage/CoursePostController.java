@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.api.Mockdatabase;
 import sample.PostListViewController;
@@ -19,6 +20,8 @@ public class CoursePostController implements Initializable {
 
     private ObservableList<Post> postObservableList;
 
+
+
     private static CoursePostController instance;
     // static method to get instance of view
     public static CoursePostController getInstance() {
@@ -31,9 +34,8 @@ public class CoursePostController implements Initializable {
         postObservableList = FXCollections.observableArrayList();
         Mockdatabase mockdatabase = new Mockdatabase();
 
-        //add some Students
-        postObservableList.addAll(
-        );
+        //postObservableList.addAll(
+        //);
 
 
     }
@@ -46,7 +48,10 @@ public class CoursePostController implements Initializable {
     }
 
     public void sendPosts(ObservableList<Post> posts){
-        postListView.setItems(posts);
-        postListView.setCellFactory(postListView -> new PostListViewController());
+        if(posts.size() > 0){
+            postListView.setItems(posts);
+            postListView.setCellFactory(postListView -> new PostListViewController());
+        } else
+            postListView.setPlaceholder(new Label("Non ci sono post in questo corso."));
     }
 }

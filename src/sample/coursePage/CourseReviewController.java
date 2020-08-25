@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.ReviewListViewController;
 import sample.model.Review;
@@ -44,7 +45,10 @@ public class CourseReviewController implements Initializable {
     }
 
     public void sendReviews(ObservableList<Review> reviews){
-        reviewListView.setItems(reviews);
-        reviewListView.setCellFactory(reviewListView -> new ReviewListViewController());
+        if(reviews.size() > 0){
+            reviewListView.setItems(reviews);
+            reviewListView.setCellFactory(reviewListView -> new ReviewListViewController());
+        } else
+            reviewListView.setPlaceholder(new Label("Non ci sono recensioni in questo corso."));
     }
 }

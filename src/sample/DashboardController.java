@@ -29,6 +29,7 @@ public class DashboardController {
     private sample.api.Mockdatabase Mockdatabase;
     private CoursePageController CoursePageController;
     private GroupPageController GroupPageController;
+    private PostPageController PostPageController;
 
     public void setMain(Main Main) {
         this.Main = Main;
@@ -95,6 +96,14 @@ public class DashboardController {
 
         GroupPageController.getInstance().transferMessage(groupId);
    }
+
+   public void postSelected(int postId) throws IOException{
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/PostPageLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        PostPageController.getInstance().transferMessage(postId);
+    }
 
     public void writeReview(int courseId) throws IOException {
 

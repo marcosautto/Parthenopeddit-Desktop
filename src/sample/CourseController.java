@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.api.Mockdatabase;
 import sample.model.Course;
@@ -21,6 +22,8 @@ public class CourseController implements Initializable {
 
     private ObservableList<Course> courseObservableList;
 
+    private ObservableList<Course> followed_courses;
+
     private DashboardController dashboardController;
 
     private Mockdatabase mockdatabase;
@@ -35,11 +38,13 @@ public class CourseController implements Initializable {
 
         courseObservableList = FXCollections.observableArrayList();
 
-        Mockdatabase.getInstance().user1.getFollowedCourses();
+        followed_courses = Mockdatabase.getInstance().user1.getFollowedCourses();
 
-        //add some Students
-        courseObservableList.addAll(
-                Mockdatabase.getInstance().user1.getFollowedCourses());
+        if(followed_courses.size() > 0)
+            courseObservableList.addAll(
+                    followed_courses);
+        else
+            courseListView.setPlaceholder(new Label("Non segui alcun corso."));
 
     }
 

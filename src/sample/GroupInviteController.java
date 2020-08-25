@@ -6,10 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import sample.api.Mockdatabase;
 import sample.model.GroupInvite;
 
@@ -26,6 +23,8 @@ public class GroupInviteController implements Initializable {
 
     private ObservableList<GroupInvite> inviteObservableList;
 
+    private ObservableList<GroupInvite> group_invite;
+
     private DashboardController dashboardController;
 
     private Mockdatabase Mockdatabase;
@@ -40,11 +39,15 @@ public class GroupInviteController implements Initializable {
 
         inviteObservableList = FXCollections.observableArrayList();
 
-        //Mockdatabase.getInstance().user1.getGroupInvites();
+        group_invite = Mockdatabase.getInstance().user1.getGroupInvites();
 
         //add some Students
-        inviteObservableList.addAll(
-                Mockdatabase.getInstance().user1.getGroupInvites());
+        if(group_invite.size() > 0)
+            inviteObservableList.addAll(
+                    group_invite);
+        else
+            groupInviteListView.setPlaceholder(new Label("Non hai ricevuto alcun invito."));
+
 
     }
 

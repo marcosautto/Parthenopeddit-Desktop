@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.PostListViewController;
 import sample.api.Mockdatabase;
@@ -46,7 +47,10 @@ public class GroupPostController implements Initializable {
     }
 
     public void sendPosts(ObservableList<Post> posts){
-        postListView.setItems(posts);
-        postListView.setCellFactory(postListView -> new PostListViewController());
+        if(posts.size() > 0){
+            postListView.setItems(posts);
+            postListView.setCellFactory(postListView -> new PostListViewController());
+        } else
+            postListView.setPlaceholder(new Label("Non ci sono post in questo gruppo."));
     }
 }

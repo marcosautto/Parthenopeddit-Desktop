@@ -15,13 +15,13 @@
       </Label>
       <VBox layoutX="14.0" layoutY="33.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0">
          <children>
-            <Label text="Average liking score:" />
+            <Label text="Gradimento:" />
             <Rating fx:id="average_liking_score_ratingbar" partialRating="true" />
          </children>
       </VBox>
       <VBox layoutX="275.0" layoutY="25.0" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="35.0">
          <children>
-            <Label text="Average difficulty score:" />
+            <Label text="Difficoltà:" />
             <Rating fx:id="average_difficulty_score_ratingbar" partialRating="true" />
          </children>
       </VBox>

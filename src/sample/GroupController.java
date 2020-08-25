@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.api.Mockdatabase;
 import sample.model.Group;
@@ -21,6 +22,8 @@ public class GroupController implements Initializable {
 
     private ObservableList<Group> groupObservableList;
 
+    private ObservableList<Group> user_group;
+
     private Mockdatabase Mockdatabase;
 
     private DashboardController DashboardController;
@@ -30,11 +33,14 @@ public class GroupController implements Initializable {
         groupObservableList = FXCollections.observableArrayList();
 
         //add some Students
+        user_group = Mockdatabase.getInstance().user1.getGroups();
 
-        System.out.println(Mockdatabase.getInstance().user1.getGroups().size());
-
+        if(user_group.size() > 0)
         groupObservableList.addAll(
-                Mockdatabase.getInstance().user1.getGroups());
+                user_group);
+        else
+            groupListView.setPlaceholder(new Label("Non sei iscritto ad alcun gruppo."));
+
 
     }
 

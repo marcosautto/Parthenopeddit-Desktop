@@ -15,7 +15,7 @@ public class Comment {
     private int downvotes_num;
     private int commented_content_id;
 
-    Comment(int id, String body, String timestamp, String author_id, User author, int upvotes_num, int downvotes_num, int commented_content_id){
+    public Comment(int id, String body, String timestamp, String author_id, User author, int upvotes_num, int downvotes_num, int commented_content_id){
         this.id = id;
         this.body = body;
         this.timestamp = timestamp;
