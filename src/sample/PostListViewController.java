@@ -48,9 +48,14 @@ public class PostListViewController extends ListCell<Post> {
 
         private FXMLLoader mLLoader;
 
+        private Post post;
+
+        private DashboardController DashboardController;
+
         @Override
         protected void updateItem(Post post, boolean empty) {
             super.updateItem(post, empty);
+            this.post = post;
 
             if(empty || post == null) {
 
@@ -84,7 +89,30 @@ public class PostListViewController extends ListCell<Post> {
                 upvoteLabel.setText(Integer.toString(post.getUpvote()));
                 downvoteLabel.setText(Integer.toString(post.getDownvote()));
                 commentLabel.setText(Integer.toString(post.getCommentsNum()));
-                //contentLabel.setText(post.get);
+
+                boardLabel.setOnMouseClicked(e ->{
+                    if(post.getPostedToBoardId() == 1) {
+                        try {
+                            DashboardController.getInstance().homeFXML(null);
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    else if(post.getPostedToBoard().getType() == "course") {
+                        try {
+                            DashboardController.getInstance().courseSelected(post.getPostedToBoardId());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                    else {
+                        try {
+                            DashboardController.getInstance().groupSelected(post.getPostedToBoardId());
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    }
+                });
 
 
                 setText(null);
@@ -92,7 +120,8 @@ public class PostListViewController extends ListCell<Post> {
             }
 
         }
-    }
+
+}
 
 
 
