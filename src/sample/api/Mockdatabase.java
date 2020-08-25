@@ -17,6 +17,7 @@ public class Mockdatabase {
     public ObservableList<Group> groups_table = FXCollections.observableArrayList();
     public ObservableList<Post> posts_table = FXCollections.observableArrayList();
     public ObservableList<Review> review_table = FXCollections.observableArrayList();
+    public ObservableList<Comment> comments_table = FXCollections.observableArrayList();
 
     public ObservableList<Comment> noComments = FXCollections.observableArrayList();
     public ObservableList<Post> noPosts = FXCollections.observableArrayList();
@@ -68,9 +69,17 @@ public class Mockdatabase {
     public Review review3 = new Review(12, "This is sheet3","01/01/1970", user1.getId(), user1, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
     public Review review4 = new Review(13,"Blue jeans","01/01/1970", user2.getId(), user2, noComments, 5, 2, course2.getCourseId(), 2, 4, course2);
 
+    public Comment comment1 = new Comment(1, "This is a comment", "25/08/2020", user1.getId(), user1, 0, 0, 0);
+    public Comment comment2 = new Comment(2, "This is a comment2", "25/08/2020", user1.getId(), user1, 0, 0, 0);
+    public Comment comment3 = new Comment(3, "This is a comment3", "25/08/2020", user2.getId(), user2, 0, 0, 1);
+    public Comment comment4 = new Comment(4, "This is a comment4", "25/08/2020", user1.getId(), user1, 0, 0, 11);
+
+
     //USER
     public ObservableList<Post> u1_post = FXCollections.observableArrayList(post1, post2, post4);
     public ObservableList<Review> u1_review = FXCollections.observableArrayList(review1, review3);
+    public ObservableList<Comment> u1_comment = FXCollections.observableArrayList(comment1, comment2, comment4);
+
     //
 
     public Mockdatabase(){
@@ -80,6 +89,7 @@ public class Mockdatabase {
         users_table.addAll(user1, user2);
         courses_table.addAll(course1, course2);
         groups_table.addAll(group2, group3, group4, group5);
+        comments_table.addAll(comment1, comment2, comment3, comment4);
         course1.getPosts().addAll(post1, post2);
         course1.getReviews().addAll(review1, review2);
         course1.setReviewsCount(course1.getReviews().size());
@@ -87,7 +97,12 @@ public class Mockdatabase {
         group1.getMembers().addAll(u1_member, u2_member, u3_member);
         user1.addPosts(u1_post);
         user1.addReviews(u1_review);
+        user1.addComments(u1_comment);
         user1.addGroup(group4);
+        post1.addComment(comment1);
+        post1.addComment(comment2);
+        post2.addComment(comment3);
+        review1.addComment(comment4);
 
         user1.addGroupInvite(groupInvite1_u1);
         group1.addGroupInvite(groupInvite1_u1);

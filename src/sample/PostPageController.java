@@ -97,9 +97,13 @@ public class PostPageController implements Initializable {
     }
 
     public void transferMessage(int post_id) {
+        System.out.println(post_id);
 
         //-----POST-----
         post = Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == post_id).collect(Collectors.toList()).get(0);
+
+        System.out.println(post.getId());
+
         titleLabel.setText(post.getTitle());
         authorLabel.setText(post.getAuthorId());
         boardLabel.setText(post.getPostedToBoard().getName());
@@ -143,11 +147,13 @@ public class PostPageController implements Initializable {
 
         commentObservableList = FXCollections.observableArrayList();
 
-        if(post.getCommentsNum() > 0)
+        if(post.getCommentsNum() > 0){
             commentObservableList.addAll(
                  post.getComments()
             );
-        else
+        commentListView.setItems(commentObservableList);
+        commentListView.setCellFactory(postListView -> new CommentListViewController());
+        } else
             commentListView.setPlaceholder(new Label("Non ci sono commenti per questo post."));
 
     }

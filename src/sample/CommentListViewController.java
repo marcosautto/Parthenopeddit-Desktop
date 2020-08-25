@@ -7,41 +7,21 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import sample.model.Comment;
 import sample.model.Post;
 
 import java.io.IOException;
 
-public class CommentListViewController {
-    /*
-    package sample;
-
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import sample.model.Post;
-
-import java.io.IOException;
-
-    public class PostListViewController extends ListCell<Post> {
+public class CommentListViewController extends ListCell<Comment> {
 
         @FXML
-        private Label titleLabel;
-
-        @FXML
-        private Label authorLabel;
-
-        @FXML
-        private Label boardLabel;
+        private Label usernameLabel;
 
         @FXML
         private Label timestampLabel;
 
         @FXML
-        private TextArea postBodyTextArea;       //Uso la TextArea e non le Label per gestire meglio i testi multilinea
+        private TextArea commentBodyTextArea;       //Uso la TextArea e non le Label per gestire meglio i testi multilinea
 
         @FXML
         private Label commentLabel;
@@ -66,23 +46,23 @@ import java.io.IOException;
 
         private FXMLLoader mLLoader;
 
-        private Post post;
+        private Comment comment;
 
         private DashboardController DashboardController;
 
         @Override
-        protected void updateItem(Post post, boolean empty) {
-            super.updateItem(post, empty);
-            this.post = post;
+        protected void updateItem(Comment comment, boolean empty) {
+            super.updateItem(comment, empty);
+            this.comment = comment;
 
-            if(empty || post == null) {
+            if(empty || comment == null) {
 
                 setText(null);
                 setGraphic(null);
 
             } else {
                 if (mLLoader == null) {
-                    mLLoader = new FXMLLoader(getClass().getResource("fxml/ListCell/PostListCell.fxml"));
+                    mLLoader = new FXMLLoader(getClass().getResource("fxml/ListCell/CommentListCell.fxml"));
                     mLLoader.setController(this);
 
                     try {
@@ -93,45 +73,12 @@ import java.io.IOException;
 
                 }
 
-                titleLabel.setText(post.getTitle());
-                authorLabel.setText(post.getAuthorId());
-                boardLabel.setText(post.getPostedToBoard().getName());
-                timestampLabel.setText(post.getTimestamp());
-                if(post.getPostedToBoardId() == 1)
-                    boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
-                else if(post.getPostedToBoard().getType() == "course")
-                    boardLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
-                else
-                    boardLabel.setStyle("-fx-background-color: #FF545D; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
-
-                postBodyTextArea.setText(post.getBody());
-                upvoteLabel.setText(Integer.toString(post.getUpvote()));
-                downvoteLabel.setText(Integer.toString(post.getDownvote()));
-                commentLabel.setText(Integer.toString(post.getCommentsNum()));
-
-                boardLabel.setOnMouseClicked(e ->{
-                    if(post.getPostedToBoardId() == 1) {
-                        try {
-                            DashboardController.getInstance().homeFXML(null);
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                    else if(post.getPostedToBoard().getType() == "course") {
-                        try {
-                            DashboardController.getInstance().courseSelected(post.getPostedToBoardId());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                    else {
-                        try {
-                            DashboardController.getInstance().groupSelected(post.getPostedToBoardId());
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-                    }
-                });
+                usernameLabel.setText(comment.getAuthor_id());
+                timestampLabel.setText(comment.getTimestamp());
+                commentBodyTextArea.setText(comment.getBody());
+                upvoteLabel.setText(Integer.toString(comment.getUpvotes()));
+                downvoteLabel.setText(Integer.toString(comment.getDownvotes()));
+                //commentLabel.setText(Integer.toString(comment.getCommentsNum()));
 
 
                 setText(null);
@@ -140,10 +87,4 @@ import java.io.IOException;
 
         }
 
-    }
-
-
-
-
-*/
 }

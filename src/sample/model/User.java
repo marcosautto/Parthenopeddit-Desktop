@@ -47,5 +47,7 @@ public class User {
     public void addGroupInvite(GroupInvite groupInvite){ group_invites.add(groupInvite);}
     public void addPosts(ObservableList<Post> posts){ published_posts.addAll(posts);}
     public void addReviews(ObservableList<Review> reviews){ published_reviews.addAll(reviews);}
+    public void addComments(ObservableList<Comment> comments){ published_comments.addAll(comments);}
+    public void addComment(Comment comment){ published_comments.add(comment);}
 
 }

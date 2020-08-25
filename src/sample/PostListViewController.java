@@ -120,7 +120,8 @@ public class PostListViewController extends ListCell<Post> {
 
                 anchorPane.setOnMouseClicked(e ->{
                     try {
-                        DashboardController.getInstance().postSelected(post.getPostedToBoardId());
+                        System.out.println(post.getId());
+                        DashboardController.getInstance().postSelected(post.getId());
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     }
