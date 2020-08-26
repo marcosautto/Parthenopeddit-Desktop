@@ -12,6 +12,7 @@ import java.io.IOException;
 public class Main extends Application {
 
     Stage loginStage;
+    //Stage privacyStage;
     Stage dashboardStage;
 
     private static Main instance;
@@ -56,6 +57,18 @@ public class Main extends Application {
     public void userLogout() throws IOException {
         dashboardStage.close();
         loginStage.show();
+    }
+
+    public void showPrivacyDisclaimer() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/PrivacyLayout.fxml"));
+
+        Parent root = loader.load();
+        Stage privacyStage = new Stage();
+        privacyStage.setTitle("Parthenopeddit Desktop - Privacy Disclaimer");
+        privacyStage.setScene(new Scene(root, 350, 300));
+        privacyStage.show();
+
+
     }
 
 

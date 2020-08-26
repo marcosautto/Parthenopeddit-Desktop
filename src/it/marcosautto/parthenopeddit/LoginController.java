@@ -42,7 +42,12 @@ public class LoginController implements Initializable {
     private void loginClicked() throws IOException {
         boolean user_logged = false;
         user_logged = validateLogin();
-        savePreference();
+        if(rememberCheckbox.isSelected())
+            savePreference();
+        else{
+            usernameTextField.clear();
+            passwordTextField.clear();
+        }
 
         if(user_logged){
             Main.getInstance().userLogged(usernameTextField.getText());
@@ -57,10 +62,9 @@ public class LoginController implements Initializable {
 
     private void savePreference(){
         prefs.putBoolean("remember", rememberCheckbox.isSelected());
-        if(rememberCheckbox.isSelected()){
-            prefs.put("username", usernameTextField.getText());
-            prefs.put("password", passwordTextField.getText());        //TODO: encrypt password
-        }
+        prefs.put("username", usernameTextField.getText());
+        prefs.put("password", passwordTextField.getText());        //TODO: encrypt password
+
     }
 
     @Override
@@ -72,6 +76,12 @@ public class LoginController implements Initializable {
         }
         // Initialization code can go here.
         // The parameters url and resources can be omitted if they are not needed
+    }
+
+    public void showPrivacyDisclaimer() throws IOException {
+
+        Main.getInstance().showPrivacyDisclaimer();
+
     }
 
     /*@Override
