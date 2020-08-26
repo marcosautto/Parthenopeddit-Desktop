@@ -17,6 +17,5 @@ public class PrivacyController implements Initializable {
 
     public void openAPIWebpage() throws URISyntaxException, IOException {
         Desktop.getDesktop().browse(new URI("https://api.uniparthenope.it/"));
-
     }
 }
