@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.PostListViewController;
 import sample.api.Mockdatabase;
@@ -14,35 +15,42 @@ import java.util.ResourceBundle;
 
 public class UserPostController implements Initializable {
 
-    private static UserPostController instance;
-
-    public static UserPostController getInstance() {
-        return instance;
-    }
-
     @FXML
     private ListView<Post> postListView;
 
     private ObservableList<Post> postObservableList;
 
-    private sample.api.Mockdatabase Mockdatabase;
-
+    private static UserPostController instance;
+    // static method to get instance of view
+    public static UserPostController getInstance() {
+        return instance;
+    }
 
     public UserPostController()  {
 
         instance = this;
         postObservableList = FXCollections.observableArrayList();
+        Mockdatabase mockdatabase = new Mockdatabase();
 
-        postObservableList.addAll( Mockdatabase.getInstance().user1.getPublishedPosts() );
+        //add some Students
+        postObservableList.addAll(
+        );
+
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        postListView.setItems(postObservableList);
-        postListView.setCellFactory(postListView -> new PostListViewController());
+        //postListView.setItems(postObservableList);
+        //postListView.setCellFactory(postListView -> new PostListViewController());
 
     }
 
+    public void sendPosts(ObservableList<Post> posts){
+        if(posts.size() > 0){
+            postListView.setItems(posts);
+            postListView.setCellFactory(postListView -> new PostListViewController());
+        } else
+            postListView.setPlaceholder(new Label("Non ci sono post in questo gruppo."));
+    }
 }
-

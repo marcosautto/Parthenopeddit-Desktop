@@ -4,11 +4,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import sample.DashboardController;
+import sample.PostListViewController;
 import sample.ReviewListViewController;
 import sample.api.Mockdatabase;
 import sample.coursePage.CourseReviewController;
+import sample.model.Post;
 import sample.model.Review;
 
 import java.net.URL;
@@ -41,9 +44,17 @@ public class UserReviewController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        reviewListView.setItems(reviewObservableList);
-        reviewListView.setCellFactory(reviewListView -> new ReviewListViewController());
+        //reviewListView.setItems(reviewObservableList);
+        //reviewListView.setCellFactory(reviewListView -> new ReviewListViewController());
 
+    }
+
+    public void sendReviews(ObservableList<Review> reviews){
+        if(reviews.size() > 0){
+            reviewListView.setItems(reviews);
+            reviewListView.setCellFactory(postListView -> new ReviewListViewController());
+        } else
+            reviewListView.setPlaceholder(new Label("Non hai ancora pubblicato alcuna recensione."));
     }
 
 }

@@ -31,6 +31,7 @@ public class DashboardController {
     private GroupPageController GroupPageController;
     private PostPageController PostPageController;
     private ReviewPageController ReviewPageController;
+    private ProfileController ProfileController;
 
     public void setMain(Main Main) {
         this.Main = Main;
@@ -47,7 +48,8 @@ public class DashboardController {
     }
 
     public void profileFXML(ActionEvent event) throws IOException {
-        loadFxml(event, "fxml/DashboardMenu/ProfileLayout.fxml");
+        //loadFxml(event, "fxml/DashboardMenu/ProfileLayout.fxml");
+        profileSelected("marcosautto");
     }
 
     public void courseFXML(ActionEvent event) throws IOException {
@@ -112,6 +114,14 @@ public class DashboardController {
         secondPane.getChildren().setAll(node);
 
         ReviewPageController.getInstance().transferMessage(reviewId);
+    }
+
+    public void profileSelected(String userId) throws IOException{
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/DashboardMenu/ProfileLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        ProfileController.getInstance().transferMessage(userId);
     }
 
     public void writeReview(int courseId) throws IOException {

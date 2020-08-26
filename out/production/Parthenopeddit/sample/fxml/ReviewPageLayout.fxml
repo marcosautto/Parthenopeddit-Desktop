@@ -97,9 +97,6 @@
                 </children>
             </HBox>
         </children>
-        <effect>
-            <DropShadow color="black" />
-        </effect>
     </AnchorPane>
     <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="625.0" prefHeight="50.0" spacing="10.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
         <children>
