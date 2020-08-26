@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DashboardController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.DashboardController">
    <children>
       <AnchorPane prefHeight="430.0" prefWidth="200.0" style="-fx-background-color: #006FFF;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -22,6 +22,15 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
+                  <JFXButton fx:id="searchButton" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Ricerca" textFill="#006fff">
+                     <graphic>
+                        <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/search-bluetheme-64px.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
                   <JFXButton fx:id="profileButton" graphicTextGap="10.0" layoutX="2.0" layoutY="143.0" onAction="#profileFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Profilo" textFill="#006fff" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="220.0">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
@@ -113,7 +122,7 @@
             <DropShadow />
          </effect>
       </AnchorPane>
-      <AnchorPane layoutX="193.0" layoutY="5.0" prefHeight="750.0" prefWidth="990.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="193.0" layoutY="5.0" prefWidth="990.0" style="-fx-background-color: #595959;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="secondPane" layoutX="91.0" layoutY="105.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children>

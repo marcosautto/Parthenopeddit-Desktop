@@ -30,6 +30,7 @@ public class DashboardController {
     private CoursePageController CoursePageController;
     private GroupPageController GroupPageController;
     private PostPageController PostPageController;
+    private ReviewPageController ReviewPageController;
 
     public void setMain(Main Main) {
         this.Main = Main;
@@ -103,6 +104,14 @@ public class DashboardController {
         secondPane.getChildren().setAll(node);
 
         PostPageController.getInstance().transferMessage(postId);
+    }
+
+    public void reviewSelected(int reviewId) throws IOException{
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("fxml/ReviewPageLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        ReviewPageController.getInstance().transferMessage(reviewId);
     }
 
     public void writeReview(int courseId) throws IOException {

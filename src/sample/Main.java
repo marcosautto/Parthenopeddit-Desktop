@@ -45,7 +45,7 @@ public class Main extends Application {
 
         Stage dashboardStage = new Stage();
         dashboardStage.setTitle("Parthenopeddit Desktop");
-        dashboardStage.setScene(new Scene(root, 1200, 800));
+        dashboardStage.setScene(new Scene(root, 1200, 950));
         this.dashboardStage = dashboardStage;
         DashboardController dashboardController = loader.getController();
         dashboardController.transferMessage(username);

@@ -33,7 +33,7 @@ public class ReviewListViewController extends ListCell<Review> {
     private Rating average_difficulty_score_ratingbar;
 
     @FXML
-    private TextArea reviewContentTextArea;
+    private TextArea reviewBodyTextArea;
 
     @FXML
     private Label commentLabel;
@@ -85,7 +85,7 @@ public class ReviewListViewController extends ListCell<Review> {
             courseNameLabel.setText(review.getReviewedCourse().getName());
             average_liking_score_ratingbar.setRating(review.getScoreLiking());
             average_difficulty_score_ratingbar.setRating(review.getScoreDifficulty());
-            reviewContentTextArea.setText(review.getBody());
+            reviewBodyTextArea.setText(review.getBody());
             commentLabel.setText(Integer.toString(review.getComments().size()));
             upvoteLabel.setText(Integer.toString(review.getUpvote()));
             downvoteLabel.setText(Integer.toString(review.getDownvote()));
@@ -99,6 +99,15 @@ public class ReviewListViewController extends ListCell<Review> {
                     ex.printStackTrace();
                 }
 
+            });
+
+            anchorPane.setOnMouseClicked(e ->{
+                try {
+                    System.out.println(review.getId());
+                    DashboardController.getInstance().reviewSelected(review.getId());
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
             });
 
             setText(null);

@@ -38,7 +38,7 @@
             </VBox>
          </children>
       </VBox>
-      <TextArea fx:id="reviewContentTextArea" layoutX="65.0" layoutY="228.0" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="220.0" />
+      <TextArea fx:id="reviewBodyTextArea" layoutX="65.0" layoutY="228.0" wrapText="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="220.0" />
       <HBox alignment="CENTER" layoutX="16.0" layoutY="486.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="420.0">
          <children>
             <Label fx:id="commentLabel" text="0">

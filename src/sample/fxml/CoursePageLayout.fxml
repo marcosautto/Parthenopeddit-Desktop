@@ -7,7 +7,7 @@
 <?import javafx.scene.text.*?>
 <?import org.controlsfx.control.*?>
 
-<AnchorPane prefHeight="750.0" prefWidth="990.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CoursePageController">
+<AnchorPane prefHeight="900.0" prefWidth="990.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.CoursePageController">
    <children>
       <Label fx:id="courseNameTitleLabel" layoutX="29.0" layoutY="44.0" text="Course name" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="0.0">
          <font>
