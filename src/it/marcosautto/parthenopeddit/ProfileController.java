@@ -4,10 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import it.marcosautto.parthenopeddit.groupPage.GroupPostController;
@@ -125,11 +122,10 @@ public class ProfileController implements Initializable {
 
     }
 
-    public void showUserPost() throws IOException {
-        DashboardController.getInstance().showUserPost(user);
-    }
-
-    public void showUserReview() throws IOException {
-        DashboardController.getInstance().showUserReview(user);
+    public void changeUserimage(){
+        Alert alert = new Alert(Alert.AlertType.NONE);
+        alert.setAlertType(Alert.AlertType.WARNING);
+        alert.setContentText("Work in progress");
+        alert.show();
     }
 }

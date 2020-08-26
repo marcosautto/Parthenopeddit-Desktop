@@ -55,7 +55,7 @@
                         <Insets />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="changeProfilePicButton" graphicTextGap="10.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF;" text="Cambia immagine del profilo" textFill="#006fff">
+                  <JFXButton fx:id="changeProfilePicButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeUserimage" style="-fx-background-color: #FFFFFF;" text="Cambia immagine del profilo" textFill="#006fff">
                      <padding>
                         <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
                      </padding>
