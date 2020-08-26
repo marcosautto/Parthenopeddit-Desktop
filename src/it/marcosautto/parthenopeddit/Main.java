@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import it.marcosautto.parthenopeddit.api.Mockdatabase;
 
@@ -29,6 +30,7 @@ public class Main extends Application {
         Mockdatabase mockdatabase = new Mockdatabase();
 
         Parent root = FXMLLoader.load(getClass().getResource("fxml/LoginLayout.fxml"));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("img/Parthenopeddit_logo.png")));
         primaryStage.setTitle("Parthenopeddit Desktop - Login");
         primaryStage.setScene(new Scene(root, 700, 600));
         loginStage = primaryStage;
@@ -45,13 +47,13 @@ public class Main extends Application {
         //Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
 
         Stage dashboardStage = new Stage();
+        dashboardStage.getIcons().add(new Image(getClass().getResourceAsStream("img/Parthenopeddit_logo.png")));
         dashboardStage.setTitle("Parthenopeddit Desktop");
         dashboardStage.setScene(new Scene(root, 1200, 950));
         this.dashboardStage = dashboardStage;
         DashboardController dashboardController = loader.getController();
         dashboardController.transferMessage(username);
         dashboardStage.show();
-
     }
 
     public void userLogout() throws IOException {
@@ -64,6 +66,7 @@ public class Main extends Application {
 
         Parent root = loader.load();
         Stage privacyStage = new Stage();
+        privacyStage.getIcons().add(new Image(getClass().getResourceAsStream("img/Parthenopeddit_logo.png")));
         privacyStage.setTitle("Parthenopeddit Desktop - Privacy Disclaimer");
         privacyStage.setScene(new Scene(root, 350, 300));
         privacyStage.show();
