@@ -22,7 +22,7 @@
                            </image>
                         </ImageView>
                      </graphic></JFXButton>
-                  <JFXButton fx:id="searchButton" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Ricerca" textFill="#006fff">
+                  <JFXButton fx:id="searchButton" graphicTextGap="10.0" layoutX="10.0" layoutY="10.0" onAction="#searchFXML" prefHeight="40.0" prefWidth="175.0" style="-fx-background-color: #FFFFFF;" text="Ricerca" textFill="#006fff">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>

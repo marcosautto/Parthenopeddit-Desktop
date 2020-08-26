@@ -10,7 +10,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListView;
-import sample.UserListViewController;
+import sample.GroupMemberListViewController;
 import sample.api.Mockdatabase;
 import sample.model.GroupMember;
 
@@ -84,6 +84,6 @@ public class GroupAdminController implements Initializable {
 
     public void sendAdmins(ObservableList<GroupMember> admins){
         adminListView.setItems(admins);
-        adminListView.setCellFactory(postListView -> new UserListViewController());
+        adminListView.setCellFactory(postListView -> new GroupMemberListViewController());
     }
 }

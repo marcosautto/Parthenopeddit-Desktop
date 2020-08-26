@@ -47,6 +47,10 @@ public class DashboardController {
         loadFxml(event, "fxml/DashboardMenu/HomeLayout.fxml");
     }
 
+    public void searchFXML(ActionEvent event) throws IOException {
+        loadFxml(event, "fxml/DashboardMenu/SearchLayout.fxml");
+    }
+
     public void profileFXML(ActionEvent event) throws IOException {
         //loadFxml(event, "fxml/DashboardMenu/ProfileLayout.fxml");
         profileSelected("marcosautto");

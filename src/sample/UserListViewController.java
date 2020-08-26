@@ -2,23 +2,17 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
-import sample.model.GroupMember;
-import sample.model.Post;
+import sample.model.User;
 
 import java.io.IOException;
 
-public class UserListViewController extends ListCell<GroupMember> {
+public class UserListViewController extends ListCell<User> {
 
     @FXML
     private Label usernameLabel;
-
-    @FXML
-    private Label joinedOnLabel;
 
     @FXML
     private AnchorPane anchorPane;
@@ -26,7 +20,7 @@ public class UserListViewController extends ListCell<GroupMember> {
     private FXMLLoader mLLoader;
 
     @Override
-    protected void updateItem(GroupMember user, boolean empty) {
+    protected void updateItem(User user, boolean empty) {
         super.updateItem(user, empty);
 
         if(empty || user == null) {
@@ -36,7 +30,7 @@ public class UserListViewController extends ListCell<GroupMember> {
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("fxml/ListCell/GroupMemberListCell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("fxml/ListCell/UserListCell.fxml"));
                 mLLoader.setController(this);
 
                 try {
@@ -47,8 +41,7 @@ public class UserListViewController extends ListCell<GroupMember> {
 
             }
 
-            usernameLabel.setText(user.getUserId());
-            joinedOnLabel.setText(user.getJoinDate());
+            usernameLabel.setText(user.getDisplayName());
 
             setText(null);
             setGraphic(anchorPane);
