@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="350.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.marcosautto.parthenopeddit.PrivacyController">
+   <children>
+      <VBox alignment="CENTER" layoutX="200.0" layoutY="-37.0" spacing="10.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <Label text="DISCLAIMER SULLA PRIVACY" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font></Label>
+            <Label prefWidth="600.0" text="I dati sensibili utilizzati per il login quali, username e password, non sono in alcun modo visibili agli sviluppatori della suddetto software, in quanto vengono utilizzate le API Esse3 ufficiali e non consentono in alcun modo l'accesso a tali credenziali. Le API e la relativa documentazione può essere ottenuta attraverso questo link:" textFill="WHITE" wrapText="true" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="apiButton" layoutX="142.0" layoutY="179.0" mnemonicParsing="false" onAction="#openAPIWebpage" style="-fx-background-color: #006FFF;" text="API Esse3" textFill="WHITE" AnchorPane.leftAnchor="142.0" AnchorPane.rightAnchor="142.0" AnchorPane.topAnchor="179.0" />
+   </children>
+</AnchorPane>

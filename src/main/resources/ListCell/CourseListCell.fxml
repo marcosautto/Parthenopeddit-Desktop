@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
+
+<AnchorPane fx:id="anchorPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="courseNameLabel" layoutX="14.0" layoutY="6.0" text="Course name" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="5.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <VBox layoutX="14.0" layoutY="33.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <Label text="Gradimento:" />
+            <Rating fx:id="average_liking_score_ratingbar" partialRating="true" />
+         </children>
+      </VBox>
+      <VBox layoutX="275.0" layoutY="25.0" AnchorPane.leftAnchor="275.0" AnchorPane.topAnchor="35.0">
+         <children>
+            <Label text="Difficoltà:" />
+            <Rating fx:id="average_difficulty_score_ratingbar" partialRating="true" />
+         </children>
+      </VBox>
+   </children>
+   <padding>
+      <Insets bottom="10.0" right="15.0" />
+   </padding>
+</AnchorPane>
