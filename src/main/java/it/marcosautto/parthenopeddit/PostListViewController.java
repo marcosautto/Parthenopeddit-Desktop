@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.PostsRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -8,10 +9,15 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import it.marcosautto.parthenopeddit.model.Post;
+import it.marcosautto.parthenopeddit.api.Auth;
 
 import java.io.IOException;
 
 public class PostListViewController extends ListCell<Post> {
+
+    private Auth Auth;
+
+    private PostsRequests PostRequests = new PostsRequests(Auth);
 
         @FXML
         private Label titleLabel;
@@ -127,12 +133,43 @@ public class PostListViewController extends ListCell<Post> {
                     }
                 });
 
+                upvoteButton.setOnMouseClicked(e ->{
+                    try {
+                        PostRequests.likePost(post.getId());
+                        updateVotes();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+
+                });
+
+                downvoteButton.setOnMouseClicked(e ->{
+                    try {
+                        PostRequests.dislikePost(post.getId());
+                        updateVotes();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
 
 
 
                 setText(null);
                 setGraphic(anchorPane);
             }
+
+        }
+
+        private void updateVotes() throws IOException, InterruptedException {
+            post = PostRequests.getPost(post.getId());
+            upvoteLabel.setText(Integer.toString(post.getUpvote()));
+            System.out.println(post.getUpvote());
+            downvoteLabel.setText(Integer.toString(post.getDownvote()));
 
         }
 

@@ -18,8 +18,8 @@ public abstract class Content {
     private ArrayList<Comment> comments;
 
     private int comments_num;
-    private int upvotes_num;
-    private int downvotes_num;
+    private int likes_num;
+    private int dislikes_num;
 
     Content(int id, String body, String timestamp, String author_id, String type, User author, ArrayList<Comment> comments, int comments_num, int upvotes, int downvotes){
         this.id = id;
@@ -30,8 +30,8 @@ public abstract class Content {
         this.author = author;
         this.comments = comments;
         this.comments_num = comments_num;
-        this.upvotes_num = upvotes;
-        this.downvotes_num = downvotes;
+        this.likes_num = upvotes;
+        this.dislikes_num = downvotes;
     }
 
     public int getId(){ return id; }
@@ -42,11 +42,11 @@ public abstract class Content {
     public String getType(){ return type; }
     public ArrayList<Comment> getComments(){ return comments; }
     public void setComments(ArrayList<Comment> comments){ this.comments = comments; }
-    public int getUpvote(){ return upvotes_num; }
-    public int getDownvote(){ return downvotes_num; }
+    public int getUpvote(){ return likes_num; }
+    public int getDownvote(){ return dislikes_num; }
     public int getCommentsNum(){ return comments_num; }
     public void addComment(Comment comment){ comments.add(comment); comments_num++; }
-    public void increaseUpvote(){ upvotes_num++; }
-    public void increaseDownvote(){ downvotes_num++; }
+    public void increaseUpvote(){ likes_num++; }
+    public void increaseDownvote(){ dislikes_num++; }
 
 }

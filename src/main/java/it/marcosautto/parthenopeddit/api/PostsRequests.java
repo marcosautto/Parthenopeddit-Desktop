@@ -1,33 +1,14 @@
 package it.marcosautto.parthenopeddit.api;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import it.marcosautto.parthenopeddit.model.Comment;
 import it.marcosautto.parthenopeddit.model.Post;
 import it.marcosautto.parthenopeddit.util.BuildFormDataFromMap;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.geometry.Pos;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URI;
-import java.net.URLEncoder;
-import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class PostsRequests {
@@ -65,7 +46,7 @@ public class PostsRequests {
     public Post getPost(int postId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/post/"+postId))
+                .uri(URI.create("http://localhost:8000/posts/"+postId))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .build();
 
@@ -107,7 +88,41 @@ public class PostsRequests {
 
 
         return post;
+    }
 
+    public int likePost(int post_id) throws IOException, InterruptedException {
+        Map<Object, Object> data = new HashMap<>();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(BuildFormDataFromMap.build(data))
+                .uri(URI.create("http://localhost:8000/posts/"+post_id+"/like"))
+                .setHeader("authorization", auth.getInstance().getToken())
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .build();
+
+        HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+        System.out.println(getPost(32).getUpvote());
+
+
+        return response.statusCode();
+
+    }
+
+    public int dislikePost(int post_id) throws IOException, InterruptedException {
+        Map<Object, Object> data = new HashMap<>();
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .POST(BuildFormDataFromMap.build(data))
+                .uri(URI.create("http://localhost:8000/posts/"+post_id+"/dislike"))
+                .setHeader("authorization", auth.getInstance().getToken())
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .build();
+
+        HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        return response.statusCode();
 
     }
 
