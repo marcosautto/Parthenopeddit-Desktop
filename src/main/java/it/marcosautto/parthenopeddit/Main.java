@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.ApiClient;
+import it.marcosautto.parthenopeddit.api.Auth;
 import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,13 +30,16 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Mockdatabase mockdatabase = new Mockdatabase();
+        ApiClient ApiClient = new ApiClient();
 
         Parent root = FXMLLoader.load(getClass().getResource("/LoginLayout.fxml"));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/Parthenopeddit_logo.png")));
         primaryStage.setTitle("Parthenopeddit Desktop - Login");
-        primaryStage.setScene(new Scene(root, 700, 600));
+        primaryStage.setScene(new Scene(root, 700, 650));
         loginStage = primaryStage;
         primaryStage.show();
+
+        NewPostController NewPostController = new NewPostController();
 
 
     }

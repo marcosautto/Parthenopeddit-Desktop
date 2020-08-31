@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="900.0" prefWidth="990.0" styleClass="background-pane" stylesheets="@css/light-theme.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.marcosautto.parthenopeddit.NewReviewController">
+<AnchorPane prefHeight="900.0" prefWidth="990.0" styleClass="background-pane" stylesheets="@css/light-theme.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.marcosautto.parthenopeddit.NewPostController">
     <children>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="background-content" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="93.0">
             <children>

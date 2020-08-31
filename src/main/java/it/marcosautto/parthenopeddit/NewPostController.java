@@ -1,26 +1,36 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.Auth;
+import it.marcosautto.parthenopeddit.api.PostsRequests;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class NewPostController {
         @FXML
-        public Label boardNameLabel;
+        private Label boardNameLabel;
 
         @FXML
-        public TextField titleTextArea;
+        private TextField titleTextField;
 
         @FXML
-        public TextArea postTextArea;
+        private TextArea bodyTextArea;
 
         @FXML
-        public Button cancelButton;
+        private Button cancelButton;
 
         @FXML
-        public Button publishButton;
+        private Button publishButton;
+
+        private int boardId;
+
+        private PostsRequests PostsRequests = new PostsRequests(Auth.getInstance());
 
         private static NewPostController instance;
         public NewPostController() {
@@ -30,30 +40,30 @@ public class NewPostController {
         public static NewPostController getInstance() {
             return instance;
         }
-/*
-        public Course course;
 
-        public void transferMessage(int courseId) {
 
-            Course mCourse = Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == courseId).collect(Collectors.toList()).get(0);
-            course = mCourse;
-            courseNameLabel.setText(mCourse.getName());
+        public void transferMessage(int boardId, String boardName) {
+            this.boardId = boardId;
+            System.out.println(boardId + " " + boardName);
+            boardNameLabel.setText(boardName);
         }
 
-        public void handlePublish() throws IOException {
+        public void handlePublish() throws IOException, InterruptedException {
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = new Date();
-            Review review = new Review(reviewTextArea.getText(), formatter.format(date), Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1,  Mockdatabase.getInstance().noComments, 0, 0, course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating(), course);
-            Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course.getCourseId()).collect(Collectors.toList()).get(0).getReviews().add(review);
-            System.out.println(review.getReviewedCourse().getName());
-            System.out.println(review.getReviewedCourse().getReviews().size()+ " inside");
-            DashboardController.getInstance().courseSelected(course.getCourseId());
+
+            int result_code =
+                    PostsRequests
+                    .publishNewPost(
+                            titleTextField.getText(),
+                            bodyTextArea.getText(),
+                            boardId);
+            System.out.println(result_code);
+            DashboardController.getInstance().homeFXML(null);
         }
 
         public void handleCancel() throws IOException{
-            DashboardController.getInstance().courseSelected(course.getCourseId());
+            //DashboardController.getInstance().courseSelected(course.getCourseId());
         }
 
-*/
+
 }

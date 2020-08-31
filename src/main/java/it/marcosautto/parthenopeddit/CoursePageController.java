@@ -132,6 +132,10 @@ public class CoursePageController implements Initializable {
 
     }
 
+    public void publishPost() throws IOException {
+        DashboardController.getInstance().publishPost(courseId, "cou");
+    }
+
     public void writeReview() throws IOException {
         DashboardController.getInstance().writeReview(courseId);
     }

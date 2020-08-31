@@ -30,6 +30,8 @@ public class DashboardController {
     private PostPageController PostPageController;
     private ReviewPageController ReviewPageController;
     private ProfileController ProfileController;
+    private NewPostController NewPostController;
+    private NewReviewController NewReviewController;
 
     public void setMain(Main Main) {
         this.Main = Main;
@@ -102,7 +104,7 @@ public class DashboardController {
         GroupPageController.getInstance().transferMessage(groupId);
    }
 
-   public void postSelected(int postId) throws IOException{
+   public void postSelected(int postId) throws IOException, InterruptedException {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/PostPageLayout.fxml"));
         secondPane.getChildren().setAll(node);
@@ -124,6 +126,15 @@ public class DashboardController {
         secondPane.getChildren().setAll(node);
 
         ProfileController.getInstance().transferMessage(userId);
+    }
+
+    public void publishPost(int boardId, String boardName) throws IOException {
+
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("/NewPostLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        NewPostController.getInstance().transferMessage(boardId, boardName);
     }
 
     public void writeReview(int courseId) throws IOException {

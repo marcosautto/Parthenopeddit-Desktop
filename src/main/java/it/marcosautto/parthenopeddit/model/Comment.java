@@ -3,13 +3,15 @@ package it.marcosautto.parthenopeddit.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class Comment {
     private int id;
     private String body;
     private String timestamp;
     private String author_id;
     private User author;
-    private ObservableList<Comment> comments = FXCollections.observableArrayList();   //if crashes, initialize this in constructor
+    private ArrayList<Comment> comments = new ArrayList<Comment>();   //if crashes, initialize this in constructor
     private int comments_num;
     private int upvotes_num;
     private int downvotes_num;

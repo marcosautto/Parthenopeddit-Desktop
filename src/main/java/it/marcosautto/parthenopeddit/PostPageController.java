@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.PostsRequests;
+import it.marcosautto.parthenopeddit.api.UserRequests;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -8,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import it.marcosautto.parthenopeddit.model.Comment;
 import it.marcosautto.parthenopeddit.model.Post;
+import it.marcosautto.parthenopeddit.api.Auth;
 
 import java.io.IOException;
 import java.net.URL;
@@ -82,6 +85,11 @@ public class PostPageController implements Initializable {
 
     private ObservableList<Comment> commentObservableList;
 
+    private Auth Auth;
+
+    private PostsRequests PostsRequests;
+
+
     private Post post;
 
     @Override
@@ -90,11 +98,13 @@ public class PostPageController implements Initializable {
 
     }
 
-    public void transferMessage(int post_id) {
+    public void transferMessage(int post_id) throws IOException, InterruptedException {
         System.out.println(post_id);
+        PostsRequests = new PostsRequests(Auth);
+
 
         //-----POST-----
-        post = Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == post_id).collect(Collectors.toList()).get(0);
+        post = PostsRequests.getPostWithComments(post_id);
 
         System.out.println(post.getId());
         System.out.println(post.getComments().size());

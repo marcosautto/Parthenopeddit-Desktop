@@ -56,10 +56,8 @@ public class NewReviewController {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
-        Review review = new Review(99, reviewTextArea.getText(), formatter.format(date), Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1,  Mockdatabase.getInstance().noComments, 0, 0, course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating(), course);
-        Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course.getCourseId()).collect(Collectors.toList()).get(0).getReviews().add(review);
-        System.out.println(review.getReviewedCourse().getName());
-        System.out.println(review.getReviewedCourse().getReviews().size()+ " inside");
+        //Review review = new Review(99, reviewTextArea.getText(), formatter.format(date), Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1,  Mockdatabase.getInstance().noComments, 0, 0, course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating(), course);
+        //Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course.getCourseId()).collect(Collectors.toList()).get(0).getReviews().add(review);
         DashboardController.getInstance().courseSelected(course.getCourseId());
     }
 

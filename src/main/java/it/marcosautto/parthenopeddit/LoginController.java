@@ -1,5 +1,8 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.ApiClient;
+import it.marcosautto.parthenopeddit.api.Auth;
+import it.marcosautto.parthenopeddit.api.AuthRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -21,7 +24,7 @@ public class LoginController implements Initializable {
     Button loginButton;
 
     @FXML
-    Label loginResult;
+    Label loginResultLabel;
 
     @FXML
     CheckBox rememberCheckbox;
@@ -37,7 +40,11 @@ public class LoginController implements Initializable {
     }
 
     @FXML
-    private void loginClicked() throws IOException {
+    private void loginClicked() throws IOException, InterruptedException {
+
+
+
+
         boolean user_logged = false;
         user_logged = validateLogin();
         if(rememberCheckbox.isSelected())
@@ -52,10 +59,24 @@ public class LoginController implements Initializable {
         }
     }
 
-    private boolean validateLogin(){
+    private boolean validateLogin() throws IOException, InterruptedException {
         //TODO: Login with API
+        Auth auth = new Auth(usernameTextField.getText(), passwordTextField.getText());
 
-        return true;
+        AuthRequests AuthRequests = new AuthRequests();
+
+        int return_code = AuthRequests.login(auth.getInstance().getToken());
+
+        if(return_code == 200 || return_code == 201){
+            return true;
+        } else if(return_code == 452){
+            loginResultLabel.setText("Username o password errati.");
+            loginResultLabel.setVisible(true);
+        } else{
+            System.out.println(return_code);
+        }
+
+        return false;
     }
 
     private void savePreference(){
@@ -72,6 +93,7 @@ public class LoginController implements Initializable {
             usernameTextField.setText(prefs.get("username", ""));
             passwordTextField.setText(prefs.get("password", ""));
         }
+
         // Initialization code can go here.
         // The parameters url and resources can be omitted if they are not needed
     }

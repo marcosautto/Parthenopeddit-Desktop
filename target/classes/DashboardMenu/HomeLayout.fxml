@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
@@ -14,15 +16,59 @@
       </Label>
       <AnchorPane layoutX="200.0" layoutY="131.0" prefWidth="980.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="93.0">
          <children>
-            <Label style="-fx-background-color: #006FFF;" text="Questi sono i post più recenti:" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
+            <HBox spacing="420.0" style="-fx-background-color: #006FFF;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <VBox spacing="10.0">
+                     <children>
+                        <Label fx:id="numPostLabel" text="Questi sono i 10 post più recenti" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="pageLabel" text="Pagina 1" textFill="WHITE">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Label>
+                     </children>
+                  </VBox>
+                  <VBox spacing="10.0">
+                     <children>
+                        <JFXButton fx:id="publishPostButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#publishPost" prefHeight="28.0" prefWidth="295.0" style="-fx-background-color: #FFFFFF;" text="Pubblica un post" textFill="#006fff">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../icons/edit-bluetheme-64px.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></JFXButton>
+                        <HBox spacing="10.0">
+                           <children>
+                              <JFXButton fx:id="previousPageButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#previousPage" style="-fx-background-color: #FFFFFF;" text="Pagina precedente" textFill="#006fff">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/previous-bluetheme-64px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></JFXButton>
+                              <JFXButton fx:id="nextPageButton" contentDisplay="RIGHT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#nextPage" style="-fx-background-color: #FFFFFF;" text="Pagina successiva" textFill="#006fff">
+                                 <graphic>
+                                    <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../icons/next-bluetheme-64px.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></JFXButton>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" top="5.0" />
+                  <Insets bottom="20.0" left="10.0" top="10.0" />
                </padding>
-            </Label>
-            <ListView fx:id="homeListView" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0" />
+            </HBox>
+            <ListView fx:id="homeListView" layoutY="90.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="90.0" />
          </children>
       </AnchorPane>
    </children>

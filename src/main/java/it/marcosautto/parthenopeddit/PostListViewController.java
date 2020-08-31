@@ -122,7 +122,7 @@ public class PostListViewController extends ListCell<Post> {
                     try {
                         System.out.println(post.getId());
                         DashboardController.getInstance().postSelected(post.getId());
-                    } catch (IOException ex) {
+                    } catch (IOException | InterruptedException ex) {
                         ex.printStackTrace();
                     }
                 });

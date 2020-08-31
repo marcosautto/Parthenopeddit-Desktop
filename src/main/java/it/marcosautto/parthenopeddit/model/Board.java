@@ -3,7 +3,7 @@ package it.marcosautto.parthenopeddit.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-public abstract class Board {
+public class Board {
 
     private int id;
     private String name;
@@ -33,5 +33,4 @@ public abstract class Board {
     public int getPostsNum() { return posts_num; }
 
     public ObservableList<Post> getPosts(){ return posts; }
-
 }
