@@ -102,9 +102,6 @@ public class PostsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(getPost(32).getUpvote());
-
-
         return response.statusCode();
 
     }

@@ -168,7 +168,6 @@ public class PostListViewController extends ListCell<Post> {
         private void updateVotes() throws IOException, InterruptedException {
             post = PostRequests.getPost(post.getId());
             upvoteLabel.setText(Integer.toString(post.getUpvote()));
-            System.out.println(post.getUpvote());
             downvoteLabel.setText(Integer.toString(post.getDownvote()));
 
         }

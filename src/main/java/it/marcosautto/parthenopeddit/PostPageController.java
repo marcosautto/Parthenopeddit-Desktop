@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CommentsRequests;
 import it.marcosautto.parthenopeddit.api.PostsRequests;
 import it.marcosautto.parthenopeddit.api.UserRequests;
 import javafx.collections.FXCollections;
@@ -31,7 +32,6 @@ public class PostPageController implements Initializable {
     private DashboardController DashboardController;
 
     private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
-
 
     public void setDashboardController(DashboardController dashboardController) {
         this.DashboardController = dashboardController;
@@ -89,6 +89,8 @@ public class PostPageController implements Initializable {
 
     private PostsRequests PostsRequests;
 
+    private CommentsRequests CommentsRequests;
+
 
     private Post post;
 
@@ -101,6 +103,7 @@ public class PostPageController implements Initializable {
     public void transferMessage(int post_id) throws IOException, InterruptedException {
         System.out.println(post_id);
         PostsRequests = new PostsRequests(Auth);
+        CommentsRequests = new CommentsRequests();
 
 
         //-----POST-----
@@ -165,7 +168,7 @@ public class PostPageController implements Initializable {
 
     }
 
-    public void sendComment(){
+    public void sendComment() throws IOException, InterruptedException {
         if(!commentTextArea.getText().isEmpty()){
             String pattern = "yyyy-MM-dd";
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
@@ -173,9 +176,14 @@ public class PostPageController implements Initializable {
 
             Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, post.getId());
 
-            Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
-
+            CommentsRequests.publishNewComment(commentTextArea.getText(), post.getId());
+            //Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
             commentTextArea.clear();
+
+            post = PostsRequests.getPostWithComments(post.getId());
+            ObservableList<Comment> comments = FXCollections.observableList(post.getComments());
+            commentListView.setItems(comments);
+
         }
     }
 
