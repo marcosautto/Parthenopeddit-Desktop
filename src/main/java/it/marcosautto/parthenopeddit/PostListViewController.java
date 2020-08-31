@@ -88,9 +88,10 @@ public class PostListViewController extends ListCell<Post> {
                 authorLabel.setText(post.getAuthorId());
                 boardLabel.setText(post.getPostedToBoard().getName());
                 timestampLabel.setText(post.getTimestamp());
-                if(post.getPostedToBoardId() == 1)
+                if(post.getPostedToBoardId() == 0){
                     boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
-                else if(post.getPostedToBoard().getType() == "course")
+                    boardLabel.setText("Generale");
+                } else if(post.getPostedToBoard().getType().equals("course"))
                     boardLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
                 else
                     boardLabel.setStyle("-fx-background-color: #FF545D; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
@@ -101,17 +102,17 @@ public class PostListViewController extends ListCell<Post> {
                 commentLabel.setText(Integer.toString(post.getCommentsNum()));
 
                 boardLabel.setOnMouseClicked(e ->{
-                    if(post.getPostedToBoardId() == 1) {
+                    if(post.getPostedToBoardId() == 0) {
                         try {
                             DashboardController.getInstance().homeFXML(null);
                         } catch (IOException ex) {
                             ex.printStackTrace();
                         }
                     }
-                    else if(post.getPostedToBoard().getType() == "course") {
+                    else if(post.getPostedToBoard().getType().equals("course")) {
                         try {
                             DashboardController.getInstance().courseSelected(post.getPostedToBoardId());
-                        } catch (IOException ex) {
+                        } catch (IOException | InterruptedException ex) {
                             ex.printStackTrace();
                         }
                     }
@@ -126,7 +127,6 @@ public class PostListViewController extends ListCell<Post> {
 
                 anchorPane.setOnMouseClicked(e ->{
                     try {
-                        System.out.println(post.getId());
                         DashboardController.getInstance().postSelected(post.getId());
                     } catch (IOException | InterruptedException ex) {
                         ex.printStackTrace();

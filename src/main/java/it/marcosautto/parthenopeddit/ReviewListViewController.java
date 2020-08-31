@@ -86,7 +86,7 @@ public class ReviewListViewController extends ListCell<Review> {
             average_liking_score_ratingbar.setRating(review.getScoreLiking());
             average_difficulty_score_ratingbar.setRating(review.getScoreDifficulty());
             reviewBodyTextArea.setText(review.getBody());
-            commentLabel.setText(Integer.toString(review.getComments().size()));
+            commentLabel.setText(Integer.toString(review.getCommentsNum()));
             upvoteLabel.setText(Integer.toString(review.getUpvote()));
             downvoteLabel.setText(Integer.toString(review.getDownvote()));
             courseNameLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
@@ -95,7 +95,7 @@ public class ReviewListViewController extends ListCell<Review> {
             courseNameLabel.setOnMouseClicked(e ->{
                 try {
                     DashboardController.getInstance().courseSelected(review.getReviewedCourseId());
-                } catch (IOException ex) {
+                } catch (IOException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
 

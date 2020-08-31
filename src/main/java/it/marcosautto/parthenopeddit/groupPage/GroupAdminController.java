@@ -15,6 +15,7 @@ import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import it.marcosautto.parthenopeddit.model.GroupMember;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -82,8 +83,9 @@ public class GroupAdminController implements Initializable {
 
     }
 
-    public void sendAdmins(ObservableList<GroupMember> admins){
-        adminListView.setItems(admins);
+    public void sendAdmins(ArrayList<GroupMember> admins){
+        adminObservableList.addAll(
+        admins);
         adminListView.setCellFactory(postListView -> new GroupMemberListViewController());
     }
 }

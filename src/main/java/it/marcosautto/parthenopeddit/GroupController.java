@@ -33,7 +33,7 @@ public class GroupController implements Initializable {
         groupObservableList = FXCollections.observableArrayList();
 
         //add some Students
-        user_group = Mockdatabase.getInstance().user1.getGroups();
+        //user_group = Mockdatabase.getInstance().user1.getGroups();
 
         if(user_group.size() > 0)
         groupObservableList.addAll(

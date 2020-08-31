@@ -3,21 +3,24 @@ package it.marcosautto.parthenopeddit.model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.ArrayList;
+
 public class Board {
 
     private int id;
     private String name;
     private String type;
 
-    private ObservableList<Post> posts = FXCollections.observableArrayList();
+    private ArrayList<Post> posts;
     private int posts_num;
 
-    public Board(int id, String name, String type){
+
+    public Board(int id, String name, String type, ArrayList<Post> posts, int posts_num){
         this.id = id;
         this.name = name;
         this.type = type;
         this.posts = posts;
-        posts_num = posts.size();
+        this.posts_num = posts_num;
     }
 
     public int getBoardId() { return id; }
@@ -32,5 +35,5 @@ public class Board {
 
     public int getPostsNum() { return posts_num; }
 
-    public ObservableList<Post> getPosts(){ return posts; }
+    public ArrayList<Post> getPosts(){ return posts; }
 }

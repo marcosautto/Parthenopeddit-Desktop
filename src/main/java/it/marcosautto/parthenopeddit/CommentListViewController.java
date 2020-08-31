@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CommentsRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -47,6 +48,8 @@ public class CommentListViewController extends ListCell<Comment> {
 
         private Comment comment;
 
+        private CommentsRequests CommentsRequests = new CommentsRequests();
+
         private DashboardController DashboardController;
 
         @Override
@@ -80,10 +83,43 @@ public class CommentListViewController extends ListCell<Comment> {
                 //commentLabel.setText(Integer.toString(comment.getCommentsNum()));
 
 
+                upvoteButton.setOnMouseClicked(e ->{
+                    try {
+                        CommentsRequests.likeComment(comment.getId());
+                        updateVotes();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+
+                });
+
+                downvoteButton.setOnMouseClicked(e ->{
+                    try {
+                        CommentsRequests.dislikeComment(comment.getId());
+                        updateVotes();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+
+
+
                 setText(null);
                 setGraphic(anchorPane);
             }
 
         }
+
+    private void updateVotes() throws IOException, InterruptedException {
+        comment = CommentsRequests.getComment(comment.getId());
+        upvoteLabel.setText(Integer.toString(comment.getUpvotes()));
+        downvoteLabel.setText(Integer.toString(comment.getDownvotes()));
+
+    }
 
 }

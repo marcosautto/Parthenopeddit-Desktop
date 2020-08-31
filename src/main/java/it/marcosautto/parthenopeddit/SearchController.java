@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CoursesRequests;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 public class SearchController implements Initializable {
+
+    private CoursesRequests CoursesRequests;
 
    @FXML
     private TextField queryTextField;
@@ -74,6 +77,9 @@ public class SearchController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         FXMLLoader loader = new FXMLLoader();
+
+        CoursesRequests = new CoursesRequests();
+
         try
         {
             AnchorPane anch1 = loader.load(getClass().getResource("/SearchCourseLayout.fxml"));
@@ -105,11 +111,12 @@ public class SearchController implements Initializable {
 
     }
 
-    public void search(){
+    public void search() throws IOException, InterruptedException {
 
         String query = queryTextField.getText();
 
-        ObservableList<Course> foundCourses = (ObservableList<Course>) Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getName().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
+
+        ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
         ObservableList<Post> foundPosts = (ObservableList<Post>) Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getTitle().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
         ObservableList<User> foundUsers = (ObservableList<User>) Mockdatabase.getInstance().users_table.stream().filter(user -> user.getDisplayName().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
 

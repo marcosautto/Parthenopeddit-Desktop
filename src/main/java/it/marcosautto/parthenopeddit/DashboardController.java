@@ -88,7 +88,7 @@ public class DashboardController {
         usernameLabel.setText(message);
     }
 
-   public void courseSelected(int courseId) throws IOException {
+   public void courseSelected(int courseId) throws IOException, InterruptedException {
        Node node;
        node = (Node)FXMLLoader.load(getClass().getResource("/CoursePageLayout.fxml"));
        secondPane.getChildren().setAll(node);
@@ -133,11 +133,12 @@ public class DashboardController {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/NewPostLayout.fxml"));
         secondPane.getChildren().setAll(node);
+        System.out.println("dbc "+boardId);
 
         NewPostController.getInstance().transferMessage(boardId, boardName);
     }
 
-    public void writeReview(int courseId) throws IOException {
+    public void writeReview(int courseId) throws IOException, InterruptedException {
 
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/NewReviewLayout.fxml"));

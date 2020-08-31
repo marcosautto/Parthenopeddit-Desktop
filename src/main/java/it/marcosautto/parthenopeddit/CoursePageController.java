@@ -1,5 +1,9 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CoursesRequests;
+import it.marcosautto.parthenopeddit.model.Post;
+import it.marcosautto.parthenopeddit.model.Review;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +19,7 @@ import it.marcosautto.parthenopeddit.model.Course;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -31,6 +36,7 @@ public class CoursePageController implements Initializable {
 
     private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
 
+    private CoursesRequests CoursesRequests;
 
     public void setDashboardController(DashboardController dashboardController) {
         this.DashboardController = dashboardController;
@@ -85,12 +91,17 @@ public class CoursePageController implements Initializable {
 
     public int courseId;
 
-    public boolean followed = false;
+    public Course course;
+
+    public boolean isFollowed = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         FXMLLoader loader = new FXMLLoader();
+
+        CoursesRequests = new CoursesRequests();
+
         try
         {
             AnchorPane anch1 = loader.load(getClass().getResource("/CourseReviewLayout.fxml"));
@@ -111,49 +122,64 @@ public class CoursePageController implements Initializable {
             System.out.println("unable to load tab2");
         }
 
-        handleFollow();
-
     }
 
-    public void transferMessage(int course_Id) {
+    public void transferMessage(int course_Id) throws IOException, InterruptedException {
 
-        Course mCourse = Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course_Id).collect(Collectors.toList()).get(0);
-        courseId = mCourse.getCourseId();
-        courseNameTitleLabel.setText(mCourse.getName());
-        average_liking_score_ratingbar.setRating(mCourse.getAverageLikingScore());
-        average_difficulty_score_ratingbar.setRating(mCourse.getAverageDifficultyScore());
-        average_liking_score_label.setText(mCourse.getAverageLikingScore() + " / 5");
-        average_difficulty_score_label.setText(mCourse.getAverageDifficultyScore() + " / 5");
-        reviews_count_label.setText(Integer.toString(mCourse.getReviewsCount()));
+        course = CoursesRequests.getCourseByID(course_Id);
+        courseId = course.getCourseId();
+        courseNameTitleLabel.setText(course.getName());
+        average_liking_score_ratingbar.setRating(course.getAverageLikingScore());
+        average_difficulty_score_ratingbar.setRating(course.getAverageDifficultyScore());
+        average_liking_score_label.setText(course.getAverageLikingScore() + " / 5");
+        average_difficulty_score_label.setText(course.getAverageDifficultyScore() + " / 5");
+        reviews_count_label.setText(Integer.toString(course.getReviewsCount()));
 
-        CourseReviewController.getInstance().sendReviews(mCourse.getReviews());
-        System.out.println(mCourse.getReviews().size());
-        CoursePostController.getInstance().sendPosts(mCourse.getPosts());
+        ObservableList<Review> reviews = CoursesRequests.getCourseReviews(course.getCourseId(), 1, 10, null);
+        ObservableList<Post> posts = CoursesRequests.getCoursePosts(course.getCourseId(), 1, 10, null);
 
-    }
+        ObservableList<Course> followedCourses = CoursesRequests.getFollowedCourses();
+        isFollowed = followedCourses.stream().anyMatch(course -> course.getCourseId() == course.getCourseId());
 
-    public void publishPost() throws IOException {
-        DashboardController.getInstance().publishPost(courseId, "cou");
-    }
-
-    public void writeReview() throws IOException {
-        DashboardController.getInstance().writeReview(courseId);
-    }
-
-    public void handleFollow(){
-        //API
-        //        //se è true, allora il corso è seguito e premendo il pulsante il corso viene lasciato
-
-        if(followed){
+        if(isFollowed){
+            writeReviewButton.setDisable(false);
+            writePostButton.setDisable(false);
+            followButton.setText("Lascia corso");
+        } else {
             writeReviewButton.setDisable(true);
             writePostButton.setDisable(true);
             followButton.setText("Segui corso");
-            followed = false;
+        }
+
+
+        CourseReviewController.getInstance().sendReviews(reviews);
+        CoursePostController.getInstance().sendPosts(posts);
+
+    }
+
+    public void writePost() throws IOException {
+        DashboardController.getInstance().publishPost(courseId, course.getName());
+    }
+
+    public void writeReview() throws IOException, InterruptedException {
+        DashboardController.getInstance().writeReview(courseId);
+    }
+
+    public void handleFollow() throws IOException, InterruptedException {
+
+        if(isFollowed){
+            writeReviewButton.setDisable(true);
+            writePostButton.setDisable(true);
+            followButton.setText("Segui corso");
+            isFollowed = false;
+            CoursesRequests.unfollowCourse(courseId);
         } else {
             writeReviewButton.setDisable(false);
             writePostButton.setDisable(false);
             followButton.setText("Lascia corso");
-            followed = true;
+            isFollowed = true;
+            CoursesRequests.followCourse(courseId);
         }
+
     }
 }

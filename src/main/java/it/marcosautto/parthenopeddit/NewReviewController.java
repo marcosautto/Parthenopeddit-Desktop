@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CoursesRequests;
+import it.marcosautto.parthenopeddit.api.ReviewsRequests;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,6 +36,10 @@ public class NewReviewController {
     @FXML
     public Button publishButton;
 
+    public CoursesRequests CoursesRequests;
+
+    public ReviewsRequests ReviewsRequests;
+
     private static NewReviewController instance;
     public NewReviewController() {
         instance = this;
@@ -45,23 +51,27 @@ public class NewReviewController {
 
     public Course course;
 
-    public void transferMessage(int courseId) {
+    public void transferMessage(int courseId) throws IOException, InterruptedException {
 
-        Course mCourse = Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == courseId).collect(Collectors.toList()).get(0);
-        course = mCourse;
-        courseNameLabel.setText(mCourse.getName());
+        CoursesRequests = new CoursesRequests();
+        ReviewsRequests = new ReviewsRequests();
+
+
+        course = CoursesRequests.getCourseByID(courseId);
+        courseNameLabel.setText(course.getName());
     }
 
-    public void handlePublish() throws IOException {
+    public void handlePublish() throws IOException, InterruptedException {
 
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         Date date = new Date();
         //Review review = new Review(99, reviewTextArea.getText(), formatter.format(date), Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1,  Mockdatabase.getInstance().noComments, 0, 0, course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating(), course);
         //Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course.getCourseId()).collect(Collectors.toList()).get(0).getReviews().add(review);
+        ReviewsRequests.publishNewReview(reviewTextArea.getText(), course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating());
         DashboardController.getInstance().courseSelected(course.getCourseId());
     }
 
-    public void handleCancel() throws IOException{
+    public void handleCancel() throws IOException, InterruptedException {
         DashboardController.getInstance().courseSelected(course.getCourseId());
     }
 

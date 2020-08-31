@@ -15,6 +15,7 @@ import it.marcosautto.parthenopeddit.model.GroupMember;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -84,9 +85,9 @@ public class GroupPageController implements Initializable {
     
     public Group group;
 
-    public ObservableList<GroupMember> groupMembers;
-    public ObservableList<GroupMember> groupAdmins;
-    public ObservableList<GroupMember> groupUsers;
+    public ArrayList<GroupMember> groupMembers;
+    public ArrayList<GroupMember> groupAdmins;
+    public ArrayList<GroupMember> groupUsers;
 
     public boolean followed = false;
 
@@ -128,9 +129,9 @@ public class GroupPageController implements Initializable {
     public void transferMessage(int group_Id) {
 
         group = Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == group_Id).collect(toList()).get(0);
-        groupMembers = group.getMembers();
-        groupAdmins = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
-        groupUsers = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
+       //groupMembers = group.getMembers();
+       //groupAdmins = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
+       //groupUsers = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
 
         groupId = group.getId();
         groupNameTitleLabel.setText(group.getName());

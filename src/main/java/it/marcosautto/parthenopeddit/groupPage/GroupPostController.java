@@ -11,6 +11,7 @@ import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import it.marcosautto.parthenopeddit.model.Post;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class GroupPostController implements Initializable {
@@ -46,9 +47,11 @@ public class GroupPostController implements Initializable {
 
     }
 
-    public void sendPosts(ObservableList<Post> posts){
+    public void sendPosts(ArrayList<Post> posts){
         if(posts.size() > 0){
-            postListView.setItems(posts);
+            postObservableList.addAll(
+                    posts
+            );
             postListView.setCellFactory(postListView -> new PostListViewController());
         } else
             postListView.setPlaceholder(new Label("Non ci sono post in questo gruppo."));

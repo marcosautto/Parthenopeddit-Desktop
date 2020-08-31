@@ -44,19 +44,15 @@ public class NewPostController {
 
         public void transferMessage(int boardId, String boardName) {
             this.boardId = boardId;
+            System.out.println("npc "+boardId);
             System.out.println(boardId + " " + boardName);
             boardNameLabel.setText(boardName);
         }
 
         public void handlePublish() throws IOException, InterruptedException {
+            System.out.println("handle publish "+boardId);
 
-
-            int result_code =
-                    PostsRequests
-                    .publishNewPost(
-                            titleTextField.getText(),
-                            bodyTextArea.getText(),
-                            boardId);
+            int result_code = PostsRequests.publishNewPost(titleTextField.getText(), bodyTextArea.getText(), boardId);
             System.out.println(result_code);
             DashboardController.getInstance().homeFXML(null);
         }

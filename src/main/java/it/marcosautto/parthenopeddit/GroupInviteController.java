@@ -37,7 +37,7 @@ public class GroupInviteController implements Initializable {
 
         inviteObservableList = FXCollections.observableArrayList();
 
-        group_invite = Mockdatabase.getInstance().user1.getGroupInvites();
+        //group_invite = Mockdatabase.getInstance().user1.getGroupInvites();
 
         //add some Students
         if(group_invite.size() > 0)
@@ -78,8 +78,8 @@ public class GroupInviteController implements Initializable {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == buttonYes){
                     //TODO: API add user in group
-                    Mockdatabase.getInstance().user1.addGroup(newValue.getGroup());
-                    Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == newValue.getGroupId()).collect(Collectors.toList()).get(0).addGroupMember(Mockdatabase.getInstance().user1);
+                    //Mockdatabase.getInstance().user1.addGroup(newValue.getGroup());
+                    //Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == newValue.getGroupId()).collect(Collectors.toList()).get(0).addGroupMember(Mockdatabase.getInstance().user1);
                     DashboardController.getInstance().groupFXML(null);
                 } else if (result.get() == buttonNo) {
                     //TODO: API remove groupInvite

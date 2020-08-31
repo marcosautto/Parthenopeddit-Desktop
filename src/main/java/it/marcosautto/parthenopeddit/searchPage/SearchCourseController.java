@@ -66,7 +66,7 @@ public class SearchCourseController implements Initializable {
 
                 try {
                     dashboardController.getInstance().courseSelected(newValue.getCourseId());
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }

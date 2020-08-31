@@ -34,7 +34,7 @@ public class UserReviewController implements Initializable {
         instance = this;
         reviewObservableList = FXCollections.observableArrayList();
         
-        reviewObservableList.addAll( Mockdatabase.getInstance().user1.getPublishedReviews() );
+        //reviewObservableList.addAll( Mockdatabase.getInstance().user1.getPublishedReviews() );
         
     }
 

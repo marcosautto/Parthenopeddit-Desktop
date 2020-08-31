@@ -117,9 +117,10 @@ public class PostPageController implements Initializable {
         authorLabel.setText(post.getAuthorId());
         boardLabel.setText(post.getPostedToBoard().getName());
         timestampLabel.setText(post.getTimestamp());
-        if(post.getPostedToBoardId() == 1)
+        if(post.getPostedToBoardId() == 0){
             boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
-        else if(post.getPostedToBoard().getType() == "course")
+            boardLabel.setText("Generale");
+        } else if(post.getPostedToBoard().getType().equals("course"))
             boardLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
         else
             boardLabel.setStyle("-fx-background-color: #FF545D; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
@@ -139,7 +140,7 @@ public class PostPageController implements Initializable {
             else if(post.getPostedToBoard().getType() == "course") {
                 try {
                     DashboardController.getInstance().courseSelected(post.getPostedToBoardId());
-                } catch (IOException ex) {
+                } catch (IOException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
             }
@@ -174,7 +175,7 @@ public class PostPageController implements Initializable {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
             String date = simpleDateFormat.format(new Date());
 
-            Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, post.getId());
+            //Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, post.getId());
 
             CommentsRequests.publishNewComment(commentTextArea.getText(), post.getId());
             //Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);

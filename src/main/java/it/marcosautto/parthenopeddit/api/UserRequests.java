@@ -39,11 +39,12 @@ public class UserRequests {
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        System.out.println(response.body());
+        //System.out.println(response.body());
         Type listType = new TypeToken<List<Post>>(){}.getType();
         List<Post> list = new ArrayList<Post>();
         list = gson.fromJson(jsonOutput, listType);
         ObservableList<Post> posts = FXCollections.observableList(list);
+
         return posts;
 
     }

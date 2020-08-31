@@ -13,8 +13,8 @@ public class Comment {
     private User author;
     private ArrayList<Comment> comments = new ArrayList<Comment>();   //if crashes, initialize this in constructor
     private int comments_num;
-    private int upvotes_num;
-    private int downvotes_num;
+    private int likes_num;
+    private int dislikes_num;
     private int commented_content_id;
 
     public Comment(int id, String body, String timestamp, String author_id, User author, int upvotes_num, int downvotes_num, int commented_content_id){
@@ -23,8 +23,8 @@ public class Comment {
         this.timestamp = timestamp;
         this.author_id = author_id;
         this.author = author;
-        this.upvotes_num = upvotes_num;
-        this.downvotes_num = downvotes_num;
+        this.likes_num = upvotes_num;
+        this.dislikes_num = downvotes_num;
         this.commented_content_id = commented_content_id;
     }
 
@@ -33,7 +33,7 @@ public class Comment {
     public String getTimestamp(){ return timestamp; }
     public String getAuthor_id(){ return author_id; }
     public User getAuthor(){ return author; }
-    public int getUpvotes(){ return upvotes_num; }
-    public int getDownvotes(){ return downvotes_num; }
+    public int getUpvotes(){ return likes_num; }
+    public int getDownvotes(){ return dislikes_num; }
     private int getCommentedContentId(){ return commented_content_id; }
 }

@@ -119,7 +119,7 @@ public class ReviewPageController implements Initializable {
             courseNameLabel.setOnMouseClicked(e ->{
                 try {
                         DashboardController.getInstance().courseSelected(review.getReviewedCourseId());
-                    } catch (IOException ex) {
+                    } catch (IOException | InterruptedException ex) {
                         ex.printStackTrace();
                     }
             });
@@ -146,9 +146,9 @@ public class ReviewPageController implements Initializable {
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
                 String date = simpleDateFormat.format(new Date());
 
-                Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, review.getId());
+                //Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, review.getId());
 
-                Mockdatabase.getInstance().review_table.stream().filter(review -> review.getId() == this.review.getId()).collect(Collectors.toList()).get(0).addComment(comment);
+                //Mockdatabase.getInstance().review_table.stream().filter(review -> review.getId() == this.review.getId()).collect(Collectors.toList()).get(0).addComment(comment);
 
                 commentTextArea.clear();
             }

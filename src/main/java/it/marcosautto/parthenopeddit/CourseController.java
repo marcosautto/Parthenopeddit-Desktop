@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CoursesRequests;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,6 +27,8 @@ public class CourseController implements Initializable {
 
     private DashboardController dashboardController;
 
+    private CoursesRequests CoursesRequests;
+
     private Mockdatabase mockdatabase;
 
     public void setDashboardController(DashboardController dashboardController) {
@@ -38,19 +41,33 @@ public class CourseController implements Initializable {
 
         courseObservableList = FXCollections.observableArrayList();
 
-        followed_courses = Mockdatabase.getInstance().user1.getFollowedCourses();
-
-        if(followed_courses.size() > 0)
-            courseObservableList.addAll(
-                    followed_courses);
-        else
-            courseListView.setPlaceholder(new Label("Non segui alcun corso."));
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        courseListView.setItems(courseObservableList);
+        CoursesRequests = new CoursesRequests();
+
+        try {
+            followed_courses = CoursesRequests.getFollowedCourses();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            if(followed_courses.size() > 0)
+                courseObservableList.addAll(
+                        followed_courses);
+            else
+                courseListView.setPlaceholder(new Label("Non segui alcun corso."));
+            courseListView.setItems(CoursesRequests.getFollowedCourses());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         courseListView.setCellFactory(postListView -> new CourseListViewController());
 
         courseListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Course>() {
@@ -64,7 +81,7 @@ public class CourseController implements Initializable {
 
                 try {
                     dashboardController.getInstance().courseSelected(newValue.getCourseId());
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
             }

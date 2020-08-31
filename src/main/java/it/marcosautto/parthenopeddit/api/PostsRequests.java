@@ -27,7 +27,7 @@ public class PostsRequests {
         Map<Object, Object> data = new HashMap<>();
         data.put("title", title);
         data.put("body", body);
-        data.put("board_id", Integer.toString(0));
+        data.put("board_id", Integer.toString(board_id));
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))

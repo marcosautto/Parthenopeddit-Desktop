@@ -25,7 +25,7 @@
          <children>
             <VBox prefHeight="200.0" spacing="5.0">
                <children>
-                  <Label text="Average enjoyment score:" textFill="WHITE">
+                  <Label text="Indice di gradimento:" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -40,10 +40,13 @@
                <HBox.margin>
                   <Insets bottom="10.0" />
                </HBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <VBox prefHeight="200.0" spacing="5.0">
                <children>
-                  <Label text="Average difficulty score:" textFill="WHITE">
+                  <Label text="Indice di difficoltà:" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -58,6 +61,9 @@
                <HBox.margin>
                   <Insets bottom="10.0" />
                </HBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
             </Label>
             <VBox alignment="TOP_CENTER" prefHeight="200.0">
                <children>
@@ -83,10 +89,10 @@
                <children>
                   <JFXButton fx:id="followButton" onAction="#handleFollow" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Segui corso" textFill="#006fff" />
                   <JFXButton fx:id="writeReviewButton" onAction="#writeReview" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Scrivi una recensione" textFill="#006fff" />
-                  <JFXButton fx:id="writePostButton" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Scrivi un post" textFill="#006fff" />
+                  <JFXButton fx:id="writePostButton" onAction="#writePost" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Scrivi un post" textFill="#006fff" />
                </children>
                <HBox.margin>
-                  <Insets left="200.0" />
+                  <Insets left="180.0" />
                </HBox.margin>
             </VBox>
          </children>

@@ -12,6 +12,7 @@ import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import it.marcosautto.parthenopeddit.model.GroupMember;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -81,9 +82,10 @@ public class GroupUserController implements Initializable {
 
     }
 
-    public void sendUsers(ObservableList<GroupMember> users){
+    public void sendUsers(ArrayList<GroupMember> users){
         if(users.size() > 0){
-            userListView.setItems(users);
+            userObservableList.addAll(
+            users);
             userListView.setCellFactory(postListView -> new GroupMemberListViewController());
         } else
             userListView.setPlaceholder(new Label("Non ci sono utenti in questo gruppo."));
