@@ -147,7 +147,7 @@ public class PostPageController implements Initializable {
             else {
                 try {
                     DashboardController.getInstance().groupSelected(post.getPostedToBoardId());
-                } catch (IOException ex) {
+                } catch (IOException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
             }

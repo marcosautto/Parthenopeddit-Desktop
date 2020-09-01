@@ -96,7 +96,7 @@ public class DashboardController {
        CoursePageController.getInstance().transferMessage(courseId);
    }
 
-   public void groupSelected(int groupId) throws IOException{
+   public void groupSelected(int groupId) throws IOException, InterruptedException {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/GroupPageLayout.fxml"));
         secondPane.getChildren().setAll(node);
@@ -126,6 +126,13 @@ public class DashboardController {
         secondPane.getChildren().setAll(node);
 
         ProfileController.getInstance().transferMessage(userId);
+    }
+
+    public void createNewGroup() throws IOException {
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("/NewGroupLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
     }
 
     public void publishPost(int boardId, String boardName) throws IOException {

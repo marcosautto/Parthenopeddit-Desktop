@@ -41,7 +41,7 @@ public class UserListViewController extends ListCell<User> {
 
             }
 
-            usernameLabel.setText(user.getDisplayName());
+            //usernameLabel.setText(user.getDisplayName());
 
             setText(null);
             setGraphic(anchorPane);

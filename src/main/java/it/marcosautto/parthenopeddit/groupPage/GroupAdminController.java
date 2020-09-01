@@ -83,7 +83,7 @@ public class GroupAdminController implements Initializable {
 
     }
 
-    public void sendAdmins(ArrayList<GroupMember> admins){
+    public void sendAdmins(ObservableList<GroupMember> admins){
         adminObservableList.addAll(
         admins);
         adminListView.setCellFactory(postListView -> new GroupMemberListViewController());

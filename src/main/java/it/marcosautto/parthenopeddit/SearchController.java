@@ -1,6 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.CoursesRequests;
+import it.marcosautto.parthenopeddit.api.GroupsRequests;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -25,6 +26,7 @@ import static java.util.stream.Collectors.toList;
 public class SearchController implements Initializable {
 
     private CoursesRequests CoursesRequests;
+    private GroupsRequests GroupsRequests;
 
    @FXML
     private TextField queryTextField;
@@ -79,6 +81,7 @@ public class SearchController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
 
         CoursesRequests = new CoursesRequests();
+        GroupsRequests = new GroupsRequests();
 
         try
         {
@@ -117,14 +120,14 @@ public class SearchController implements Initializable {
 
 
         ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
-        ObservableList<Post> foundPosts = (ObservableList<Post>) Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getTitle().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
-        ObservableList<User> foundUsers = (ObservableList<User>) Mockdatabase.getInstance().users_table.stream().filter(user -> user.getDisplayName().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
+        //ObservableList<Post> foundPosts = (ObservableList<Post>) Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getTitle().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
+        //ObservableList<User> foundUsers = (ObservableList<User>) Mockdatabase.getInstance().users_table.stream().filter(user -> user.getDisplayName().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
 
 
 
         SearchCourseController.getInstance().sendCourses(foundCourses);
-        SearchPostController.getInstance().sendPosts(foundPosts);
-        SearchUserController.getInstance().sendUsers(foundUsers);
+        //SearchPostController.getInstance().sendPosts(foundPosts);
+        //SearchUserController.getInstance().sendUsers(foundUsers);
     }
 
 

@@ -82,7 +82,7 @@ public class GroupUserController implements Initializable {
 
     }
 
-    public void sendUsers(ArrayList<GroupMember> users){
+    public void sendUsers(ObservableList<GroupMember> users){
         if(users.size() > 0){
             userObservableList.addAll(
             users);

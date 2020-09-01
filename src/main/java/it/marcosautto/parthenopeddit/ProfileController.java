@@ -108,15 +108,15 @@ public class ProfileController implements Initializable {
     public void transferMessage(String userId){
         user = Mockdatabase.getInstance().users_table.stream().filter(user -> user.getId() == userId).collect(Collectors.toList()).get(0);;
 
-        usernameShownLabel.setText(user.getDisplayName());
+        //usernameShownLabel.setText(user.getDisplayName());
         usernameLabel.setText(user.getId());
 
-        UserPostController.getInstance().sendPosts(user.getPublishedPosts());
-        UserReviewController.getInstance().sendReviews(user.getPublishedReviews());
-        try{
-        UserCommentController.getInstance().sendComments(user.getPublishedComments());}
- catch(Exception e){
- e.printStackTrace();}
+       //UserPostController.getInstance().sendPosts(user.getPublishedPosts());
+       //UserReviewController.getInstance().sendReviews(user.getPublishedReviews());
+       //try{
+       //UserCommentController.getInstance().sendComments(user.getPublishedComments());}
+ //catch(Exception e){
+ //e.printStackTrace();}
 
     }
 

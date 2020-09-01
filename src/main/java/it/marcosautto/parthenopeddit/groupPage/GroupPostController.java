@@ -47,7 +47,7 @@ public class GroupPostController implements Initializable {
 
     }
 
-    public void sendPosts(ArrayList<Post> posts){
+    public void sendPosts(ObservableList<Post> posts){
         if(posts.size() > 0){
             postObservableList.addAll(
                     posts

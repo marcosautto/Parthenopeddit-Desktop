@@ -13,8 +13,11 @@ public class User {
     private ObservableList<Post> published_posts = FXCollections.observableArrayList();
     private ObservableList<Comment> published_comments = FXCollections.observableArrayList();
     private ObservableList<Review> published_reviews = FXCollections.observableArrayList();
+    private ObservableList<Content> liked_content = FXCollections.observableArrayList();
+    private ObservableList<Content> disliked_content = FXCollections.observableArrayList();
     private ObservableList<Course> followed_courses = FXCollections.observableArrayList();
     private ObservableList<Group> groups = FXCollections.observableArrayList();
+    private ObservableList<UsersChat> chats_with_users = FXCollections.observableArrayList();
     private ObservableList<GroupInvite> group_invites = FXCollections.observableArrayList();
 
     public User(String id, String display_name, String registered_on, ObservableList<Content> published_content, ObservableList<Post> published_posts, ObservableList<Comment> published_comments, ObservableList<Review> published_reviews, ObservableList<Course> followed_courses, ObservableList<Group> groups, ObservableList<GroupInvite> group_invites){

@@ -18,6 +18,7 @@ public class Auth {
     }
 
     public String getToken(){ return token; }
+    public String getUsername(){ return username; }
     public static Auth getInstance() {
         return instance;
     }

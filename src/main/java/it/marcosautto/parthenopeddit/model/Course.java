@@ -26,12 +26,14 @@ public class Course extends Board {
             double average_difficulty_score,
             int reviews_count,
             ArrayList<Review> reviews,
-            ArrayList<User> followes) {
+            ArrayList<User> followers) {
         super(id, name, "course", posts, posts_num);
         this.average_liking_score = average_liking_score;
-        follower_number = 0;
+        this.follower_number = follower_number;
         this.average_difficulty_score = average_difficulty_score;
-        reviews_count = reviews.size();
+        this.reviews_count = reviews_count;
+        this.reviews = reviews;
+        this.followers = followers;
     }
 
     public int getCourseId() { return super.getBoardId(); }

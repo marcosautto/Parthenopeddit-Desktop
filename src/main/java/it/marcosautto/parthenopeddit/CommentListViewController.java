@@ -75,11 +75,11 @@ public class CommentListViewController extends ListCell<Comment> {
 
                 }
 
-                usernameLabel.setText(comment.getAuthor_id());
+                usernameLabel.setText(comment.getAuthorId());
                 timestampLabel.setText(comment.getTimestamp());
                 commentBodyTextArea.setText(comment.getBody());
-                upvoteLabel.setText(Integer.toString(comment.getUpvotes()));
-                downvoteLabel.setText(Integer.toString(comment.getDownvotes()));
+                upvoteLabel.setText(Integer.toString(comment.getUpvote()));
+                downvoteLabel.setText(Integer.toString(comment.getDownvote()));
                 //commentLabel.setText(Integer.toString(comment.getCommentsNum()));
 
 
@@ -117,8 +117,8 @@ public class CommentListViewController extends ListCell<Comment> {
 
     private void updateVotes() throws IOException, InterruptedException {
         comment = CommentsRequests.getComment(comment.getId());
-        upvoteLabel.setText(Integer.toString(comment.getUpvotes()));
-        downvoteLabel.setText(Integer.toString(comment.getDownvotes()));
+        upvoteLabel.setText(Integer.toString(comment.getUpvote()));
+        downvoteLabel.setText(Integer.toString(comment.getDownvote()));
 
     }
 

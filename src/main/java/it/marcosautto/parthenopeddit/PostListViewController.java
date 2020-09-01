@@ -119,7 +119,7 @@ public class PostListViewController extends ListCell<Post> {
                     else {
                         try {
                             DashboardController.getInstance().groupSelected(post.getPostedToBoardId());
-                        } catch (IOException ex) {
+                        } catch (IOException | InterruptedException ex) {
                             ex.printStackTrace();
                         }
                     }

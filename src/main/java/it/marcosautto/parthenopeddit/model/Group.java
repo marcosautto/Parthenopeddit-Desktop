@@ -23,7 +23,10 @@ public class Group extends Board {
                  ArrayList<GroupInvite> invites,
                  int members_num) {
         super(id, name, "group", posts, posts_num);
-        members_num = members.size();
+        this.members = members;
+        this.chat = chat;
+        this.invites = invites;
+        this.members_num = members_num;
         this.created_on = created_on;
     }
 
@@ -34,11 +37,5 @@ public class Group extends Board {
     public ArrayList<Post> getPosts(){ return super.getPosts(); }
     public ArrayList<GroupMember> getMembers(){ return members; }
     public ArrayList<GroupInvite> getInvites(){ return invites; }
-
-    public void addGroupInvite(GroupInvite groupInvite){ invites.add(groupInvite);}
-    public void addGroupMember(User user){
-        GroupMember groupMember = new GroupMember(user.getId(), super.getBoardId(), "24/08/2020", false, user, this);
-        members.add(groupMember);
-    }
 
 }

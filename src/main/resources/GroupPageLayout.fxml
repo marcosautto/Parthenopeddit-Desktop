@@ -78,6 +78,7 @@
             <VBox spacing="10.0">
                <children>
                         <JFXButton fx:id="leaveButton" onAction="#handleLeave" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Lascia gruppo" textFill="#006fff" />
+                  <JFXButton fx:id="writePostButton" layoutX="10.0" layoutY="10.0" onAction="#writePost" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Scrivi un post" textFill="#006fff" />
                   <JFXButton fx:id="inviteButton" onAction="#handleInvite" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Invita utenti" textFill="#006fff" />
                </children>
                <HBox.margin>

@@ -32,7 +32,7 @@ public class UserRequests {
     public ObservableList<Post> getUserFeed(int page, int perPage, String transactionStartDataTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/feed/10/1"))
+                .uri(URI.create("http://localhost:8000/user/feed/"+perPage+"/"+page))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .build();
 

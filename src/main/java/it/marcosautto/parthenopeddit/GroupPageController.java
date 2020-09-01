@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.model.Post;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,6 +13,8 @@ import it.marcosautto.parthenopeddit.groupPage.GroupPostController;
 import it.marcosautto.parthenopeddit.groupPage.GroupUserController;
 import it.marcosautto.parthenopeddit.model.Group;
 import it.marcosautto.parthenopeddit.model.GroupMember;
+import it.marcosautto.parthenopeddit.api.Auth;
+import it.marcosautto.parthenopeddit.api.GroupsRequests;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,13 +84,18 @@ public class GroupPageController implements Initializable {
     @FXML
     public Button inviteButton;
 
+    private Auth Auth;
+
+    private GroupsRequests GroupsRequests;
+
     public int groupId;
     
     public Group group;
 
-    public ArrayList<GroupMember> groupMembers;
-    public ArrayList<GroupMember> groupAdmins;
-    public ArrayList<GroupMember> groupUsers;
+    public ObservableList<Post> groupPosts;
+    public ObservableList<GroupMember> groupMembers;
+    public ObservableList<GroupMember> groupAdmins;
+    public ObservableList<GroupMember> groupUsers;
 
     public boolean followed = false;
 
@@ -95,6 +103,7 @@ public class GroupPageController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         FXMLLoader loader = new FXMLLoader();
+        GroupsRequests = new GroupsRequests();
         try
         {
             AnchorPane anch1 = loader.load(getClass().getResource("/GroupPostLayout.fxml"));
@@ -126,12 +135,13 @@ public class GroupPageController implements Initializable {
 
     }
 
-    public void transferMessage(int group_Id) {
+    public void transferMessage(int group_Id) throws IOException, InterruptedException {
 
-        group = Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == group_Id).collect(toList()).get(0);
-       //groupMembers = group.getMembers();
-       //groupAdmins = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
-       //groupUsers = group.getMembers().stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
+        group = GroupsRequests.getGroup(group_Id);
+        groupPosts = GroupsRequests.getGroupPosts(group_Id, 10, 1, null);
+        groupMembers = GroupsRequests.getGroupMembers(group_Id);
+        groupAdmins = groupMembers.stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
+        groupUsers = groupMembers.stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
 
         groupId = group.getId();
         groupNameTitleLabel.setText(group.getName());
@@ -139,14 +149,15 @@ public class GroupPageController implements Initializable {
         adminLabel.setText(Integer.toString(groupAdmins.size()));
         memberLabel.setText(Integer.toString(groupMembers.size()));
 
-        if(groupAdmins.stream().anyMatch(admin -> admin.getUserId() == "marcosautto")){
-            inviteButton.setDisable(false);
-        } else{
-            inviteButton.setDisable(true);
-        }
+       //if(groupAdmins.stream().anyMatch(admin -> admin.getUserId().equals(Auth.getUsername()))){
+       //     inviteButton.setDisable(false);
+       // } else{
+       //     inviteButton.setDisable(true);
+       // }
 
-        GroupPostController.getInstance().sendPosts(group.getPosts());
+        GroupPostController.getInstance().sendPosts(groupPosts);
         GroupAdminController.getInstance().sendAdmins(groupAdmins);
+        System.out.println(groupAdmins.size());
         GroupUserController.getInstance().sendUsers(groupUsers);
 
     }
@@ -174,6 +185,10 @@ public class GroupPageController implements Initializable {
             // cancel button is pressed
 
         }
+    }
+
+    public void writePost() throws IOException {
+        DashboardController.getInstance().publishPost(groupId, group.getName());
     }
 
     public void handleInvite(){
