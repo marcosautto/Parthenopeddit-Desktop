@@ -2,6 +2,7 @@ package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.GroupsRequests;
 import it.marcosautto.parthenopeddit.model.GroupMember;
+import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -16,6 +17,7 @@ import it.marcosautto.parthenopeddit.api.Auth;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 
 public class GroupController implements Initializable {
@@ -76,7 +78,7 @@ public class GroupController implements Initializable {
 
                 try {
                     DashboardController.getInstance().groupSelected(newValue.getGroup().getId());
-                } catch (IOException | InterruptedException e) {
+                } catch (IOException | InterruptedException | ParseException e) {
                     e.printStackTrace();
                 }
             }

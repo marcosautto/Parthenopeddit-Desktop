@@ -57,7 +57,7 @@ public class SearchUserController implements Initializable {
 
                 try {
                     DashboardController.getInstance().profileSelected(newValue.getId());
-                } catch (IOException e) {
+                } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
 

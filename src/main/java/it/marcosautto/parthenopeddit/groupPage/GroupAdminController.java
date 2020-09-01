@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit.groupPage;
 
+import it.marcosautto.parthenopeddit.DashboardController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -14,6 +15,7 @@ import it.marcosautto.parthenopeddit.GroupMemberListViewController;
 import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import it.marcosautto.parthenopeddit.model.GroupMember;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -54,29 +56,13 @@ public class GroupAdminController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends GroupMember> observable, GroupMember oldValue, GroupMember newValue) {
-                // Your action here
+
                 System.out.println("Selected item: " + newValue.getUserId());
 
-                //DashboardController dashboardController = new DashboardController();
-
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Amministratore selezionato");
-                alert.setHeaderText("Cosa vuoi fare con l'amministratore " + newValue.getUserId() + "?");
-                alert.setContentText("Seleziona un'opzione.");
-
-                ButtonType buttonAdmin= new ButtonType("Revoca amministratore");
-                ButtonType buttonKick = new ButtonType("Caccia dal gruppo");
-                ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-                alert.getButtonTypes().setAll(buttonKick, buttonAdmin, buttonTypeCancel);
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == buttonAdmin){
-                    //TODO: API make admin as user
-                } else if (result.get() == buttonKick) {
-                    //TODO: kick admin from group
-                }  else {
-                    // ... admin chose CANCEL or closed the dialog
+                try {
+                    DashboardController.getInstance().profileSelected(newValue.getUserId());
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -86,6 +72,7 @@ public class GroupAdminController implements Initializable {
     public void sendAdmins(ObservableList<GroupMember> admins){
         adminObservableList.addAll(
         admins);
+        adminListView.setItems(adminObservableList);
         adminListView.setCellFactory(postListView -> new GroupMemberListViewController());
     }
 }

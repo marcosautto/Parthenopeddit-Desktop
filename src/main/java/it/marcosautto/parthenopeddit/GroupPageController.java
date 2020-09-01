@@ -1,6 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.model.Post;
+import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import it.marcosautto.parthenopeddit.api.GroupsRequests;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -46,64 +48,67 @@ public class GroupPageController implements Initializable {
     }
 
     @FXML
-    public TabPane tabPane;
+    private TabPane tabPane;
 
     @FXML
-    public Tab postTab;
+    private Tab postTab;
 
     @FXML
-    public GroupPostController groupPostController;
+    private GroupPostController groupPostController;
 
     @FXML
-    public Tab adminTab;
+    private Tab adminTab;
 
     @FXML
-    public GroupAdminController groupAdminController;
+    private GroupAdminController groupAdminController;
 
     @FXML
-    public Tab userTab;
+    private Tab userTab;
 
     @FXML
-    public GroupUserController groupUserController;
+    private GroupUserController groupUserController;
 
     @FXML
-    public Label groupNameTitleLabel;
+    private Label groupNameTitleLabel;
 
     @FXML
-    public Label createdOnLabel;
+    private Label createdOnLabel;
 
     @FXML
-    public Label adminLabel;
+    private Label adminLabel;
 
     @FXML
-    public Label memberLabel;
+    private Label memberLabel;
 
     @FXML
-    public Button leaveButton;
+    private Button leaveButton;
 
     @FXML
-    public Button inviteButton;
+    private Button inviteButton;
 
     private Auth Auth;
 
     private GroupsRequests GroupsRequests;
 
-    public int groupId;
+    private DateParser DateParser;
+
+    private int groupId;
     
-    public Group group;
+    private Group group;
 
-    public ObservableList<Post> groupPosts;
-    public ObservableList<GroupMember> groupMembers;
-    public ObservableList<GroupMember> groupAdmins;
-    public ObservableList<GroupMember> groupUsers;
+    private ObservableList<Post> groupPosts;
+    private ObservableList<GroupMember> groupMembers;
+    private ObservableList<GroupMember> groupAdmins;
+    private ObservableList<GroupMember> groupUsers;
 
-    public boolean followed = false;
+    private boolean isAdmin = false;
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
         FXMLLoader loader = new FXMLLoader();
         GroupsRequests = new GroupsRequests();
+        DateParser = new DateParser();
         try
         {
             AnchorPane anch1 = loader.load(getClass().getResource("/GroupPostLayout.fxml"));
@@ -135,7 +140,7 @@ public class GroupPageController implements Initializable {
 
     }
 
-    public void transferMessage(int group_Id) throws IOException, InterruptedException {
+    public void transferMessage(int group_Id) throws IOException, InterruptedException, ParseException {
 
         group = GroupsRequests.getGroup(group_Id);
         groupPosts = GroupsRequests.getGroupPosts(group_Id, 10, 1, null);
@@ -143,57 +148,60 @@ public class GroupPageController implements Initializable {
         groupAdmins = groupMembers.stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
         groupUsers = groupMembers.stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
 
+        System.out.println("members "+groupMembers.size());
+
         groupId = group.getId();
         groupNameTitleLabel.setText(group.getName());
-        createdOnLabel.setText(group.getCreatedOn());
+        createdOnLabel.setText(DateParser.parseDate(group.getCreatedOn()));
         adminLabel.setText(Integer.toString(groupAdmins.size()));
         memberLabel.setText(Integer.toString(groupMembers.size()));
 
-       //if(groupAdmins.stream().anyMatch(admin -> admin.getUserId().equals(Auth.getUsername()))){
-       //     inviteButton.setDisable(false);
-       // } else{
-       //     inviteButton.setDisable(true);
-       // }
+
+       if(groupAdmins.stream().anyMatch(x -> x.getUserId().equals(Auth.getInstance().getUsername()))){
+            inviteButton.setDisable(false);
+            isAdmin = true;
+        } else{
+            inviteButton.setDisable(true);
+            isAdmin = false;
+        }
 
         GroupPostController.getInstance().sendPosts(groupPosts);
         GroupAdminController.getInstance().sendAdmins(groupAdmins);
-        System.out.println(groupAdmins.size());
         GroupUserController.getInstance().sendUsers(groupUsers);
 
     }
 
-    public void handleLeave() throws IOException {
-        if(groupMembers.stream().anyMatch(user -> user.getUserId() == "marcosautto")){
+    public void handleLeave() throws IOException, InterruptedException {
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Lascia gruppo");
-            alert.setHeaderText("Vuoi davvero lasciare il gruppo " + group.getName() + "?");
-            alert.setResizable(false);
-            alert.setContentText("Seleziona un'opzione.");
-            Optional<ButtonType> result = alert.showAndWait();
-            if(!result.isPresent()) {
-                alert.close();
-            }
-            // alert is exited, no button has been pressed.
-            else if(result.get() == ButtonType.OK){
-                //TODO: API remove user from group
-                DashboardController.getInstance().groupFXML(null);
-            }
-            //oke button is pressed
-            else if(result.get() == ButtonType.CANCEL)
-                alert.close();
-            // cancel button is pressed
-
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Lascia gruppo");
+        alert.setHeaderText("Vuoi davvero lasciare il gruppo " + group.getName() + "?");
+        alert.setResizable(false);
+        alert.setContentText("Seleziona un'opzione.");
+        Optional<ButtonType> result = alert.showAndWait();
+        if(!result.isPresent()) {
+            alert.close();
         }
+        // alert is exited, no button has been pressed.
+        else if(result.get() == ButtonType.OK){
+            //TODO: API remove user from group
+            GroupsRequests.leaveGroup(groupId);
+            DashboardController.getInstance().groupFXML(null);
+        }
+        //oke button is pressed
+        else if(result.get() == ButtonType.CANCEL)
+            alert.close();
+        // cancel button is pressed
     }
 
     public void writePost() throws IOException {
         DashboardController.getInstance().publishPost(groupId, group.getName());
     }
 
-    public void handleInvite(){
-        if(groupAdmins.stream().anyMatch(admin -> admin.getUserId() == "user1")){
-            //Invite
-        }
+    public void handleInvite() throws IOException, InterruptedException {
+        DashboardController.getInstance().inviteUser(groupId, group.getName());
     }
+
+    public boolean checkIsAdmin(){ return isAdmin; }
+
 }

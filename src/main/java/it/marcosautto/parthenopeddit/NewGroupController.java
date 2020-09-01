@@ -11,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class NewGroupController {
     }
 
 
-    public void handleCreateGroup() throws IOException, InterruptedException {
+    public void handleCreateGroup() throws IOException, InterruptedException, ParseException {
         Group group = GroupsRequests
                 .createGroup(
                         groupnameTextField

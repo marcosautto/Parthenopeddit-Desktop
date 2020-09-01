@@ -15,6 +15,7 @@ import it.marcosautto.parthenopeddit.api.Auth;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
@@ -147,7 +148,7 @@ public class PostPageController implements Initializable {
             else {
                 try {
                     DashboardController.getInstance().groupSelected(post.getPostedToBoardId());
-                } catch (IOException | InterruptedException ex) {
+                } catch (IOException | InterruptedException | ParseException ex) {
                     ex.printStackTrace();
                 }
             }

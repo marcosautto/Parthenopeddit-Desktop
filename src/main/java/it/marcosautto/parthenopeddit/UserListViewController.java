@@ -30,7 +30,7 @@ public class UserListViewController extends ListCell<User> {
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("fxml/ListCell/UserListCell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/ListCell/UserListCell.fxml"));
                 mLLoader.setController(this);
 
                 try {
@@ -41,7 +41,7 @@ public class UserListViewController extends ListCell<User> {
 
             }
 
-            //usernameLabel.setText(user.getDisplayName());
+            usernameLabel.setText(user.getId());
 
             setText(null);
             setGraphic(anchorPane);

@@ -53,17 +53,13 @@ public class HomeController implements Initializable {
 
         postObservableList = FXCollections.observableArrayList();
 
-        //add some Students
-        postObservableList.addAll(
-                Mockdatabase.getInstance().posts_table
-        );
 
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        UserRequests = new UserRequests(Auth);
+        UserRequests = new UserRequests();
 
         try {
             previousPageButton.setDisable(true);

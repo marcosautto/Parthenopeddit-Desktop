@@ -36,7 +36,7 @@ public class GroupMemberListViewController extends ListCell<GroupMember> {
 
         } else {
             if (mLLoader == null) {
-                mLLoader = new FXMLLoader(getClass().getResource("fxml/ListCell/GroupMemberListCell.fxml"));
+                mLLoader = new FXMLLoader(getClass().getResource("/ListCell/GroupMemberListCell.fxml"));
                 mLLoader.setController(this);
 
                 try {

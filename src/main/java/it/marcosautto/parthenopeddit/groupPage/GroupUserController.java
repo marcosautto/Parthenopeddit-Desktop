@@ -1,5 +1,8 @@
 package it.marcosautto.parthenopeddit.groupPage;
 
+import it.marcosautto.parthenopeddit.DashboardController;
+import it.marcosautto.parthenopeddit.GroupPageController;
+import it.marcosautto.parthenopeddit.api.GroupsRequests;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -11,10 +14,10 @@ import it.marcosautto.parthenopeddit.GroupMemberListViewController;
 import it.marcosautto.parthenopeddit.api.Mockdatabase;
 import it.marcosautto.parthenopeddit.model.GroupMember;
 
+import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.text.ParseException;
+import java.util.*;
 
 public class GroupUserController implements Initializable {
 
@@ -23,6 +26,9 @@ public class GroupUserController implements Initializable {
 
     private ObservableList<GroupMember> userObservableList;
 
+    public GroupsRequests GroupsRequests;
+
+    private GroupPageController GroupPageController;
 
     private static GroupUserController instance;
     // static method to get instance of view
@@ -34,7 +40,7 @@ public class GroupUserController implements Initializable {
 
         instance = this;
         userObservableList = FXCollections.observableArrayList();
-        Mockdatabase mockdatabase = new Mockdatabase();
+        GroupsRequests = new GroupsRequests();
 
         //add some Students
         userObservableList.addAll(
@@ -56,25 +62,50 @@ public class GroupUserController implements Initializable {
                 System.out.println("Selected item: " + newValue.getUserId());
 
                 //DashboardController dashboardController = new DashboardController();
+                if(GroupPageController.getInstance().checkIsAdmin()){           //If user is admin
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Utente selezionato");
+                    alert.setHeaderText("Cosa vuoi fare con l'utente " + newValue.getUserId() + "?");
+                    alert.setContentText("Seleziona un'opzione.");
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Utente selezionato");
-                alert.setHeaderText("Cosa vuoi fare con l'utente " + newValue.getUserId() + "?");
-                alert.setContentText("Seleziona un'opzione.");
+                    ButtonType buttonAdmin= new ButtonType("Rendi amministratore");
+                    ButtonType buttonKick = new ButtonType("Caccia dal gruppo");
+                    ButtonType buttonProfile = new ButtonType("Visualizza profilo");
+                    ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
 
-                ButtonType buttonAdmin= new ButtonType("Rendi amministratore");
-                ButtonType buttonKick = new ButtonType("Caccia dal gruppo");
-                ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(buttonProfile, buttonKick, buttonAdmin, buttonTypeCancel);
 
-                alert.getButtonTypes().setAll(buttonKick, buttonAdmin, buttonTypeCancel);
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == buttonAdmin){
-                    //TODO: API make user as admin
-                } else if (result.get() == buttonKick) {
-                    //TODO: kick user from group
-                }  else {
-                    // ... user chose CANCEL or closed the dialog
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if(result.get() == buttonProfile){
+                        try {
+                            DashboardController.getInstance().profileSelected(newValue.getUserId());
+                        } catch (IOException | InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (result.get() == buttonAdmin){                           //Make user admin
+                        try {
+                            List<String> user_id = Arrays.asList(newValue.getUserId());
+                            GroupsRequests.makeMembersOwners(newValue.getGroupId(), user_id);
+                            DashboardController.getInstance().groupSelected(newValue.getGroupId());
+                        } catch (IOException | InterruptedException | ParseException e) {
+                            e.printStackTrace();
+                        }
+                    } else if (result.get() == buttonKick) {
+                        try {
+                            GroupsRequests.removeFromGroup(newValue.getGroupId(), newValue.getUserId());     //Remove user from group
+                            DashboardController.getInstance().groupSelected(newValue.getGroupId());
+                        } catch (IOException | InterruptedException | ParseException e) {
+                            e.printStackTrace();
+                        }
+                    }  else {
+                        //Dialog cancel
+                    }
+                } else{             //Else show user profile
+                    try {
+                        DashboardController.getInstance().profileSelected(newValue.getUserId());
+                    } catch (IOException | InterruptedException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         });
@@ -86,6 +117,7 @@ public class GroupUserController implements Initializable {
         if(users.size() > 0){
             userObservableList.addAll(
             users);
+            userListView.setItems(userObservableList);
             userListView.setCellFactory(postListView -> new GroupMemberListViewController());
         } else
             userListView.setPlaceholder(new Label("Non ci sono utenti in questo gruppo."));

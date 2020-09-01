@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.Auth;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,6 +10,7 @@ import javafx.scene.layout.Pane;
 import it.marcosautto.parthenopeddit.model.User;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class DashboardController {
 
@@ -19,9 +21,7 @@ public class DashboardController {
     Label usernameLabel;
 
     private static DashboardController instance;
-    public DashboardController() {
-        instance = this;
-    }
+    public DashboardController() { instance = this; }
 
     private Main Main;
     private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
@@ -32,6 +32,7 @@ public class DashboardController {
     private ProfileController ProfileController;
     private NewPostController NewPostController;
     private NewReviewController NewReviewController;
+    private GroupInviteMemberController GroupInviteMemberController;
 
     public void setMain(Main Main) {
         this.Main = Main;
@@ -51,9 +52,9 @@ public class DashboardController {
         loadFxml(event, "/DashboardMenu/SearchLayout.fxml");
     }
 
-    public void profileFXML(ActionEvent event) throws IOException {
+    public void profileFXML(ActionEvent event) throws IOException, InterruptedException {
         //loadFxml(event, "fxml/DashboardMenu/ProfileLayout.fxml");
-        profileSelected("marcosautto");
+        profileSelected(Auth.getInstance().getUsername());
     }
 
     public void courseFXML(ActionEvent event) throws IOException {
@@ -96,7 +97,7 @@ public class DashboardController {
        CoursePageController.getInstance().transferMessage(courseId);
    }
 
-   public void groupSelected(int groupId) throws IOException, InterruptedException {
+   public void groupSelected(int groupId) throws IOException, InterruptedException, ParseException {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/GroupPageLayout.fxml"));
         secondPane.getChildren().setAll(node);
@@ -120,7 +121,7 @@ public class DashboardController {
         ReviewPageController.getInstance().transferMessage(reviewId);
     }
 
-    public void profileSelected(String userId) throws IOException{
+    public void profileSelected(String userId) throws IOException, InterruptedException {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/DashboardMenu/ProfileLayout.fxml"));
         secondPane.getChildren().setAll(node);
@@ -152,6 +153,15 @@ public class DashboardController {
         secondPane.getChildren().setAll(node);
 
         NewReviewController.getInstance().transferMessage(courseId);
+    }
+
+    public void inviteUser(int groupId, String groupName) throws IOException, InterruptedException {
+        Node node;
+        node = (Node)FXMLLoader.load(getClass().getResource("/GroupInviteMemberLayout.fxml"));
+        secondPane.getChildren().setAll(node);
+
+        GroupInviteMemberController.getInstance().transferMessage(groupId, groupName);
+
     }
 
     public void showUserPost(User user) throws IOException {

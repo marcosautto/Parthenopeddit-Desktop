@@ -181,7 +181,7 @@ public class GroupsRequests {
         return invitableUsers;
     }
 
-    private int answerGroupInvite(int group_id, boolean accept) throws IOException, InterruptedException {
+    public int answerGroupInvite(int group_id, boolean accept) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();      //prob crash
         Gson Gson = new Gson();
         data.put("answer", Gson.toJson(accept));
@@ -197,7 +197,7 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
-    private int leaveGroup(int group_id) throws IOException, InterruptedException {
+    public int leaveGroup(int group_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();      //prob crash
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -229,7 +229,7 @@ public class GroupsRequests {
         return groupMembers;
     }
 
-    private int removeFromGroup(int group_id, String userId) throws IOException, InterruptedException {
+    public int removeFromGroup(int group_id, String userId) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();      //prob crash
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -243,7 +243,7 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
-    private int makeMembersOwners(int group_id, List<String> newOwners) throws IOException, InterruptedException {
+    public int makeMembersOwners(int group_id, List<String> newOwners) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();      //prob crash
         Gson Gson = new Gson();
         data.put("users_list", Gson.toJson(newOwners));
@@ -267,7 +267,6 @@ public class GroupsRequests {
                 .build();
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
 
         Gson Gson = new Gson();
         Type listType = new TypeToken<List<Post>>(){}.getType();

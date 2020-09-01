@@ -48,10 +48,14 @@ public class GroupPostController implements Initializable {
     }
 
     public void sendPosts(ObservableList<Post> posts){
+
+        System.out.println("size "+posts.size());
+
         if(posts.size() > 0){
             postObservableList.addAll(
                     posts
             );
+            postListView.setItems(postObservableList);
             postListView.setCellFactory(postListView -> new PostListViewController());
         } else
             postListView.setPlaceholder(new Label("Non ci sono post in questo gruppo."));

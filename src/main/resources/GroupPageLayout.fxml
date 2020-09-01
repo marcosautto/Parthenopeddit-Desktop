@@ -82,7 +82,7 @@
                   <JFXButton fx:id="inviteButton" onAction="#handleInvite" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Invita utenti" textFill="#006fff" />
                </children>
                <HBox.margin>
-                  <Insets left="170.0" />
+                  <Insets left="150.0" />
                </HBox.margin>
             </VBox>
          </children>
@@ -90,7 +90,7 @@
             <Insets bottom="10.0" left="10.0" top="10.0" />
          </padding>
       </HBox>
-        <JFXTabPane fx:id="tabPane" layoutX="15.0" layoutY="240.0" stylesheets="@css/tab.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="190.0">
+        <JFXTabPane fx:id="tabPane" layoutX="15.0" layoutY="208.0" prefHeight="677.0" prefWidth="960.0" stylesheets="@css/tab.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="208.0">
             <tabs>
                 <Tab fx:id="postTab" text="Post">
                     <content>

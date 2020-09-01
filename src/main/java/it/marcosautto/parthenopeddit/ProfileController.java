@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.Auth;
+import it.marcosautto.parthenopeddit.api.UserRequests;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -48,6 +50,11 @@ public class ProfileController implements Initializable {
     @FXML
     private Button changeUsernameButton;
 
+    @FXML
+    private Button changeProfilePicButton;
+
+    private UserRequests UserRequests;
+
     private Mockdatabase Mockdatabase;
 
     private DashboardController DashboardController;
@@ -74,6 +81,8 @@ public class ProfileController implements Initializable {
     public void initialize(URL location, ResourceBundle resources)
     {
         FXMLLoader loader = new FXMLLoader();
+        UserRequests = new UserRequests();
+
         try
         {
             AnchorPane anch1 = loader.load(getClass().getResource("/UserPostLayout.fxml"));
@@ -105,18 +114,27 @@ public class ProfileController implements Initializable {
 
     }
 
-    public void transferMessage(String userId){
-        user = Mockdatabase.getInstance().users_table.stream().filter(user -> user.getId() == userId).collect(Collectors.toList()).get(0);;
+    public void transferMessage(String userId) throws IOException, InterruptedException {
+        user = UserRequests.getUserByID(userId);
 
-        //usernameShownLabel.setText(user.getDisplayName());
+        if(user.getId().equals((Auth.getInstance().getUsername()))){
+            changeUsernameButton.setVisible(true);
+            changeProfilePicButton.setVisible(true);
+        } else {
+            changeUsernameButton.setVisible(false);
+            changeProfilePicButton.setVisible(false);
+        }
+
+        if(user.getDisplayName() != null)
+            usernameShownLabel.setText(user.getDisplayName());
+        else
+            usernameShownLabel.setText(user.getId());
         usernameLabel.setText(user.getId());
 
-       //UserPostController.getInstance().sendPosts(user.getPublishedPosts());
-       //UserReviewController.getInstance().sendReviews(user.getPublishedReviews());
-       //try{
-       //UserCommentController.getInstance().sendComments(user.getPublishedComments());}
- //catch(Exception e){
- //e.printStackTrace();}
+
+       UserPostController.getInstance().sendPosts(UserRequests.getUserPublishedPosts(userId, 1, 10, null));
+       UserReviewController.getInstance().sendReviews(UserRequests.getUserPublishedReviews(userId, 1, 10, null));
+       UserCommentController.getInstance().sendComments(UserRequests.getUserPublishedComments(userId, 1, 10, null));
 
     }
 

@@ -12,6 +12,7 @@ import it.marcosautto.parthenopeddit.model.Post;
 import it.marcosautto.parthenopeddit.api.Auth;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class PostListViewController extends ListCell<Post> {
 
@@ -119,7 +120,7 @@ public class PostListViewController extends ListCell<Post> {
                     else {
                         try {
                             DashboardController.getInstance().groupSelected(post.getPostedToBoardId());
-                        } catch (IOException | InterruptedException ex) {
+                        } catch (IOException | InterruptedException | ParseException ex) {
                             ex.printStackTrace();
                         }
                     }
