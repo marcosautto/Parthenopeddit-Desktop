@@ -2,14 +2,13 @@ package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.Auth;
 import it.marcosautto.parthenopeddit.api.PostsRequests;
+import it.marcosautto.parthenopeddit.model.Group;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 
 public class NewPostController {
@@ -52,13 +51,20 @@ public class NewPostController {
         public void handlePublish() throws IOException, InterruptedException {
             System.out.println("handle publish "+boardId);
 
-            int result_code = PostsRequests.publishNewPost(titleTextField.getText(), bodyTextArea.getText(), boardId);
-            System.out.println(result_code);
-            DashboardController.getInstance().homeFXML(null);
+            if(titleTextField.getText().length()<3){
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                alert.setAlertType(Alert.AlertType.WARNING);
+                alert.setContentText("Il titolo del post deve essere lungo almeno 3 caratteri.");
+                alert.show();
+            } else {
+                int result_code = PostsRequests.publishNewPost(titleTextField.getText(), bodyTextArea.getText(), boardId);
+                System.out.println(result_code);
+                DashboardController.getInstance().homeFXML(null);
+            }
         }
 
         public void handleCancel() throws IOException{
-            //DashboardController.getInstance().courseSelected(course.getCourseId());
+            DashboardController.getInstance().homeFXML(null);
         }
 
 

@@ -104,8 +104,17 @@ public class ReviewListViewController extends ListCell<Review> {
             anchorPane.setOnMouseClicked(e ->{
                 try {
                     System.out.println(review.getId());
-                    DashboardController.getInstance().reviewSelected(review.getId());
-                } catch (IOException ex) {
+                    DashboardController.getInstance().reviewSelected(review.getId(), review.getReviewedCourse().getName());
+                } catch (IOException | InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+            commentButton.setOnMouseClicked(e ->{
+                try {
+                    System.out.println(review.getId());
+                    DashboardController.getInstance().reviewSelected(review.getId(), review.getReviewedCourse().getName());
+                } catch (IOException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
             });

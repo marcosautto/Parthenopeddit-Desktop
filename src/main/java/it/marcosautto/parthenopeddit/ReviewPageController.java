@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.CommentsRequests;
+import it.marcosautto.parthenopeddit.api.ReviewsRequests;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,19 +24,21 @@ import java.util.stream.Collectors;
 
 public class ReviewPageController implements Initializable {
 
-        private static it.marcosautto.parthenopeddit.ReviewPageController instance;
-        public ReviewPageController() { instance = this; }
-        // static method to get instance of view
-        public static it.marcosautto.parthenopeddit.ReviewPageController getInstance() {
-            return instance;
-        }
+    private static it.marcosautto.parthenopeddit.ReviewPageController instance;
 
-        private DashboardController DashboardController;
-
-        private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
+    public ReviewPageController() { instance = this; }
 
 
-        public void setDashboardController(DashboardController dashboardController) {
+    public static it.marcosautto.parthenopeddit.ReviewPageController getInstance() { return instance; }
+
+    private DashboardController DashboardController;
+
+    private ReviewsRequests ReviewsRequests;
+
+    private CommentsRequests CommentsRequests;
+
+
+    public void setDashboardController(DashboardController dashboardController) {
             this.DashboardController = dashboardController;
 
             // Add observable list data to the table
@@ -98,17 +102,17 @@ public class ReviewPageController implements Initializable {
         @Override
         public void initialize(URL location, ResourceBundle resources)
         {
-
+            ReviewsRequests = new ReviewsRequests();
+            CommentsRequests = new CommentsRequests();
         }
 
-        public void transferMessage(int review_id) {
+        public void transferMessage(int review_id, String courseName) throws IOException, InterruptedException {
             System.out.println(review_id);
 
             //-----POST-----
-            review = Mockdatabase.getInstance().review_table.stream().filter(review -> review.getId() == review_id).collect(Collectors.toList()).get(0);
-
+            review = ReviewsRequests.getReviewWithComments(review_id);
             usernameLabel.setText(review.getAuthorId());
-            courseNameLabel.setText(review.getReviewedCourse().getName());
+            courseNameLabel.setText(courseName);
             timestampLabel.setText(review.getTimestamp());
             courseNameLabel.setStyle("-fx-background-color: #006FFF; -fx-background-radius: 20; -fx-text-fill: #FFFFFF; -fx-label-padding: 5");
             reviewBodyTextArea.setText(review.getBody());
@@ -122,6 +126,29 @@ public class ReviewPageController implements Initializable {
                     } catch (IOException | InterruptedException ex) {
                         ex.printStackTrace();
                     }
+            });
+
+            upvoteButton.setOnMouseClicked(e ->{
+                try {
+                    ReviewsRequests.likeReview(review.getId());
+                    updateVotes();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+
+            });
+
+            downvoteButton.setOnMouseClicked(e ->{
+                try {
+                    ReviewsRequests.dislikeReview(review.getId());
+                    updateVotes();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             });
 
             //-----COMMENT LIST-----
@@ -140,19 +167,25 @@ public class ReviewPageController implements Initializable {
 
         }
 
-        public void sendComment(){
+        public void sendComment() throws IOException, InterruptedException {
             if(!commentTextArea.getText().isEmpty()){
-                String pattern = "yyyy-MM-dd";
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-                String date = simpleDateFormat.format(new Date());
-
-                //Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, review.getId());
-
-                //Mockdatabase.getInstance().review_table.stream().filter(review -> review.getId() == this.review.getId()).collect(Collectors.toList()).get(0).addComment(comment);
-
+                CommentsRequests.publishNewComment(commentTextArea.getText(), review.getId());
+                //Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
                 commentTextArea.clear();
+
+                review = ReviewsRequests.getReviewWithComments(review.getId());
+                ObservableList<Comment> comments = FXCollections.observableList(review.getComments());
+                commentListView.setItems(comments);
+
             }
         }
+
+    private void updateVotes() throws IOException, InterruptedException {
+        review = ReviewsRequests.getReview(review.getId());
+        upvoteLabel.setText(Integer.toString(review.getUpvote()));
+        downvoteLabel.setText(Integer.toString(review.getDownvote()));
+
+    }
 
 
 

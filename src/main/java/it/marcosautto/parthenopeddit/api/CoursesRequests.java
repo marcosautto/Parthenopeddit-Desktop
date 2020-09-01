@@ -37,13 +37,11 @@ public class CoursesRequests {
 
             Gson gson = new Gson();
             String jsonOutput = response.body();
-            System.out.println(response.body());
 
             Type listType = new TypeToken<List<Course>>(){}.getType();
             List<Course> list = new ArrayList<Course>();
             list = gson.fromJson(jsonOutput, listType);
             ObservableList<Course> courses = FXCollections.observableList(list);
-
             return courses;
     }
 

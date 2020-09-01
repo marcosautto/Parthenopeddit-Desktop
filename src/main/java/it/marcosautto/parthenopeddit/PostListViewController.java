@@ -134,6 +134,14 @@ public class PostListViewController extends ListCell<Post> {
                     }
                 });
 
+                commentButton.setOnMouseClicked(e ->{
+                    try {
+                        DashboardController.getInstance().postSelected(post.getId());
+                    } catch (IOException | InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
                 upvoteButton.setOnMouseClicked(e ->{
                     try {
                         PostRequests.likePost(post.getId());

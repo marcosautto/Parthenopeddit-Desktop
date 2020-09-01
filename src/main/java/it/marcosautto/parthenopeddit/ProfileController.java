@@ -148,8 +148,15 @@ public class ProfileController implements Initializable {
         dialog.setContentText("Inserisci nuovo username:");
         Optional<String> result = dialog.showAndWait();
         if (result.isPresent()){
-            UserRequests.setDisplayName(result.get());
-            DashboardController.getInstance().profileSelected(user.getId());
+            if(result.get().length()<3){
+                Alert alert = new Alert(Alert.AlertType.NONE);
+                alert.setAlertType(Alert.AlertType.WARNING);
+                alert.setContentText("L'username deve essere lungo almeno 3 caratteri.");
+                alert.show();
+            } else {
+                UserRequests.setDisplayName(result.get());
+                DashboardController.getInstance().profileSelected(user.getId());
+            }
         }
     }
 

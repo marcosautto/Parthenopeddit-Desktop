@@ -120,17 +120,23 @@ public class SearchController implements Initializable {
     public void search() throws IOException, InterruptedException {
 
         String query = queryTextField.getText();
+        if(query.length()<3){
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("La ricerca deve essere lunga almeno 3 caratteri.");
+            alert.show();
+        } else{
+            ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
+            ObservableList<Post> foundPosts = PostsRequests.searchPost(queryTextField.getText());
+            ObservableList<User> foundUsers = UserRequests.searchUser(queryTextField.getText());
 
 
-        ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
-        ObservableList<Post> foundPosts = PostsRequests.searchPost(queryTextField.getText());
-        ObservableList<User> foundUsers = UserRequests.searchUser(queryTextField.getText());
 
+            SearchCourseController.getInstance().sendCourses(foundCourses);
+            SearchPostController.getInstance().sendPosts(foundPosts);
+            SearchUserController.getInstance().sendUsers(foundUsers);
+        }
 
-
-        SearchCourseController.getInstance().sendCourses(foundCourses);
-        SearchPostController.getInstance().sendPosts(foundPosts);
-        SearchUserController.getInstance().sendUsers(foundUsers);
     }
 
 

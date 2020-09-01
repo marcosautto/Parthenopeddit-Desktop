@@ -5,10 +5,7 @@ import it.marcosautto.parthenopeddit.api.GroupsRequests;
 import it.marcosautto.parthenopeddit.api.PostsRequests;
 import it.marcosautto.parthenopeddit.model.Group;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -46,12 +43,17 @@ public class NewGroupController {
 
 
     public void handleCreateGroup() throws IOException, InterruptedException, ParseException {
-        Group group = GroupsRequests
-                .createGroup(
-                        groupnameTextField
-                                .getText(),
-                        Collections.<String> emptyList());
-        DashboardController.getInstance().groupSelected(group.getId());
+
+        if(groupnameTextField.getText().length()<3){
+            Alert alert = new Alert(Alert.AlertType.NONE);
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("Il nome del gruppo deve essere lungo almeno 3 caratteri.");
+            alert.show();
+        } else {
+            Group group = GroupsRequests.createGroup(groupnameTextField.getText(), Collections.<String> emptyList());
+            DashboardController.getInstance().groupSelected(group.getId());
+        }
+
     }
 
     public void handleCancel() throws IOException{

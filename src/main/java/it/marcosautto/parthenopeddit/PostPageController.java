@@ -98,14 +98,12 @@ public class PostPageController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources)
     {
-
+        PostsRequests = new PostsRequests();
+        CommentsRequests = new CommentsRequests();
     }
 
     public void transferMessage(int post_id) throws IOException, InterruptedException {
         System.out.println(post_id);
-        PostsRequests = new PostsRequests();
-        CommentsRequests = new CommentsRequests();
-
 
         //-----POST-----
         post = PostsRequests.getPostWithComments(post_id);
@@ -154,6 +152,29 @@ public class PostPageController implements Initializable {
             }
         });
 
+        upvoteButton.setOnMouseClicked(e ->{
+            try {
+                PostsRequests.likePost(post.getId());
+                updateVotes();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+
+        });
+
+        downvoteButton.setOnMouseClicked(e ->{
+            try {
+                PostsRequests.dislikePost(post.getId());
+                updateVotes();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+        });
+
         //-----COMMENT LIST-----
 
         commentObservableList = FXCollections.observableArrayList();
@@ -172,12 +193,6 @@ public class PostPageController implements Initializable {
 
     public void sendComment() throws IOException, InterruptedException {
         if(!commentTextArea.getText().isEmpty()){
-            String pattern = "yyyy-MM-dd";
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-            String date = simpleDateFormat.format(new Date());
-
-            //Comment comment = new Comment(1, commentTextArea.getText(), date, Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1, 0, 0, post.getId());
-
             CommentsRequests.publishNewComment(commentTextArea.getText(), post.getId());
             //Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
             commentTextArea.clear();
@@ -185,8 +200,16 @@ public class PostPageController implements Initializable {
             post = PostsRequests.getPostWithComments(post.getId());
             ObservableList<Comment> comments = FXCollections.observableList(post.getComments());
             commentListView.setItems(comments);
+            commentListView.setCellFactory(postListView -> new CommentListViewController());
 
         }
+    }
+
+    private void updateVotes() throws IOException, InterruptedException {
+        post = PostsRequests.getPost(post.getId());
+        upvoteLabel.setText(Integer.toString(post.getUpvote()));
+        downvoteLabel.setText(Integer.toString(post.getDownvote()));
+
     }
 
 

@@ -113,12 +113,12 @@ public class DashboardController {
         PostPageController.getInstance().transferMessage(postId);
     }
 
-    public void reviewSelected(int reviewId) throws IOException{
+    public void reviewSelected(int reviewId, String courseName) throws IOException, InterruptedException {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/ReviewPageLayout.fxml"));
         secondPane.getChildren().setAll(node);
 
-        ReviewPageController.getInstance().transferMessage(reviewId);
+        ReviewPageController.getInstance().transferMessage(reviewId, courseName);
     }
 
     public void profileSelected(String userId) throws IOException, InterruptedException {
