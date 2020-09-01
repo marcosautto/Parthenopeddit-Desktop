@@ -2,6 +2,8 @@ package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.Auth;
 import it.marcosautto.parthenopeddit.api.UserRequests;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,6 +17,7 @@ import it.marcosautto.parthenopeddit.model.User;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -136,6 +139,18 @@ public class ProfileController implements Initializable {
        UserReviewController.getInstance().sendReviews(UserRequests.getUserPublishedReviews(userId, 1, 10, null));
        UserCommentController.getInstance().sendComments(UserRequests.getUserPublishedComments(userId, 1, 10, null));
 
+    }
+
+    public void changeUsername() throws IOException, InterruptedException {
+        TextInputDialog dialog = new TextInputDialog(user.getDisplayName());
+        dialog.setTitle("Cambia username");
+        dialog.setHeaderText("Cambia l'username visualizzato");
+        dialog.setContentText("Inserisci nuovo username:");
+        Optional<String> result = dialog.showAndWait();
+        if (result.isPresent()){
+            UserRequests.setDisplayName(result.get());
+            DashboardController.getInstance().profileSelected(user.getId());
+        }
     }
 
     public void changeUserimage(){

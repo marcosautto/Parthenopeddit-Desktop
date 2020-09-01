@@ -20,7 +20,13 @@ public class GroupInviteListViewController extends ListCell<GroupInvite> {
     @FXML
     private AnchorPane anchorPane;
 
+    public boolean flag;
+
     private FXMLLoader mLLoader;
+
+    public GroupInviteListViewController(boolean flag){
+        this.flag = flag;
+    }
 
     @Override
     protected void updateItem(GroupInvite invite, boolean empty) {
@@ -44,7 +50,10 @@ public class GroupInviteListViewController extends ListCell<GroupInvite> {
 
             }
 
-            groupnameLabel.setText(invite.getGroup().getName());
+            if(flag)                        //Se è vero, setta il nome del gruppo (Usato per GroupInviteController)
+                groupnameLabel.setText(invite.getGroup().getName());
+            else                            //Altrimenti, setta il nome dell'utente invitato (Usato per GroupInvitedController)
+                groupnameLabel.setText(invite.getInvitedId());
             usernameLabel.setText(invite.getInviterId());
 
             setText(null);

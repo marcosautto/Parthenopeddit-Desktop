@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.api.GroupsRequests;
+import it.marcosautto.parthenopeddit.model.Group;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,6 +12,7 @@ import it.marcosautto.parthenopeddit.model.GroupInvite;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -21,9 +24,11 @@ public class GroupInviteController implements Initializable {
 
     private ObservableList<GroupInvite> inviteObservableList;
 
-    private ObservableList<GroupInvite> group_invite;
+    private ObservableList<GroupInvite> group_invites;
 
     private DashboardController dashboardController;
+
+    private GroupsRequests GroupsRequests;
 
     private Mockdatabase Mockdatabase;
 
@@ -36,23 +41,35 @@ public class GroupInviteController implements Initializable {
     public GroupInviteController(){
 
         inviteObservableList = FXCollections.observableArrayList();
+        GroupsRequests = new GroupsRequests();
 
-        //group_invite = Mockdatabase.getInstance().user1.getGroupInvites();
-
-        //add some Students
-        if(group_invite.size() > 0)
-            inviteObservableList.addAll(
-                    group_invite);
-        else
-            groupInviteListView.setPlaceholder(new Label("Non hai ricevuto alcun invito."));
+        ////group_invite = Mockdatabase.getInstance().user1.getGroupInvites();
+//
+        ////add some Students
+        //if(group_invite.size() > 0)
+        //    inviteObservableList.addAll(
+        //            group_invite);
+        //else
+        //    groupInviteListView.setPlaceholder(new Label("Non hai ricevuto alcun invito."));
 
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        groupInviteListView.setItems(inviteObservableList);
-        groupInviteListView.setCellFactory(postListView -> new GroupInviteListViewController());
+        try {
+            group_invites = GroupsRequests.getUserInvitesToGroup();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        if(group_invites.size() > 0){
+            groupInviteListView.setItems(group_invites);
+            groupInviteListView.setCellFactory(postListView -> new GroupInviteListViewController(true));
+        } else
+            groupInviteListView.setPlaceholder(new Label("Non hai ricevuto alcun invito."));
+
+
 
         groupInviteListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             // Your action here
@@ -77,18 +94,17 @@ public class GroupInviteController implements Initializable {
 
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == buttonYes){
-                    //TODO: API add user in group
-                    //Mockdatabase.getInstance().user1.addGroup(newValue.getGroup());
-                    //Mockdatabase.getInstance().groups_table.stream().filter(group -> group.getId() == newValue.getGroupId()).collect(Collectors.toList()).get(0).addGroupMember(Mockdatabase.getInstance().user1);
-                    DashboardController.getInstance().groupFXML(null);
+                    GroupsRequests.answerGroupInvite(newValue.getGroupId(), true);
+                    DashboardController.getInstance().groupSelected(newValue.getGroupId());
                 } else if (result.get() == buttonNo) {
-                    //TODO: API remove groupInvite
+                    GroupsRequests.answerGroupInvite(newValue.getGroupId(), false);
+                    DashboardController.getInstance().groupInviteFXML(null);
                 } else {
                     alert.close();
                 }
 
 
-            } catch (IOException e) {
+            } catch (IOException | InterruptedException | ParseException e) {
                 e.printStackTrace();
             }
         });

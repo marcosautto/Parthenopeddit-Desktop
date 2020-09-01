@@ -1,5 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.groupPage.GroupInvitedController;
+import it.marcosautto.parthenopeddit.model.GroupInvite;
 import it.marcosautto.parthenopeddit.model.Post;
 import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.collections.FXCollections;
@@ -20,7 +22,6 @@ import it.marcosautto.parthenopeddit.api.GroupsRequests;
 import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -69,6 +70,12 @@ public class GroupPageController implements Initializable {
     private GroupUserController groupUserController;
 
     @FXML
+    private Tab groupInviteTab;
+
+    @FXML
+    private GroupInvitedController groupInvitedController;
+
+    @FXML
     private Label groupNameTitleLabel;
 
     @FXML
@@ -100,6 +107,7 @@ public class GroupPageController implements Initializable {
     private ObservableList<GroupMember> groupMembers;
     private ObservableList<GroupMember> groupAdmins;
     private ObservableList<GroupMember> groupUsers;
+    private ObservableList<GroupInvite> groupInvites;
 
     private boolean isAdmin = false;
 
@@ -137,6 +145,14 @@ public class GroupPageController implements Initializable {
         {
             System.out.println("unable to load tab3");
         }
+        try{
+            AnchorPane anch4 = loader.load(getClass().getResource("/GroupInvitedLayout.fxml"));
+            groupInviteTab.setContent(anch4);
+        }
+        catch(IOException iex)
+        {
+            System.out.println("unable to load tab4");
+        }
 
     }
 
@@ -147,9 +163,7 @@ public class GroupPageController implements Initializable {
         groupMembers = GroupsRequests.getGroupMembers(group_Id);
         groupAdmins = groupMembers.stream().filter(groupMember -> groupMember.getIsOwner() == true).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
         groupUsers = groupMembers.stream().filter(groupMember -> groupMember.getIsOwner() == false).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableList(l)));
-
-        System.out.println("members "+groupMembers.size());
-
+        groupInvites = GroupsRequests.getGroupInvites(group_Id);
         groupId = group.getId();
         groupNameTitleLabel.setText(group.getName());
         createdOnLabel.setText(DateParser.parseDate(group.getCreatedOn()));
@@ -168,6 +182,7 @@ public class GroupPageController implements Initializable {
         GroupPostController.getInstance().sendPosts(groupPosts);
         GroupAdminController.getInstance().sendAdmins(groupAdmins);
         GroupUserController.getInstance().sendUsers(groupUsers);
+        GroupInvitedController.getInstance().sendInvitedUsers(groupInvites);
 
     }
 

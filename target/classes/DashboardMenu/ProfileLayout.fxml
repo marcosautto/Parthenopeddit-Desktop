@@ -40,7 +40,7 @@
             </VBox>
             <VBox spacing="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="50.0">
                <children>
-                  <JFXButton fx:id="changeUsernameButton" graphicTextGap="10.0" mnemonicParsing="false" prefWidth="204.0" style="-fx-background-color: #FFFFFF;" text="Cambia username" textFill="#006fff">
+                  <JFXButton fx:id="changeUsernameButton" graphicTextGap="10.0" mnemonicParsing="false" onAction="#changeUsername" prefWidth="204.0" style="-fx-background-color: #FFFFFF;" text="Cambia username" textFill="#006fff">
                      <padding>
                         <Insets bottom="8.0" left="10.0" right="10.0" top="8.0" />
                      </padding>
