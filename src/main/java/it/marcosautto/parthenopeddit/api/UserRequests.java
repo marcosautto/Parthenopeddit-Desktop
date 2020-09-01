@@ -77,15 +77,21 @@ public class UserRequests {
                 .build();
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        Gson gson = new Gson();
-        String jsonOutput = response.body();
-        //System.out.println(response.body());
-        Type listType = new TypeToken<List<Post>>(){}.getType();
-        List<Post> list = new ArrayList<Post>();
-        list = gson.fromJson(jsonOutput, listType);
-        ObservableList<Post> posts = FXCollections.observableList(list);
+        if(response.statusCode() != 470) {
+            Gson gson = new Gson();
+            String jsonOutput = response.body();
+            //System.out.println(response.body());
+            Type listType = new TypeToken<List<Post>>() {
+            }.getType();
+            List<Post> list = new ArrayList<Post>();
+            list = gson.fromJson(jsonOutput, listType);
+            ObservableList<Post> posts = FXCollections.observableList(list);
+            return posts;
+        } else{
+            ObservableList<Post> empty_posts = FXCollections.observableArrayList();
+            return empty_posts;
+        }
 
-        return posts;
     }
 
     public ObservableList<Comment> getUserPublishedComments(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {

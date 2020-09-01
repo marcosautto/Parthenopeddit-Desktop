@@ -32,7 +32,7 @@ public class NewGroupController {
 
     private int boardId;
 
-    private it.marcosautto.parthenopeddit.api.PostsRequests PostsRequests = new PostsRequests(Auth.getInstance());
+    private it.marcosautto.parthenopeddit.api.PostsRequests PostsRequests = new PostsRequests();
 
     private static NewGroupController instance;
     public NewGroupController() {

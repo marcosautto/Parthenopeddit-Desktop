@@ -81,14 +81,21 @@ public class HomeController implements Initializable {
 
     public void nextPage() throws IOException, InterruptedException {
         previousPageButton.setDisable(false);
-        homeListView.setItems(UserRequests.getUserFeed(++page, 10, null));
-        pageLabel.setText("Pagina " + page);
+        ObservableList<Post> posts = UserRequests.getUserFeed(++page, 10, null);
+        if(!posts.isEmpty()){
+            homeListView.setItems(posts);
+            pageLabel.setText("Pagina " + page);
+        } else {
+            nextPageButton.setDisable(true);
+        }
     }
 
     public void previousPage() throws IOException, InterruptedException {
         if(page==2) {
             previousPageButton.setDisable(true);
         }
+        if(nextPageButton.isDisabled())
+            nextPageButton.setDisable(false);
         homeListView.setItems(UserRequests.getUserFeed(--page, 10, null));
         pageLabel.setText("Pagina " + page);
     }

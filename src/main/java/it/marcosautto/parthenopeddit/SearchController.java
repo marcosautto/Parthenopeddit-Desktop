@@ -1,7 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
-import it.marcosautto.parthenopeddit.api.CoursesRequests;
-import it.marcosautto.parthenopeddit.api.GroupsRequests;
+import it.marcosautto.parthenopeddit.api.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -26,6 +25,8 @@ import static java.util.stream.Collectors.toList;
 public class SearchController implements Initializable {
 
     private CoursesRequests CoursesRequests;
+    private PostsRequests PostsRequests;
+    private UserRequests UserRequests;
     private GroupsRequests GroupsRequests;
 
    @FXML
@@ -81,6 +82,8 @@ public class SearchController implements Initializable {
         FXMLLoader loader = new FXMLLoader();
 
         CoursesRequests = new CoursesRequests();
+        PostsRequests = new PostsRequests();
+        UserRequests = new UserRequests();
         GroupsRequests = new GroupsRequests();
 
         try
@@ -120,14 +123,14 @@ public class SearchController implements Initializable {
 
 
         ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
-        //ObservableList<Post> foundPosts = (ObservableList<Post>) Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getTitle().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
-        //ObservableList<User> foundUsers = (ObservableList<User>) Mockdatabase.getInstance().users_table.stream().filter(user -> user.getDisplayName().contains(query)).collect(Collectors.collectingAndThen(toList(), l -> FXCollections.observableArrayList(l)));
+        ObservableList<Post> foundPosts = PostsRequests.searchPost(queryTextField.getText());
+        ObservableList<User> foundUsers = UserRequests.searchUser(queryTextField.getText());
 
 
 
         SearchCourseController.getInstance().sendCourses(foundCourses);
-        //SearchPostController.getInstance().sendPosts(foundPosts);
-        //SearchUserController.getInstance().sendUsers(foundUsers);
+        SearchPostController.getInstance().sendPosts(foundPosts);
+        SearchUserController.getInstance().sendUsers(foundUsers);
     }
 
 

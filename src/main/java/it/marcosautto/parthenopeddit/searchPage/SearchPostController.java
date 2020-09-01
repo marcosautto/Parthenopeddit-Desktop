@@ -53,5 +53,9 @@ public class SearchPostController implements Initializable {
             postListView.setCellFactory(postListView -> new PostListViewController());
         } else
             postListView.setPlaceholder(new Label("Non sono stati trovati post."));
+
+        if(posts.isEmpty()){
+            postListView.getItems().clear();
+        }
     }
 }

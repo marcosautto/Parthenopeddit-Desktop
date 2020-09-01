@@ -80,6 +80,10 @@ public class SearchCourseController implements Initializable {
             courseListView.setCellFactory(postListView -> new CourseListViewController());
         } else
             courseListView.setPlaceholder(new Label("Non sono stati trovati corsi."));
+
+        if(courses.isEmpty()){
+            courseListView.getItems().clear();
+        }
     }
 }
 

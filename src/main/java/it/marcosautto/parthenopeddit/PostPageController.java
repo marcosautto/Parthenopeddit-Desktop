@@ -103,7 +103,7 @@ public class PostPageController implements Initializable {
 
     public void transferMessage(int post_id) throws IOException, InterruptedException {
         System.out.println(post_id);
-        PostsRequests = new PostsRequests(Auth);
+        PostsRequests = new PostsRequests();
         CommentsRequests = new CommentsRequests();
 
 

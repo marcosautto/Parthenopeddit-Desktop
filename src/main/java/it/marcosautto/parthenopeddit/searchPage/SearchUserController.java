@@ -72,5 +72,9 @@ public class SearchUserController implements Initializable {
             userListView.setCellFactory(postListView -> new UserListViewController());
         } else
             userListView.setPlaceholder(new Label("Non sono stati trovati utenti."));
+
+        if(users.isEmpty()){
+            userListView.getItems().clear();
+        }
     }
 }

@@ -18,7 +18,7 @@ public class PostListViewController extends ListCell<Post> {
 
     private Auth Auth;
 
-    private PostsRequests PostRequests = new PostsRequests(Auth);
+    private PostsRequests PostRequests = new PostsRequests();
 
         @FXML
         private Label titleLabel;

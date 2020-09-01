@@ -30,7 +30,7 @@ public class NewPostController {
 
         private int boardId;
 
-        private PostsRequests PostsRequests = new PostsRequests(Auth.getInstance());
+        private PostsRequests PostsRequests = new PostsRequests();
 
         private static NewPostController instance;
         public NewPostController() {
