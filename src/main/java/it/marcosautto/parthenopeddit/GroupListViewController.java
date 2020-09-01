@@ -25,7 +25,6 @@ public class GroupListViewController extends ListCell<GroupMember> {
 
         private DateParser DateParser;
 
-
         private FXMLLoader mLLoader;
         
         @Override

@@ -105,7 +105,7 @@ public class DashboardController {
         GroupPageController.getInstance().transferMessage(groupId);
    }
 
-   public void postSelected(int postId) throws IOException, InterruptedException {
+   public void postSelected(int postId) throws IOException, InterruptedException, ParseException {
         Node node;
         node = (Node)FXMLLoader.load(getClass().getResource("/PostPageLayout.fxml"));
         secondPane.getChildren().setAll(node);

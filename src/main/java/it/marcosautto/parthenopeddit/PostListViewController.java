@@ -1,6 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.PostsRequests;
+import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -58,13 +59,17 @@ public class PostListViewController extends ListCell<Post> {
 
         private FXMLLoader mLLoader;
 
-        private Post post;
+        private DateParser DateParser;
+
+
+    private Post post;
 
         private DashboardController DashboardController;
 
         @Override
         protected void updateItem(Post post, boolean empty) {
             super.updateItem(post, empty);
+            DateParser = new DateParser();
             this.post = post;
 
             if(empty || post == null) {
@@ -88,7 +93,11 @@ public class PostListViewController extends ListCell<Post> {
                 titleLabel.setText(post.getTitle());
                 authorLabel.setText(post.getAuthorId());
                 boardLabel.setText(post.getPostedToBoard().getName());
-                timestampLabel.setText(post.getTimestamp());
+                try {
+                    timestampLabel.setText(DateParser.parseDate(post.getTimestamp()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 if(post.getPostedToBoardId() == 0){
                     boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
                     boardLabel.setText("Generale");
@@ -129,7 +138,7 @@ public class PostListViewController extends ListCell<Post> {
                 anchorPane.setOnMouseClicked(e ->{
                     try {
                         DashboardController.getInstance().postSelected(post.getId());
-                    } catch (IOException | InterruptedException ex) {
+                    } catch (IOException | InterruptedException | ParseException ex) {
                         ex.printStackTrace();
                     }
                 });
@@ -137,7 +146,7 @@ public class PostListViewController extends ListCell<Post> {
                 commentButton.setOnMouseClicked(e ->{
                     try {
                         DashboardController.getInstance().postSelected(post.getId());
-                    } catch (IOException | InterruptedException ex) {
+                    } catch (IOException | InterruptedException | ParseException ex) {
                         ex.printStackTrace();
                     }
                 });

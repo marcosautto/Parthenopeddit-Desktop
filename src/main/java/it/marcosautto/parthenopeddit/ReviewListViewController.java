@@ -1,5 +1,6 @@
 package it.marcosautto.parthenopeddit;
 
+import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import org.controlsfx.control.Rating;
 import it.marcosautto.parthenopeddit.model.Review;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class ReviewListViewController extends ListCell<Review> {
 
@@ -56,11 +58,14 @@ public class ReviewListViewController extends ListCell<Review> {
     @FXML
     private AnchorPane anchorPane;
 
+    private DateParser DateParser;
+
     private FXMLLoader mLLoader;
 
     @Override
     protected void updateItem(Review review, boolean empty) {
         super.updateItem(review, empty);
+        DateParser = new DateParser();
 
         if(empty || review == null) {
 
@@ -81,7 +86,11 @@ public class ReviewListViewController extends ListCell<Review> {
             }
 
             usernameLabel.setText(review.getAuthorId());
-            timestampLabel.setText(review.getTimestamp());
+            try {
+                timestampLabel.setText(DateParser.parseDate(review.getTimestamp()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             courseNameLabel.setText(review.getReviewedCourse().getName());
             average_liking_score_ratingbar.setRating(review.getScoreLiking());
             average_difficulty_score_ratingbar.setRating(review.getScoreDifficulty());

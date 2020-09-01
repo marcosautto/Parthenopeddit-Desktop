@@ -3,6 +3,7 @@ package it.marcosautto.parthenopeddit;
 import it.marcosautto.parthenopeddit.api.CommentsRequests;
 import it.marcosautto.parthenopeddit.api.PostsRequests;
 import it.marcosautto.parthenopeddit.api.UserRequests;
+import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -92,6 +93,9 @@ public class PostPageController implements Initializable {
 
     private CommentsRequests CommentsRequests;
 
+    private DateParser DateParser;
+
+
 
     private Post post;
 
@@ -100,9 +104,10 @@ public class PostPageController implements Initializable {
     {
         PostsRequests = new PostsRequests();
         CommentsRequests = new CommentsRequests();
+        DateParser = new DateParser();
     }
 
-    public void transferMessage(int post_id) throws IOException, InterruptedException {
+    public void transferMessage(int post_id) throws IOException, InterruptedException, ParseException {
         System.out.println(post_id);
 
         //-----POST-----
@@ -115,7 +120,7 @@ public class PostPageController implements Initializable {
         titleLabel.setText(post.getTitle());
         authorLabel.setText(post.getAuthorId());
         boardLabel.setText(post.getPostedToBoard().getName());
-        timestampLabel.setText(post.getTimestamp());
+        timestampLabel.setText(DateParser.parseDate(post.getTimestamp()));
         if(post.getPostedToBoardId() == 0){
             boardLabel.setStyle("-fx-background-color: #FFFFFF; -fx-background-radius: 20; -fx-border-color: #000000; -fx-border-width: 2; -fx-border-radius: 20; -fx-label-padding: 5");
             boardLabel.setText("Generale");

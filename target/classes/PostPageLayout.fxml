@@ -18,12 +18,12 @@
         <children>
             <VBox prefWidth="100.0" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="15.0">
                 <children>
+                    <Label fx:id="authorLabel" text="Username" />
                     <Label fx:id="titleLabel" text="Title" wrapText="true">
                         <font>
                             <Font name="System Bold" size="15.0" />
                         </font>
                     </Label>
-                    <Label fx:id="authorLabel" text="Username" />
                 </children>
             </VBox>
             <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">

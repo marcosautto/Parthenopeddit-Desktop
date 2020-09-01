@@ -1,6 +1,7 @@
 package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.CommentsRequests;
+import it.marcosautto.parthenopeddit.util.DateParser;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -11,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import it.marcosautto.parthenopeddit.model.Comment;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class CommentListViewController extends ListCell<Comment> {
 
@@ -52,9 +54,12 @@ public class CommentListViewController extends ListCell<Comment> {
 
         private DashboardController DashboardController;
 
-        @Override
+        private DateParser DateParser;
+
+    @Override
         protected void updateItem(Comment comment, boolean empty) {
             super.updateItem(comment, empty);
+            DateParser = new DateParser();
             this.comment = comment;
 
             if(empty || comment == null) {
@@ -76,7 +81,11 @@ public class CommentListViewController extends ListCell<Comment> {
                 }
 
                 usernameLabel.setText(comment.getAuthorId());
-                timestampLabel.setText(comment.getTimestamp());
+                try {
+                    timestampLabel.setText(DateParser.parseDate(comment.getTimestamp()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
                 commentBodyTextArea.setText(comment.getBody());
                 upvoteLabel.setText(Integer.toString(comment.getUpvote()));
                 downvoteLabel.setText(Integer.toString(comment.getDownvote()));
