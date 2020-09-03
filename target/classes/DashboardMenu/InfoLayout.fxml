@@ -278,9 +278,9 @@
                                     </VBox>
                                     <VBox alignment="CENTER">
                                        <children>
-                                          <JFXButton contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 50;" text="Button">
+                                          <JFXButton fx:id="cfxGitHubButton" contentDisplay="GRAPHIC_ONLY" mnemonicParsing="false" onAction="#openCfxGitHubWebpage" prefHeight="50.0" prefWidth="50.0" style="-fx-background-radius: 50;" text="Button">
                                              <graphic>
-                                                <ImageView fx:id="cfxGitHubButton" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                                                <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                                    <image>
                                                       <Image url="@../icons/github-black-64px.png" />
                                                    </image>

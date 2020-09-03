@@ -1,6 +1,8 @@
 package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.GroupsRequests;
+import it.marcosautto.parthenopeddit.factory.AlertFactory;
+import it.marcosautto.parthenopeddit.factory.AlertType;
 import it.marcosautto.parthenopeddit.model.Group;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,6 +32,8 @@ public class GroupInviteController implements Initializable {
 
     private GroupsRequests GroupsRequests;
 
+    private AlertFactory alertFactory;
+
     private Mockdatabase Mockdatabase;
 
     public void setDashboardController(DashboardController dashboardController) {
@@ -42,6 +46,7 @@ public class GroupInviteController implements Initializable {
 
         inviteObservableList = FXCollections.observableArrayList();
         GroupsRequests = new GroupsRequests();
+        alertFactory = new AlertFactory();
 
         ////group_invite = Mockdatabase.getInstance().user1.getGroupInvites();
 //
@@ -80,27 +85,28 @@ public class GroupInviteController implements Initializable {
             try {
                 //dashboardController.getInstance().inviteSelected(newValue.getGroupInviteId());
 
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Invito gruppo");
-                alert.setHeaderText("Vuoi entrare nel gruppo " + newValue.getGroup().getName() + "?");
-                alert.setContentText("Seleziona un'opzione.");
-                alert.setResizable(false);
+                //Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                //alert.setTitle("Invito gruppo");
+                //alert.setHeaderText("Vuoi entrare nel gruppo " + newValue.getGroup().getName() + "?");
+                //alert.setContentText("Seleziona un'opzione.");
+                //alert.setResizable(false);
+//
+                //ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+                //ButtonType buttonNo = new ButtonType("No");
+                //ButtonType buttonYes = new ButtonType("Si");
+//
+                //alert.getButtonTypes().setAll(buttonCancel, buttonNo, buttonYes);
+                AlertType alert = alertFactory.getAlert("INVITE_ALERT", newValue.getGroup().getName());
+                Optional<ButtonType> result = alert.getResult();
 
-                ButtonType buttonCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-                ButtonType buttonNo = new ButtonType("No");
-                ButtonType buttonYes = new ButtonType("Si");
-
-                alert.getButtonTypes().setAll(buttonCancel, buttonNo, buttonYes);
-
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == buttonYes){
+                if (result.get().getText().equals("Si")){
                     GroupsRequests.answerGroupInvite(newValue.getGroupId(), true);
                     DashboardController.getInstance().groupSelected(newValue.getGroupId());
-                } else if (result.get() == buttonNo) {
+                } else if (result.get().getText().equals("No")) {
                     GroupsRequests.answerGroupInvite(newValue.getGroupId(), false);
                     DashboardController.getInstance().groupInviteFXML(null);
                 } else {
-                    alert.close();
+                    alert.closeAlert();
                 }
 
 

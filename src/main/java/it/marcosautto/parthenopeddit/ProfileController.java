@@ -120,6 +120,9 @@ public class ProfileController implements Initializable {
     public void transferMessage(String userId) throws IOException, InterruptedException {
         user = UserRequests.getUserByID(userId);
 
+        if(user != null)
+            System.out.println(user.getId());
+
         if(user.getId().equals((Auth.getInstance().getUsername()))){
             changeUsernameButton.setVisible(true);
             changeProfilePicButton.setVisible(true);
@@ -135,6 +138,9 @@ public class ProfileController implements Initializable {
         usernameLabel.setText(user.getId());
 
 
+        System.out.println(usernameShownLabel.getText());
+
+
        UserPostController.getInstance().sendPosts(UserRequests.getUserPublishedPosts(userId, 1, 10, null));
        UserReviewController.getInstance().sendReviews(UserRequests.getUserPublishedReviews(userId, 1, 10, null));
        UserCommentController.getInstance().sendComments(UserRequests.getUserPublishedComments(userId, 1, 10, null));
@@ -142,6 +148,8 @@ public class ProfileController implements Initializable {
     }
 
     public void changeUsername() throws IOException, InterruptedException {
+        if(user == null)
+            System.out.println("null");
         TextInputDialog dialog = new TextInputDialog(user.getDisplayName());
         dialog.setTitle("Cambia username");
         dialog.setHeaderText("Cambia l'username visualizzato");
@@ -165,5 +173,8 @@ public class ProfileController implements Initializable {
         alert.setAlertType(Alert.AlertType.WARNING);
         alert.setContentText("Work in progress");
         alert.show();
+
+        if(user == null)
+            System.out.println("null");
     }
 }
