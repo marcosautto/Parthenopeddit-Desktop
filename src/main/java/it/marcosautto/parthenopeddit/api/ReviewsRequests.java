@@ -28,7 +28,7 @@ public class ReviewsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/reviews/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/reviews/"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -42,7 +42,7 @@ public class ReviewsRequests {
     public Review getReview(int reviewId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/reviews/"+reviewId))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/reviews/"+reviewId))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -60,7 +60,7 @@ public class ReviewsRequests {
     public Review getReviewWithComments(int reviewId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/reviews/"+reviewId+"/comments"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/reviews/"+reviewId+"/comments"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -92,7 +92,7 @@ public class ReviewsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/reviews/"+review_id+"/like"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/reviews/"+review_id+"/like"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -108,7 +108,7 @@ public class ReviewsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/reviews/"+review_id+"/dislike"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/reviews/"+review_id+"/dislike"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();

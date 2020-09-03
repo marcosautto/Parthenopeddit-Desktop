@@ -18,7 +18,7 @@ public class AuthRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/auth/login"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/auth/login"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 

@@ -5,6 +5,8 @@ import java.net.http.HttpClient;
 public class ApiClient {
 
     private static ApiClient instance;
+    private String baseUrl;
+
 
     private final HttpClient httpClient = HttpClient.newBuilder()
             .version(HttpClient.Version.HTTP_2)
@@ -14,6 +16,7 @@ public class ApiClient {
         instance = this;
     }
 
+    public String getBaseUrl(){ return "http://localhost:8000"; }
     public static ApiClient getInstance() {
         return instance;
     }

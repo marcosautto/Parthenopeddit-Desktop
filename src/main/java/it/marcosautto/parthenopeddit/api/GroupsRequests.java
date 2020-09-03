@@ -30,7 +30,7 @@ public class GroupsRequests {
     public ObservableList<GroupMember> getUserGroups() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -60,7 +60,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -74,7 +74,7 @@ public class GroupsRequests {
     public ObservableList<GroupInvite> getUserInvitesToGroup() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/invites"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/invites"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -95,7 +95,7 @@ public class GroupsRequests {
     public Group getGroup(int group_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/"+group_id))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -115,7 +115,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/invite"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/invite"))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -135,7 +135,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/invite/"+user_id+"/undo"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/invite/"+user_id+"/undo"))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -148,7 +148,7 @@ public class GroupsRequests {
     public ObservableList<GroupInvite> getGroupInvites(int group_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/invite"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/invite"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -166,7 +166,7 @@ public class GroupsRequests {
     public ObservableList<User> searchInvitableUser(int group_id, String searched_user_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/invite/search/"+searched_user_id))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/invite/search/"+searched_user_id))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -188,7 +188,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/invite/answer"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/invite/answer"))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -202,7 +202,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/leave"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/leave"))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -214,7 +214,7 @@ public class GroupsRequests {
     public ObservableList<GroupMember> getGroupMembers(int group_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/members"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/members"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -234,7 +234,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/kick/"+userId))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/kick/"+userId))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -250,7 +250,7 @@ public class GroupsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/members/make_owner"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/members/make_owner"))
                 .setHeader("authorization", it.marcosautto.parthenopeddit.api.Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -262,7 +262,7 @@ public class GroupsRequests {
     public ObservableList<Post> getGroupPosts(int group_id, int per_page, int page, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/groups/"+group_id+"/posts/"+per_page+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/groups/"+group_id+"/posts/"+per_page+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 

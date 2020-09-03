@@ -26,7 +26,7 @@ public class CommentsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/comments/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"comments/"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -41,7 +41,7 @@ public class CommentsRequests {
     public Comment getComment(int commentId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/comments/"+commentId))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"comments/"+commentId))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -61,7 +61,7 @@ public class CommentsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/comments/"+comment_id+"/like"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/comments/"+comment_id+"/like"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -77,7 +77,7 @@ public class CommentsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/comments/"+comment_id+"/dislike"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/comments/"+comment_id+"/dislike"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();

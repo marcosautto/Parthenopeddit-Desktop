@@ -29,7 +29,7 @@ public class CoursesRequests {
     public ObservableList<Course> searchByName(String course_name) throws IOException, InterruptedException {
             HttpRequest request = HttpRequest.newBuilder()
                     .GET()
-                    .uri(URI.create("http://localhost:8000/courses/search/"+course_name))
+                    .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/search/"+course_name))
                     .setHeader("authorization", Auth.getInstance().getToken())
                     .build();
 
@@ -48,7 +48,7 @@ public class CoursesRequests {
     public ObservableList<Course> getFollowedCourses() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/courses/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -69,7 +69,7 @@ public class CoursesRequests {
     public Course getCourseByID(int course_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/courses/"+course_id))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/"+course_id))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -85,7 +85,7 @@ public class CoursesRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/courses/"+Integer.toString(course_id)+"/follow"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/"+Integer.toString(course_id)+"/follow"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -100,7 +100,7 @@ public class CoursesRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/courses/"+Integer.toString(course_id)+"/unfollow"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/"+Integer.toString(course_id)+"/unfollow"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -113,7 +113,7 @@ public class CoursesRequests {
     public ObservableList<Post> getCoursePosts(int course_id, int page, int perPage, String transactionStartDataTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/courses/"+course_id+"/posts/"+perPage+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/"+course_id+"/posts/"+perPage+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -132,7 +132,7 @@ public class CoursesRequests {
     public ObservableList<Review> getCourseReviews(int course_id, int page, int perPage, String transactionStartDataTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/courses/"+course_id+"/reviews/"+perPage+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/courses/"+course_id+"/reviews/"+perPage+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 

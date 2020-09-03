@@ -27,7 +27,7 @@ public class UserRequests {
     public ObservableList<User> searchUser(String searched_user_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/search/"+searched_user_id))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/search/"+searched_user_id))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
@@ -44,7 +44,7 @@ public class UserRequests {
     public User getUserByID(String fetched_user_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/"+fetched_user_id))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/"+fetched_user_id))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
@@ -60,7 +60,7 @@ public class UserRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/user/display_name"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/display_name"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -72,7 +72,7 @@ public class UserRequests {
     public ObservableList<Post> getUserFeed(int page, int perPage, String transactionStartDataTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/feed/"+perPage+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/feed/"+perPage+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -97,7 +97,7 @@ public class UserRequests {
     public ObservableList<Comment> getUserPublishedComments(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/"+user_id+"/published_comments/"+perPage+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/"+user_id+"/published_comments/"+perPage+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -117,7 +117,7 @@ public class UserRequests {
     public ObservableList<Post> getUserPublishedPosts(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/"+user_id+"/published_posts/"+perPage+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/"+user_id+"/published_posts/"+perPage+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -137,7 +137,7 @@ public class UserRequests {
     public ObservableList<Review> getUserPublishedReviews(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/user/"+user_id+"/published_reviews/"+perPage+"/"+page))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/user/"+user_id+"/published_reviews/"+perPage+"/"+page))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 

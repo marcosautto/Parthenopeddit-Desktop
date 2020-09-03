@@ -16,7 +16,6 @@ public abstract class ApiRoute {
 
 
     public int getTimeOut(){ return 3000; }
-    public String baseUrl(){ return "http://localhost:8000/"; }
     public HashMap<String, String> getParamsMap(){
         return params; }
     public HashMap<String, String> getHeadersMap(String token){

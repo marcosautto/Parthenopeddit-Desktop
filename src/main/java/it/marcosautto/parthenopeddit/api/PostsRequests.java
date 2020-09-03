@@ -32,7 +32,7 @@ public class PostsRequests {
     public ObservableList<Post> searchPost(String searched_post_title) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/posts/search/"+searched_post_title))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/posts/search/"+searched_post_title))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -59,7 +59,7 @@ public class PostsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/posts/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/posts/"))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -74,7 +74,7 @@ public class PostsRequests {
     public Post getPost(int postId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/posts/"+postId))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/posts/"+postId))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .build();
 
@@ -92,7 +92,7 @@ public class PostsRequests {
     public Post getPostWithComments(int postId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create("http://localhost:8000/posts/"+postId+"/comments"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/posts/"+postId+"/comments"))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .build();
 
@@ -123,7 +123,7 @@ public class PostsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/posts/"+post_id+"/like"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/posts/"+post_id+"/like"))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
@@ -139,7 +139,7 @@ public class PostsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create("http://localhost:8000/posts/"+post_id+"/dislike"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/posts/"+post_id+"/dislike"))
                 .setHeader("authorization", auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
