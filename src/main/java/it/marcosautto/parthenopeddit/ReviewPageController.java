@@ -176,7 +176,7 @@ public class ReviewPageController implements Initializable {
                 review = ReviewsRequests.getReviewWithComments(review.getId());
                 ObservableList<Comment> comments = FXCollections.observableList(review.getComments());
                 commentListView.setItems(comments);
-
+                commentListView.setCellFactory(commentListView -> new CommentListViewController());
             }
         }
 

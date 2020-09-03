@@ -205,7 +205,7 @@ public class PostPageController implements Initializable {
             post = PostsRequests.getPostWithComments(post.getId());
             ObservableList<Comment> comments = FXCollections.observableList(post.getComments());
             commentListView.setItems(comments);
-            commentListView.setCellFactory(postListView -> new CommentListViewController());
+            commentListView.setCellFactory(commentListView -> new CommentListViewController());
 
         }
     }
