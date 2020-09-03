@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.controlsfx.control.*?>
+
+<AnchorPane prefHeight="900.0" prefWidth="990.0" style="-fx-background-color: #595959;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.marcosautto.parthenopeddit.CoursePageController">
+   <children>
+      <Label fx:id="courseNameTitleLabel" layoutX="29.0" layoutY="44.0" text="Course name" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Label layoutX="15.0" layoutY="93.0" prefWidth="960.0" style="-fx-background-color: #006FFF;" text="Riepilogo corso:" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="93.0">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets bottom="10.0" left="10.0" top="5.0" />
+         </padding></Label>
+      <HBox alignment="CENTER_LEFT" layoutX="15.0" layoutY="117.0" prefHeight="100.0" spacing="10.0" style="-fx-background-color: #006FFF;" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="125.0">
+         <children>
+            <VBox prefHeight="200.0" spacing="5.0">
+               <children>
+                  <Label text="Indice di gradimento:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rating fx:id="average_liking_score_ratingbar" partialRating="true" />
+               </children>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <Label fx:id="average_liking_score_label" text="0.0/5" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <VBox prefHeight="200.0" spacing="5.0">
+               <children>
+                  <Label text="Indice di difficoltà:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Rating fx:id="average_difficulty_score_ratingbar" partialRating="true" />
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+            <Label fx:id="average_difficulty_score_label" text="0.0/5" textFill="WHITE">
+               <HBox.margin>
+                  <Insets bottom="10.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0">
+               <children>
+                  <Label text="Recensioni:" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="reviews_count_label" text="0" textFill="WHITE">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="30.0" />
+               </padding>
+            </VBox>
+            <VBox alignment="TOP_CENTER" prefHeight="200.0" spacing="10.0">
+               <children>
+                  <JFXButton fx:id="followButton" onAction="#handleFollow" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Segui corso" textFill="#006fff" />
+                  <JFXButton fx:id="writeReviewButton" onAction="#writeReview" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Scrivi una recensione" textFill="#006fff" />
+                  <JFXButton fx:id="writePostButton" onAction="#writePost" prefWidth="130.0" style="-fx-background-color: #FFFFFF;" text="Scrivi un post" textFill="#006fff" />
+               </children>
+               <HBox.margin>
+                  <Insets left="180.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" top="10.0" />
+         </padding>
+      </HBox>
+      <JFXTabPane fx:id="tabPane" layoutX="15.0" layoutY="240.0" stylesheets="@css/tab.css" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="240.0">
+         <tabs>
+            <Tab fx:id="reviewTab" text="Recensioni">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab fx:id="postTab" text="Post">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+         </tabs>
+      </JFXTabPane>
+   </children>
+</AnchorPane>

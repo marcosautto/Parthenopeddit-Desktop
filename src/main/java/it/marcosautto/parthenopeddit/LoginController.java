@@ -42,20 +42,22 @@ public class LoginController implements Initializable {
     @FXML
     private void loginClicked() throws IOException, InterruptedException {
 
+        if(usernameTextField.getText().isEmpty() || passwordTextField.getText().isEmpty()) {
+            loginResultLabel.setText("Devi inserire username e password.");
+            loginResultLabel.setVisible(true);
+        } else {
+            boolean user_logged = false;
+            user_logged = validateLogin();
+            if(rememberCheckbox.isSelected())
+                savePreference();
+            else{
+                usernameTextField.clear();
+                passwordTextField.clear();
+            }
 
-
-
-        boolean user_logged = false;
-        user_logged = validateLogin();
-        if(rememberCheckbox.isSelected())
-            savePreference();
-        else{
-            usernameTextField.clear();
-            passwordTextField.clear();
-        }
-
-        if(user_logged){
-            Main.getInstance().userLogged(usernameTextField.getText());
+            if(user_logged){
+                Main.getInstance().userLogged(usernameTextField.getText());
+            }
         }
     }
 
