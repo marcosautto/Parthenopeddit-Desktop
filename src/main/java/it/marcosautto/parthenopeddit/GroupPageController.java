@@ -166,7 +166,6 @@ public class GroupPageController implements Initializable {
         adminLabel.setText(Integer.toString(groupAdmins.size()));
         memberLabel.setText(Integer.toString(groupMembers.size()));
 
-
        if(groupAdmins.stream().anyMatch(x -> x.getUserId().equals(Auth.getInstance().getUsername()))){
             inviteButton.setDisable(false);
             isAdmin = true;
@@ -193,16 +192,12 @@ public class GroupPageController implements Initializable {
         if(!result.isPresent()) {
             alert.close();
         }
-        // alert is exited, no button has been pressed.
         else if(result.get() == ButtonType.OK){
-            //TODO: API remove user from group
             GroupsRequests.leaveGroup(groupId);
             DashboardController.getInstance().groupFXML(null);
         }
-        //oke button is pressed
         else if(result.get() == ButtonType.CANCEL)
             alert.close();
-        // cancel button is pressed
     }
 
     public void writePost() throws IOException {

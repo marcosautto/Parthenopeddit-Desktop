@@ -81,7 +81,7 @@ public class LoginController implements Initializable {
     private void savePreference(){
         prefs.putBoolean("remember", rememberCheckbox.isSelected());
         prefs.put("username", usernameTextField.getText());
-        prefs.put("password", passwordTextField.getText());        //TODO: encrypt password
+        prefs.put("password", passwordTextField.getText());
 
     }
 
@@ -95,9 +95,7 @@ public class LoginController implements Initializable {
     }
 
     public void showPrivacyDisclaimer() throws IOException {
-
         Main.getInstance().showPrivacyDisclaimer();
-
     }
 
 }
