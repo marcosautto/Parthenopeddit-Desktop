@@ -29,6 +29,11 @@ public class PostsRequests {
         //this.auth = auth;
     }
 
+    /**
+     *  - searchPost -
+     *  Ricerca la lista dei post il cui titolo
+     *  contiene la stringa inviata
+     */
     public ObservableList<Post> searchPost(String searched_post_title) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -40,7 +45,6 @@ public class PostsRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        System.out.println(response.body());
 
         Type listType = new TypeToken<List<Post>>(){}.getType();
         List<Post> list = new ArrayList<Post>();
@@ -50,6 +54,10 @@ public class PostsRequests {
         return posts;
     }
 
+    /**
+     *  - publishNewPost -
+     *  Pubblica un post nella board di cui viene passato l'ID
+     */
     public int publishNewPost(String title, String body, int board_id) throws IOException, InterruptedException {
 
         Map<Object, Object> data = new HashMap<>();
@@ -66,11 +74,13 @@ public class PostsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-
         return response.statusCode();
     }
 
-
+    /**
+     *  - getPost -
+     *  Ottieni un post dato il suo ID
+     */
     public Post getPost(int postId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -82,13 +92,16 @@ public class PostsRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        System.out.println(response.body());
 
         Post post = new Gson().fromJson(response.body(), Post.class);
 
         return post;
     }
 
+    /**
+     *  - getPostWithComments -
+     *  Ottieni un post con i suoi commenti dato il suo ID
+     */
     public Post getPostWithComments(int postId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -100,24 +113,16 @@ public class PostsRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        System.out.println(response.body());
-        System.out.println("Lol0");
 
         Post post = new Gson().fromJson(response.body(), Post.class);
-        System.out.println("Lol1");
-
-        //Devo convertire la lista di commenti
-        //Type listType = new TypeToken<List<Comment>>(){}.getType();
-        //List<Comment> list = new ArrayList<Comment>();
-        //list = gson.fromJson(jsonOutput, listType);
-        //ObservableList<Comment> comments = FXCollections.observableList(list);
-        System.out.println("Lol2");
-        //post.setComments(comments);
-
 
         return post;
     }
 
+    /**
+     *  - likePost -
+     *  Invia un upvote al post dato il suo ID
+     */
     public int likePost(int post_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
@@ -131,9 +136,12 @@ public class PostsRequests {
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         return response.statusCode();
-
     }
 
+    /**
+     *  - dislikePost -
+     *  Invia un downvote al post dato il suo ID
+     */
     public int dislikePost(int post_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
@@ -148,7 +156,6 @@ public class PostsRequests {
 
 
         return response.statusCode();
-
     }
 
 

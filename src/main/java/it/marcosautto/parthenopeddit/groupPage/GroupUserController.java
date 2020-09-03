@@ -29,12 +29,10 @@ public class GroupUserController implements Initializable {
 
     public GroupsRequests GroupsRequests;
 
-    private GroupPageController GroupPageController;
-
     private AlertFactory alertFactory;
 
     private static GroupUserController instance;
-    // static method to get instance of view
+
     public static GroupUserController getInstance() {
         return instance;
     }
@@ -46,40 +44,16 @@ public class GroupUserController implements Initializable {
         GroupsRequests = new GroupsRequests();
         alertFactory = new AlertFactory();
 
-        //add some Students
-        userObservableList.addAll(
-        );
-
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //postListView.setItems(postObservableList);
-        //postListView.setCellFactory(postListView -> new PostListViewController());
 
         userListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<GroupMember>() {
 
             @Override
             public void changed(ObservableValue<? extends GroupMember> observable, GroupMember oldValue, GroupMember newValue) {
-                // Your action here
-                System.out.println("Selected item: " + newValue.getUserId());
-
-                //DashboardController dashboardController = new DashboardController();
                 if(GroupPageController.getInstance().checkIsAdmin()){           //If user is admin
-                    //AlertType adminAlert = new AlertType();
-//
-                    //Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                    //alert.setTitle("Utente selezionato");
-                    //alert.setHeaderText("Cosa vuoi fare con l'utente " + newValue.getUserId() + "?");
-                    //alert.setContentText("Seleziona un'opzione.");
-//
-                    //ButtonType buttonAdmin= new ButtonType("Rendi amministratore");
-                    //ButtonType buttonKick = new ButtonType("Caccia dal gruppo");
-                    //ButtonType buttonProfile = new ButtonType("Visualizza profilo");
-                    //ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-//
-                    //alert.getButtonTypes().setAll(buttonProfile, buttonKick, buttonAdmin, buttonTypeCancel);
 
                     //FACTORY PATTERN
                     AlertType alert = alertFactory.getAlert("MEMBER_ALERT", newValue.getUserId());

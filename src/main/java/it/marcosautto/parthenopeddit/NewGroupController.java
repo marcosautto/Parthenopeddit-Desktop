@@ -29,9 +29,10 @@ public class NewGroupController {
 
     private int boardId;
 
-    private it.marcosautto.parthenopeddit.api.PostsRequests PostsRequests = new PostsRequests();
+    private PostsRequests PostsRequests = new PostsRequests();
 
     private static NewGroupController instance;
+
     public NewGroupController() {
         instance = this;
         GroupsRequests = new GroupsRequests();
@@ -40,7 +41,6 @@ public class NewGroupController {
     public static NewGroupController getInstance() {
         return instance;
     }
-
 
     public void handleCreateGroup() throws IOException, InterruptedException, ParseException {
 

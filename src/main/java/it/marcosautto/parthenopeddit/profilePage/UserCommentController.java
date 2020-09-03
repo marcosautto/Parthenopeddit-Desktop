@@ -25,22 +25,15 @@ public class UserCommentController implements Initializable {
 
     private ObservableList<Comment> commentObservableList;
 
-    private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
-
-
     public UserCommentController() {
 
         instance = this;
         commentObservableList = FXCollections.observableArrayList();
 
-        commentObservableList.addAll();
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //commentListView.setItems(commentObservableList);
-        //commentListView.setCellFactory(commentListView -> new CommentListViewController());
 
     }
 

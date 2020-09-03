@@ -15,21 +15,21 @@ import java.io.IOException;
 public class Main extends Application {
 
     Stage loginStage;
-    //Stage privacyStage;
+
     Stage dashboardStage;
 
     private static Main instance;
+
     public Main() {
         instance = this;
     }
-    // static method to get instance of view
+
     public static Main getInstance() {
         return instance;
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Mockdatabase mockdatabase = new Mockdatabase();
         ApiClient ApiClient = new ApiClient();
 
         Parent root = FXMLLoader.load(getClass().getResource("/LoginLayout.fxml"));
@@ -49,7 +49,6 @@ public class Main extends Application {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/Dashboard.fxml"));
         Parent root = loader.load();
-        //Parent root = FXMLLoader.load(getClass().getResource("Dashboard.fxml"));
 
         Stage dashboardStage = new Stage();
         dashboardStage.getIcons().add(new Image(getClass().getResourceAsStream("/img/Parthenopeddit_logo.png")));
@@ -76,9 +75,7 @@ public class Main extends Application {
         privacyStage.setScene(new Scene(root, 350, 300));
         privacyStage.show();
 
-
     }
-
 
         public static void main(String[] args) {
         launch(args);

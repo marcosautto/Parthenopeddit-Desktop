@@ -25,21 +25,9 @@ import java.util.stream.Collectors;
 public class PostPageController implements Initializable {
 
     private static PostPageController instance;
-    public PostPageController() { instance = this; }
-    // static method to get instance of view
-    public static PostPageController getInstance() {
-        return instance;
-    }
 
     private DashboardController DashboardController;
 
-    private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
-
-    public void setDashboardController(DashboardController dashboardController) {
-        this.DashboardController = dashboardController;
-
-        // Add observable list data to the table
-    }
     @FXML
     private Label titleLabel;
 
@@ -95,9 +83,17 @@ public class PostPageController implements Initializable {
 
     private DateParser DateParser;
 
-
-
     private Post post;
+
+    public PostPageController() { instance = this; }
+
+    public static PostPageController getInstance() {
+        return instance;
+    }
+
+    public void setDashboardController(DashboardController dashboardController) {
+        this.DashboardController = dashboardController;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources)
@@ -134,7 +130,7 @@ public class PostPageController implements Initializable {
         commentLabel.setText(Integer.toString(post.getCommentsNum()));
 
         boardLabel.setOnMouseClicked(e ->{
-            if(post.getPostedToBoardId() == 1) {
+            if(post.getPostedToBoardId() == 0) {
                 try {
                     DashboardController.getInstance().homeFXML(null);
                 } catch (IOException ex) {
@@ -199,14 +195,12 @@ public class PostPageController implements Initializable {
     public void sendComment() throws IOException, InterruptedException {
         if(!commentTextArea.getText().isEmpty()){
             CommentsRequests.publishNewComment(commentTextArea.getText(), post.getId());
-            //Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
             commentTextArea.clear();
 
             post = PostsRequests.getPostWithComments(post.getId());
             ObservableList<Comment> comments = FXCollections.observableList(post.getComments());
             commentListView.setItems(comments);
             commentListView.setCellFactory(commentListView -> new CommentListViewController());
-
         }
     }
 
@@ -214,7 +208,6 @@ public class PostPageController implements Initializable {
         post = PostsRequests.getPost(post.getId());
         upvoteLabel.setText(Integer.toString(post.getUpvote()));
         downvoteLabel.setText(Integer.toString(post.getDownvote()));
-
     }
 
 

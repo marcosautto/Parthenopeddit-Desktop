@@ -53,7 +53,6 @@ public class DashboardController {
     }
 
     private Main Main;
-    private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
     private CoursePageController CoursePageController;
     private GroupPageController GroupPageController;
     private PostPageController PostPageController;
@@ -66,57 +65,44 @@ public class DashboardController {
     public void setMain(Main Main) {
         this.Main = Main;
 
-        // Add observable list data to the table
     }
 
     public static DashboardController getInstance() {
         return instance;
     }
 
+    //STATE PATTERN
+
     public void homeFXML(ActionEvent event) throws IOException {
-        //loadFxml(event, "/DashboardMenu/HomeLayout.fxml");
         dashboard_state.home(secondPane, homeButton);
     }
 
     public void searchFXML(ActionEvent event) throws IOException {
-        //loadFxml(event, "/DashboardMenu/SearchLayout.fxml");
         dashboard_state.search(secondPane, searchButton);
     }
 
     public void profileFXML(ActionEvent event) throws IOException, InterruptedException {
-        //loadFxml(event, "fxml/DashboardMenu/ProfileLayout.fxml");
         profileSelected(Auth.getInstance().getUsername());
-        //dashboard_state.profile(secondPane, profileButton);
     }
 
     public void courseFXML(ActionEvent event) throws IOException {
-        //loadFxml(event, "/DashboardMenu/CourseLayout.fxml");
         dashboard_state.course(secondPane, courseButton);
     }
 
     public void groupFXML(ActionEvent event) throws IOException {
-        //loadFxml(event, "/DashboardMenu/GroupLayout.fxml");
         dashboard_state.group(secondPane, groupButton);
     }
 
     public void groupInviteFXML(ActionEvent event) throws IOException {
-        //loadFxml(event, "/DashboardMenu/GroupInviteLayout.fxml");
         dashboard_state.groupInvite(secondPane, groupInviteButton);
     }
 
     public void infoFXML(ActionEvent event) throws IOException {
-        //loadFxml(event, "/DashboardMenu/InfoLayout.fxml");
         dashboard_state.info(secondPane, infoButton);
     }
 
     public void outDashboardFXML(String ui) throws IOException{
         dashboard_state.outDashboard(secondPane, ui);
-    }
-
-    private void loadFxml (ActionEvent event, String ui) throws IOException {
-        Node node;
-        node = (Node)FXMLLoader.load(getClass().getResource(ui));
-        secondPane.getChildren().setAll(node);
     }
 
     @FXML
@@ -125,7 +111,6 @@ public class DashboardController {
     }
 
     public void transferMessage(String message) {
-        //Display the message
         usernameLabel.setText(message);
     }
 
@@ -151,11 +136,6 @@ public class DashboardController {
 
     public void profileSelected(String userId) throws IOException, InterruptedException {
         dashboard_state.profile(secondPane, profileButton);
-        //loadFxml(null, userId);
-        //Node node;
-        //node = (Node)FXMLLoader.load(getClass().getResource("/DashboardMenu/ProfileLayout.fxml"));
-        //secondPane.getChildren().setAll(node);
-
         ProfileController.getInstance().transferMessage(userId);
     }
 
@@ -176,19 +156,6 @@ public class DashboardController {
     public void inviteUser(int groupId, String groupName) throws IOException, InterruptedException {
         outDashboardFXML("/GroupInviteMemberLayout.fxml");
         GroupInviteMemberController.getInstance().transferMessage(groupId, groupName);
-
-    }
-
-    public void showUserPost(User user) throws IOException {
-        Node node;
-        node = (Node)FXMLLoader.load(getClass().getResource("/UserPostLayout.fxml"));
-        secondPane.getChildren().setAll(node);
-    }
-
-    public void showUserReview(User user) throws IOException {
-        Node node;
-        node = (Node)FXMLLoader.load(getClass().getResource("/UserReviewLayout.fxml"));
-        secondPane.getChildren().setAll(node);
     }
 
 }

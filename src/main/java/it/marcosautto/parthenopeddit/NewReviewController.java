@@ -41,6 +41,9 @@ public class NewReviewController {
     public ReviewsRequests ReviewsRequests;
 
     private static NewReviewController instance;
+
+    public Course course;
+
     public NewReviewController() {
         instance = this;
     }
@@ -49,24 +52,16 @@ public class NewReviewController {
         return instance;
     }
 
-    public Course course;
-
     public void transferMessage(int courseId) throws IOException, InterruptedException {
 
         CoursesRequests = new CoursesRequests();
         ReviewsRequests = new ReviewsRequests();
-
 
         course = CoursesRequests.getCourseByID(courseId);
         courseNameLabel.setText(course.getName());
     }
 
     public void handlePublish() throws IOException, InterruptedException {
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-        Date date = new Date();
-        //Review review = new Review(99, reviewTextArea.getText(), formatter.format(date), Mockdatabase.getInstance().user1.getId(), Mockdatabase.getInstance().user1,  Mockdatabase.getInstance().noComments, 0, 0, course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating(), course);
-        //Mockdatabase.getInstance().courses_table.stream().filter(course -> course.getCourseId() == course.getCourseId()).collect(Collectors.toList()).get(0).getReviews().add(review);
         ReviewsRequests.publishNewReview(reviewTextArea.getText(), course.getCourseId(), (int) average_enjoyment_score_ratingbar.getRating(), (int) average_difficulty_score_ratingbar.getRating());
         DashboardController.getInstance().courseSelected(course.getCourseId());
     }

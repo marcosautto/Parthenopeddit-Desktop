@@ -28,9 +28,8 @@ public class GroupAdminController implements Initializable {
 
     private ObservableList<GroupMember> adminObservableList;
 
-
     private static GroupAdminController instance;
-    // static method to get instance of view
+
     public static GroupAdminController getInstance() {
         return instance;
     }
@@ -39,26 +38,16 @@ public class GroupAdminController implements Initializable {
 
         instance = this;
         adminObservableList = FXCollections.observableArrayList();
-        Mockdatabase mockdatabase = new Mockdatabase();
-
-        //add some Students
-        adminObservableList.addAll(
-        );
-
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //postListView.setItems(postObservableList);
-        //postListView.setCellFactory(postListView -> new PostListViewController());
+
         adminListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<GroupMember>() {
 
             @Override
             public void changed(ObservableValue<? extends GroupMember> observable, GroupMember oldValue, GroupMember newValue) {
-
-                System.out.println("Selected item: " + newValue.getUserId());
-
                 try {
                     DashboardController.getInstance().profileSelected(newValue.getUserId());
                 } catch (IOException | InterruptedException e) {

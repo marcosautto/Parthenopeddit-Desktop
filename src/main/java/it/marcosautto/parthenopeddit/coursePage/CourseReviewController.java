@@ -20,7 +20,7 @@ public class CourseReviewController implements Initializable {
     private ObservableList<Review> reviewObservableList;
 
     private static CourseReviewController instance;
-    // static method to get instance of view
+
     public static CourseReviewController getInstance() {
         return instance;
     }
@@ -30,17 +30,10 @@ public class CourseReviewController implements Initializable {
         instance = this;
         reviewObservableList = FXCollections.observableArrayList();
 
-        //add some Students
-        reviewObservableList.addAll(
-        );
-
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //reviewListView.setItems(reviewObservableList);
-        //reviewListView.setCellFactory(reviewListView -> new ReviewListViewController());
 
     }
 

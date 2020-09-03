@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.Date;
 
 public class NewPostController {
+
         @FXML
         private Label boardNameLabel;
 
@@ -40,7 +41,6 @@ public class NewPostController {
             return instance;
         }
 
-
         public void transferMessage(int boardId, String boardName) {
             this.boardId = boardId;
             System.out.println("npc "+boardId);
@@ -66,6 +66,5 @@ public class NewPostController {
         public void handleCancel() throws IOException{
             DashboardController.getInstance().homeFXML(null);
         }
-
 
 }

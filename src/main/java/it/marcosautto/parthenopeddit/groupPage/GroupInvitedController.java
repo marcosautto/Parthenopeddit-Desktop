@@ -30,7 +30,7 @@ public class GroupInvitedController implements Initializable {
     private GroupsRequests GroupsRequests;
 
     private static GroupInvitedController instance;
-    // static method to get instance of view
+
     public static GroupInvitedController getInstance() {
         return instance;
     }
@@ -44,12 +44,9 @@ public class GroupInvitedController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //postListView.setItems(postObservableList);
-        //postListView.setCellFactory(postListView -> new PostListViewController());
 
         groupInviteListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-            System.out.println("Selected item: " + newValue.getGroup().getName());
             try {
                 if(GroupPageController.getInstance().checkIsAdmin()){               //If user is admin
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -76,8 +73,6 @@ public class GroupInvitedController implements Initializable {
                 } else{
 
                 }
-
-
 
             } catch (IOException | InterruptedException | ParseException e) {
                 e.printStackTrace();

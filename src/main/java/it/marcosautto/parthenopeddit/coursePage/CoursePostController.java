@@ -19,10 +19,8 @@ public class CoursePostController implements Initializable {
 
     private ObservableList<Post> postObservableList;
 
-
-
     private static CoursePostController instance;
-    // static method to get instance of view
+
     public static CoursePostController getInstance() {
         return instance;
     }
@@ -31,18 +29,11 @@ public class CoursePostController implements Initializable {
 
         instance = this;
         postObservableList = FXCollections.observableArrayList();
-        Mockdatabase mockdatabase = new Mockdatabase();
-
-        //postObservableList.addAll(
-        //);
-
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //postListView.setItems(postObservableList);
-        //postListView.setCellFactory(postListView -> new PostListViewController());
 
     }
 

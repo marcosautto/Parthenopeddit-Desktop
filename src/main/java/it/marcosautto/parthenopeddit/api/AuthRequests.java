@@ -14,6 +14,10 @@ public class AuthRequests {
 
     private HttpClient httpClient = ApiClient.getInstance().getHttpClient();
 
+    /**
+     *  - login -
+     *  Effettua l'accesso alla piattaforma dato il token dell'utente
+     */
     public int login(String token) throws IOException, InterruptedException {
 
         HttpRequest request = HttpRequest.newBuilder()
@@ -23,8 +27,7 @@ public class AuthRequests {
                 .build();
 
         HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.statusCode());
-        return response.statusCode();
 
+        return response.statusCode();
     }
 }

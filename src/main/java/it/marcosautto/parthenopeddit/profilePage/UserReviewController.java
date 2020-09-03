@@ -26,22 +26,16 @@ public class UserReviewController implements Initializable {
 
     private ObservableList<Review> reviewObservableList;
 
-    private Mockdatabase Mockdatabase;
-
 
     public UserReviewController()  {
 
         instance = this;
         reviewObservableList = FXCollections.observableArrayList();
         
-        //reviewObservableList.addAll( Mockdatabase.getInstance().user1.getPublishedReviews() );
-        
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //reviewListView.setItems(reviewObservableList);
-        //reviewListView.setCellFactory(reviewListView -> new ReviewListViewController());
 
     }
 

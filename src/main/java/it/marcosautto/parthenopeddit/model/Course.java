@@ -6,8 +6,6 @@ import javafx.collections.ObservableList;
 import java.util.ArrayList;
 
 public class Course extends Board {
-    
-    //private static int courseIdAct = 0;
 
     private double average_liking_score;
     private Integer follower_number;

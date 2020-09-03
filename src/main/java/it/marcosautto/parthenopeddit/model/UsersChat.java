@@ -2,6 +2,14 @@ package it.marcosautto.parthenopeddit.model;
 
 import java.util.ArrayList;
 
+//--------WIP--------
+/*  ATTENZIONE
+ *   La chat non verrà implementata,
+ *   ma il model UsersChat devo introdurlo in quanto
+ *   viene restituito all'interno del model Group dal
+ *   JSON ottenuto dalle API.
+ */
+
 public class UsersChat extends Chat{
     private String of_user_id;
     private String last_opened_on;

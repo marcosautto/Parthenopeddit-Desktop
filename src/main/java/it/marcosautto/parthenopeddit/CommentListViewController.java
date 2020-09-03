@@ -89,8 +89,6 @@ public class CommentListViewController extends ListCell<Comment> {
                 commentBodyTextArea.setText(comment.getBody());
                 upvoteLabel.setText(Integer.toString(comment.getUpvote()));
                 downvoteLabel.setText(Integer.toString(comment.getDownvote()));
-                //commentLabel.setText(Integer.toString(comment.getCommentsNum()));
-
 
                 upvoteButton.setOnMouseClicked(e ->{
                     try {
@@ -115,9 +113,6 @@ public class CommentListViewController extends ListCell<Comment> {
                     }
                 });
 
-
-
-
                 setText(null);
                 setGraphic(anchorPane);
             }
@@ -128,7 +123,6 @@ public class CommentListViewController extends ListCell<Comment> {
         comment = CommentsRequests.getComment(comment.getId());
         upvoteLabel.setText(Integer.toString(comment.getUpvote()));
         downvoteLabel.setText(Integer.toString(comment.getDownvote()));
-
     }
 
 }

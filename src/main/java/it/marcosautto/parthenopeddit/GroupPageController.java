@@ -31,22 +31,8 @@ import static java.util.stream.Collectors.toList;
 public class GroupPageController implements Initializable {
 
     private static GroupPageController instance;
-    public GroupPageController() { instance = this; }
-    // static method to get instance of view
-    public static GroupPageController getInstance() {
-        return instance;
-    }
 
     private DashboardController DashboardController;
-
-    private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
-
-
-    public void setDashboardController(DashboardController dashboardController) {
-        this.DashboardController = dashboardController;
-
-        // Add observable list data to the table
-    }
 
     @FXML
     private TabPane tabPane;
@@ -110,6 +96,16 @@ public class GroupPageController implements Initializable {
     private ObservableList<GroupInvite> groupInvites;
 
     private boolean isAdmin = false;
+
+    public GroupPageController() { instance = this; }
+
+    public static GroupPageController getInstance() {
+        return instance;
+    }
+
+    public void setDashboardController(DashboardController dashboardController) {
+        this.DashboardController = dashboardController;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources)

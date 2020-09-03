@@ -6,9 +6,6 @@ import java.util.ArrayList;
 
 public class Review extends Content {
 
-    //TODO: optimize extends
-
-
     private int reviewed_course_id;
     private int score_liking;
     private int score_difficulty;

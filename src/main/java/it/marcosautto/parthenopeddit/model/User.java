@@ -26,7 +26,7 @@ public class User {
         this.registered_on = registered_on;
         this.published_content = published_content;
         this.published_posts = published_posts;
-        this. published_comments = published_comments;
+        this.published_comments = published_comments;
         this.published_reviews = published_reviews;
         this.followed_courses = followed_courses;
         this.groups = groups;
@@ -34,7 +34,6 @@ public class User {
     }
 
     public String getId(){ return id; }
-
 
     public ObservableList<Content> getPublishedContent(){ return published_content; }
     public ObservableList<Post> getPublishedPosts(){ return published_posts; }
@@ -44,13 +43,5 @@ public class User {
     public ObservableList<Group> getGroups(){ return groups; }
     public ObservableList<GroupInvite> getGroupInvites(){ return group_invites; }
     public String getDisplayName(){ return display_name; }
-
-    //USER
-    public void addGroup(Group group){ groups.add(group);}
-    public void addGroupInvite(GroupInvite groupInvite){ group_invites.add(groupInvite);}
-    public void addPosts(ObservableList<Post> posts){ published_posts.addAll(posts);}
-    public void addReviews(ObservableList<Review> reviews){ published_reviews.addAll(reviews);}
-    public void addComments(ObservableList<Comment> comments){ published_comments.addAll(comments);}
-    public void addComment(Comment comment){ published_comments.add(comment);}
 
 }

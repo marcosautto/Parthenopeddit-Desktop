@@ -48,12 +48,9 @@ public class HomeController implements Initializable {
 
     private int page = 1;
 
-
     public HomeController()  {
 
         postObservableList = FXCollections.observableArrayList();
-
-
 
     }
 
@@ -72,7 +69,6 @@ public class HomeController implements Initializable {
         }
 
         homeListView.setCellFactory(postListView -> new PostListViewController());
-
     }
 
     public void publishPost() throws IOException {

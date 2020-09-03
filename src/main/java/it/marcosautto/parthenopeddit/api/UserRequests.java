@@ -24,6 +24,10 @@ public class UserRequests {
         //this.Auth = Auth;
     }
 
+    /**
+     *  - searchUser -
+     *  Ottieni la lista di utenti il cui ID è simile alla stringa di ricerca
+     */
     public ObservableList<User> searchUser(String searched_user_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -41,6 +45,10 @@ public class UserRequests {
         return users;
     }
 
+    /**
+     *  - getUserByID -
+     *  Ottieni l'utente dato il suo ID
+     */
     public User getUserByID(String fetched_user_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -53,7 +61,11 @@ public class UserRequests {
 
         return user;
     }
-    
+
+    /**
+     *  - setDisplayName -
+     *  Imposta l'username visualizzato data la stringa del nuovo username
+     */
     public int setDisplayName(String name) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
         data.put("display_name", name);
@@ -69,6 +81,11 @@ public class UserRequests {
         return response.statusCode();
     }
 
+    /**
+     *  - getUserFeed -
+     *  Ottieni la lista dei post del feed dell'utente dato il numero di pagina
+     *  ed il numero di post per pagina
+     */
     public ObservableList<Post> getUserFeed(int page, int perPage, String transactionStartDataTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -80,7 +97,6 @@ public class UserRequests {
         if(response.statusCode() != 470) {
             Gson gson = new Gson();
             String jsonOutput = response.body();
-            //System.out.println(response.body());
             Type listType = new TypeToken<List<Post>>() {
             }.getType();
             List<Post> list = new ArrayList<Post>();
@@ -94,6 +110,11 @@ public class UserRequests {
 
     }
 
+    /**
+     *  - getUserPublishedComments -
+     *  Ottieni la lista dei commenti pubblicati dall'utente dato il suo ID,
+     *  il numero di pagina ed il numero di commenti per pagina
+     */
     public ObservableList<Comment> getUserPublishedComments(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -105,7 +126,6 @@ public class UserRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        //System.out.println(response.body());
         Type listType = new TypeToken<List<Comment>>(){}.getType();
         List<Comment> list = new ArrayList<Comment>();
         list = gson.fromJson(jsonOutput, listType);
@@ -114,6 +134,11 @@ public class UserRequests {
         return comments;
     }
 
+    /**
+     *  - getUserPublishedPosts -
+     *  Ottieni la lista dei post pubblicati dall'utente dato il suo ID,
+     *  il numero di pagina ed il numero di post per pagina
+     */
     public ObservableList<Post> getUserPublishedPosts(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -125,7 +150,6 @@ public class UserRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        //System.out.println(response.body());
         Type listType = new TypeToken<List<Post>>(){}.getType();
         List<Post> list = new ArrayList<Post>();
         list = gson.fromJson(jsonOutput, listType);
@@ -134,6 +158,11 @@ public class UserRequests {
         return posts;
     }
 
+    /**
+     *  - getUserPublishedReviews -
+     *  Ottieni la lista delle recensioni pubblicate dall'utente dato il suo ID,
+     *  il numero di pagina ed il numero di recensioni per pagina
+     */
     public ObservableList<Review> getUserPublishedReviews(String user_id, int page, int perPage, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -145,7 +174,6 @@ public class UserRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        //System.out.println(response.body());
         Type listType = new TypeToken<List<Review>>(){}.getType();
         List<Review> list = new ArrayList<Review>();
         list = gson.fromJson(jsonOutput, listType);

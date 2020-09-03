@@ -58,26 +58,22 @@ public class ProfileController implements Initializable {
 
     private UserRequests UserRequests;
 
-    private Mockdatabase Mockdatabase;
-
     private DashboardController DashboardController;
 
     private User user;
 
     private static ProfileController instance;
-    // static method to get instance of view
+
+    public ProfileController()  {
+        instance = this;
+    }
+
     public static ProfileController getInstance() {
         return instance;
     }
 
     public void setDashboardController(DashboardController dashboardController) {
         this.DashboardController = dashboardController;
-
-        // Add observable list data to the table
-    }
-
-    public ProfileController()  {
-        instance = this;
     }
 
     @Override
@@ -148,8 +144,6 @@ public class ProfileController implements Initializable {
     }
 
     public void changeUsername() throws IOException, InterruptedException {
-        if(user == null)
-            System.out.println("null");
         TextInputDialog dialog = new TextInputDialog(user.getDisplayName());
         dialog.setTitle("Cambia username");
         dialog.setHeaderText("Cambia l'username visualizzato");
@@ -173,8 +167,5 @@ public class ProfileController implements Initializable {
         alert.setAlertType(Alert.AlertType.WARNING);
         alert.setContentText("Work in progress");
         alert.show();
-
-        if(user == null)
-            System.out.println("null");
     }
 }

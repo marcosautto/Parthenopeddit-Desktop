@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public abstract class Content {
 
-    //TODO: optimize extends
-
     private int id;
     private String body;
     private String timestamp;

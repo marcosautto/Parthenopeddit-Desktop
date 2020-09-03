@@ -174,9 +174,6 @@ public class PostListViewController extends ListCell<Post> {
                     }
                 });
 
-
-
-
                 setText(null);
                 setGraphic(anchorPane);
             }
@@ -187,7 +184,6 @@ public class PostListViewController extends ListCell<Post> {
             post = PostRequests.getPost(post.getId());
             upvoteLabel.setText(Integer.toString(post.getUpvote()));
             downvoteLabel.setText(Integer.toString(post.getDownvote()));
-
         }
 
 }

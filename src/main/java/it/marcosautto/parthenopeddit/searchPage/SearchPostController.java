@@ -20,10 +20,8 @@ public class SearchPostController implements Initializable {
 
     private ObservableList<Post> postObservableList;
 
-
-
     private static SearchPostController instance;
-    // static method to get instance of view
+
     public static SearchPostController getInstance() {
         return instance;
     }
@@ -32,18 +30,11 @@ public class SearchPostController implements Initializable {
 
         instance = this;
         postObservableList = FXCollections.observableArrayList();
-        Mockdatabase mockdatabase = new Mockdatabase();
-
-        //postObservableList.addAll(
-        //);
-
 
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //postListView.setItems(postObservableList);
-        //postListView.setCellFactory(postListView -> new PostListViewController());
 
     }
 

@@ -54,7 +54,6 @@ public class GroupListViewController extends ListCell<GroupMember> {
                                 e.printStackTrace();
                         }
 
-
                         setText(null);
                         setGraphic(anchorPane);
                 }

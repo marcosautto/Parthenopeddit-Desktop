@@ -27,6 +27,10 @@ public class GroupsRequests {
     private ApiClient ApiClient;
     private ApiRoute ApiRoute;
 
+    /**
+     *  - getUserGroups -
+     *  Ottieni la lista dei gruppi a cui è iscritto l'utente
+     */
     public ObservableList<GroupMember> getUserGroups() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -38,9 +42,6 @@ public class GroupsRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        System.out.println(response.body());
-
-        //List<Group> pdvs = gson.fromJson(reader, new TypeToken<List<PdvResult>>() {}.getType());
 
         Type listType = new TypeToken<ArrayList<GroupMember>>(){}.getType();
         ArrayList<GroupMember> list = new ArrayList<GroupMember>();
@@ -50,13 +51,19 @@ public class GroupsRequests {
         return groups;
     }
 
+
+    /**
+     *  - createGroup -
+     *  Crea un nuovo gruppo dato il suo nome e la lista degli ID degli
+     *  utenti invitati
+     */
     public Group createGroup(String group_name, List<String> invitedUserIds) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
         Gson Gson = new Gson();
 
         data.put("group_name", group_name);
-        data.put("invited_members", Gson.toJson(invitedUserIds));       //prob crash
+        data.put("invited_members", Gson.toJson(invitedUserIds));
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
@@ -71,6 +78,10 @@ public class GroupsRequests {
         return group;
     }
 
+    /**
+     *  - getUserInvitesToGroup -
+     *  Ottieni la lista degli inviti ai gruppi dell'utente
+     */
     public ObservableList<GroupInvite> getUserInvitesToGroup() throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -82,7 +93,6 @@ public class GroupsRequests {
 
         Gson gson = new Gson();
         String jsonOutput = response.body();
-        System.out.println(response.body());
 
         Type listType = new TypeToken<List<GroupInvite>>(){}.getType();
         List<GroupInvite> list = new ArrayList<GroupInvite>();
@@ -92,6 +102,10 @@ public class GroupsRequests {
         return groupInvites;
     }
 
+    /**
+     *  - getGroup -
+     *  Ottieni il gruppo dato il suo ID
+     */
     public Group getGroup(int group_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -101,17 +115,21 @@ public class GroupsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        System.out.println(response.body());
         Group group = new Gson().fromJson(response.body(), Group.class);
         return group;
     }
 
+    /**
+     *  - inviteUsersToGroup -
+     *  Invita una lista di utenti al gruppo dato il suo ID
+     *  e la lista degli ID degli utenti invitati
+     */
     public ObservableList<GroupInvite> inviteUsersToGroup(int group_id, List<String> invitedUsersIds) throws IOException, InterruptedException{
         Map<Object, Object> data = new HashMap<>();
 
         Gson Gson = new Gson();
 
-        data.put("users_list", Gson.toJson(invitedUsersIds));       //prob crash
+        data.put("users_list", Gson.toJson(invitedUsersIds));
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
@@ -130,8 +148,12 @@ public class GroupsRequests {
         return groupInvites;
     }
 
+    /**
+     *  - undoInvite -
+     *  Annulla l'invito dato il suo ID e l'ID dell'utente invitato
+     */
     public int undoInvite(int group_id, String user_id) throws IOException, InterruptedException {
-        Map<Object, Object> data = new HashMap<>();      //prob crash
+        Map<Object, Object> data = new HashMap<>();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
@@ -145,6 +167,10 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
+    /**
+     *  - getGroupInvites -
+     *  Ottieni la lista degli inivti di un gruppo dato il suo ID
+     */
     public ObservableList<GroupInvite> getGroupInvites(int group_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -163,6 +189,11 @@ public class GroupsRequests {
         return groupInvites;
     }
 
+    /**
+     *  - searchInvitableUser -
+     *  Ottieni la lista degli utenti che ancora non sono stati invitati
+     *  al gruppo dell'ID inviato e il cui ID utente è simile alla stringa inviata
+     */
     public ObservableList<User> searchInvitableUser(int group_id, String searched_user_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -181,8 +212,13 @@ public class GroupsRequests {
         return invitableUsers;
     }
 
+    /**
+     *  - answerGroupInvite -
+     *  Inoltra la risposta ad un invito dato l'ID del gruppo
+     *  dell'invito ed un booleano, true accetta, false rifiuta
+     */
     public int answerGroupInvite(int group_id, boolean accept) throws IOException, InterruptedException {
-        Map<Object, Object> data = new HashMap<>();      //prob crash
+        Map<Object, Object> data = new HashMap<>();
         Gson Gson = new Gson();
         data.put("answer", Gson.toJson(accept));
 
@@ -197,8 +233,12 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
+    /**
+     *  - leaveGroup -
+     *  Lascia il gruppo dato il suo ID
+     */
     public int leaveGroup(int group_id) throws IOException, InterruptedException {
-        Map<Object, Object> data = new HashMap<>();      //prob crash
+        Map<Object, Object> data = new HashMap<>();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
@@ -211,6 +251,10 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
+    /**
+     *  - getGroupMembers -
+     *  Ottieni la lista dei membri di un gruppo dato il suo ID
+     */
     public ObservableList<GroupMember> getGroupMembers(int group_id) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -229,8 +273,12 @@ public class GroupsRequests {
         return groupMembers;
     }
 
+    /**
+     *  - removeFromGroup -
+     *  Rimuovi l'utente dal gruppo dato l'ID del gruppo e l'ID dell'utente
+     */
     public int removeFromGroup(int group_id, String userId) throws IOException, InterruptedException {
-        Map<Object, Object> data = new HashMap<>();      //prob crash
+        Map<Object, Object> data = new HashMap<>();
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
@@ -243,8 +291,13 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
+    /**
+     *  - makeMembersOwners -
+     *  Rendi amministratori una lista di utenti di un gruppo dato
+     *  l'ID del gruppo e la lista di ID degli utenti
+     */
     public int makeMembersOwners(int group_id, List<String> newOwners) throws IOException, InterruptedException {
-        Map<Object, Object> data = new HashMap<>();      //prob crash
+        Map<Object, Object> data = new HashMap<>();
         Gson Gson = new Gson();
         data.put("users_list", Gson.toJson(newOwners));
 
@@ -259,6 +312,11 @@ public class GroupsRequests {
         return response.statusCode();
     }
 
+    /**
+     *  - getGroupPosts -
+     *  Ottieni i post di un gruppo dato il suo ID, il numero di post per pagina ed il numero
+     *  di pagina
+     */
     public ObservableList<Post> getGroupPosts(int group_id, int per_page, int page, String transactionStartDateTime) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()

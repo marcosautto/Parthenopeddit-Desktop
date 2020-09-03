@@ -46,17 +46,15 @@ public class GroupInviteMemberController implements Initializable {
     private String groupName;
 
     private static GroupInviteMemberController instance;
+
     public GroupInviteMemberController() {
         instance = this;
         userObservableList = FXCollections.observableArrayList();
-
     }
 
     public static GroupInviteMemberController getInstance() {
         return instance;
     }
-
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,7 +69,6 @@ public class GroupInviteMemberController implements Initializable {
 
     public void searchUser() throws IOException, InterruptedException {
         invitable_users = GroupsRequests.searchInvitableUser(groupId, queryTextField.getText());
-
 
         if(invitable_users.size() > 0)
             userObservableList.addAll(
@@ -88,11 +85,6 @@ public class GroupInviteMemberController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                // Your action here
-                System.out.println("Selected item: " + newValue.getId());
-
-                //DashboardController dashboardController = new DashboardController();
-
                 try {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Invita utente");
@@ -103,16 +95,13 @@ public class GroupInviteMemberController implements Initializable {
                     if(!result.isPresent()) {
                         alert.close();
                     }
-                    // alert is exited, no button has been pressed.
                     else if(result.get() == ButtonType.OK){
                         List<String> user_id = Arrays.asList(newValue.getId());
                         GroupsRequests.inviteUsersToGroup(groupId, user_id);
                         DashboardController.getInstance().groupSelected(groupId);
                     }
-                    //oke button is pressed
                     else if(result.get() == ButtonType.CANCEL)
                         alert.close();
-                    // cancel button is pressed
                 } catch (IOException | InterruptedException | ParseException e) {
                     e.printStackTrace();
                 }

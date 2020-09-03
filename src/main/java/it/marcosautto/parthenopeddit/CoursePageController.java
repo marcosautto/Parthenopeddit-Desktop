@@ -26,22 +26,19 @@ import java.util.stream.Collectors;
 public class CoursePageController implements Initializable {
 
     private static CoursePageController instance;
+
     public CoursePageController() { instance = this; }
-    // static method to get instance of view
+
     public static CoursePageController getInstance() {
         return instance;
     }
 
     private DashboardController DashboardController;
 
-    private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
-
     private CoursesRequests CoursesRequests;
 
     public void setDashboardController(DashboardController dashboardController) {
         this.DashboardController = dashboardController;
-
-        // Add observable list data to the table
     }
 
     @FXML
@@ -150,7 +147,6 @@ public class CoursePageController implements Initializable {
             writePostButton.setDisable(true);
             followButton.setText("Segui corso");
         }
-
 
         CourseReviewController.getInstance().sendReviews(reviews);
         CoursePostController.getInstance().sendPosts(posts);

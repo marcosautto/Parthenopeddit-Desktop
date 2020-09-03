@@ -35,8 +35,6 @@ public class LoginController implements Initializable {
 
     public void setMain(Main Main) {
         this.Main = Main;
-
-        // Add observable list data to the table
     }
 
     @FXML
@@ -62,7 +60,6 @@ public class LoginController implements Initializable {
     }
 
     private boolean validateLogin() throws IOException, InterruptedException {
-        //TODO: Login with API
         Auth auth = new Auth(usernameTextField.getText(), passwordTextField.getText());
 
         AuthRequests AuthRequests = new AuthRequests();
@@ -95,9 +92,6 @@ public class LoginController implements Initializable {
             usernameTextField.setText(prefs.get("username", ""));
             passwordTextField.setText(prefs.get("password", ""));
         }
-
-        // Initialization code can go here.
-        // The parameters url and resources can be omitted if they are not needed
     }
 
     public void showPrivacyDisclaimer() throws IOException {
@@ -106,8 +100,4 @@ public class LoginController implements Initializable {
 
     }
 
-    /*@Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-    }*/
 }

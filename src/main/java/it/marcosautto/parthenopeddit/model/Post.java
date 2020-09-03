@@ -6,8 +6,6 @@ import java.util.ArrayList;
 
 public class Post extends Content {
 
-    //TODO: optimize extends
-
         private String title;
         private int posted_to_board_id;
         private Board posted_to_board;

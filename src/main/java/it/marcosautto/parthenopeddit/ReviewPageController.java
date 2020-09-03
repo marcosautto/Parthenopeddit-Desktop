@@ -24,25 +24,13 @@ import java.util.stream.Collectors;
 
 public class ReviewPageController implements Initializable {
 
-    private static it.marcosautto.parthenopeddit.ReviewPageController instance;
-
-    public ReviewPageController() { instance = this; }
-
-
-    public static it.marcosautto.parthenopeddit.ReviewPageController getInstance() { return instance; }
+    private static ReviewPageController instance;
 
     private DashboardController DashboardController;
 
     private ReviewsRequests ReviewsRequests;
 
     private CommentsRequests CommentsRequests;
-
-
-    public void setDashboardController(DashboardController dashboardController) {
-            this.DashboardController = dashboardController;
-
-            // Add observable list data to the table
-        }
 
         @FXML
         private Label usernameLabel;
@@ -99,6 +87,15 @@ public class ReviewPageController implements Initializable {
 
         private Review review;
 
+        public ReviewPageController() { instance = this; }
+
+        public static ReviewPageController getInstance() { return instance; }
+
+        public void setDashboardController(DashboardController dashboardController) {
+            this.DashboardController = dashboardController;
+
+        }
+
         @Override
         public void initialize(URL location, ResourceBundle resources)
         {
@@ -107,7 +104,6 @@ public class ReviewPageController implements Initializable {
         }
 
         public void transferMessage(int review_id, String courseName) throws IOException, InterruptedException {
-            System.out.println(review_id);
 
             //-----POST-----
             review = ReviewsRequests.getReviewWithComments(review_id);
@@ -159,7 +155,6 @@ public class ReviewPageController implements Initializable {
                 commentObservableList.addAll(
                         review.getComments()
                 );
-                System.out.println(review.getComments().size());
                 commentListView.setItems(commentObservableList);
                 commentListView.setCellFactory(reviewListView -> new CommentListViewController());
             } else
@@ -170,7 +165,6 @@ public class ReviewPageController implements Initializable {
         public void sendComment() throws IOException, InterruptedException {
             if(!commentTextArea.getText().isEmpty()){
                 CommentsRequests.publishNewComment(commentTextArea.getText(), review.getId());
-                //Mockdatabase.getInstance().posts_table.stream().filter(post -> post.getId() == this.post.getId()).collect(Collectors.toList()).get(0).addComment(comment);
                 commentTextArea.clear();
 
                 review = ReviewsRequests.getReviewWithComments(review.getId());
@@ -184,7 +178,6 @@ public class ReviewPageController implements Initializable {
         review = ReviewsRequests.getReview(review.getId());
         upvoteLabel.setText(Integer.toString(review.getUpvote()));
         downvoteLabel.setText(Integer.toString(review.getDownvote()));
-
     }
 
 

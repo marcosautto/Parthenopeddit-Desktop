@@ -29,12 +29,8 @@ public class CourseController implements Initializable {
 
     private CoursesRequests CoursesRequests;
 
-    private Mockdatabase mockdatabase;
-
     public void setDashboardController(DashboardController dashboardController) {
         this.dashboardController = dashboardController;
-
-        // Add observable list data to the table
     }
 
     public CourseController(){
@@ -74,11 +70,6 @@ public class CourseController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends Course> observable, Course oldValue, Course newValue) {
-                // Your action here
-                System.out.println("Selected item: " + newValue.getName());
-
-                //DashboardController dashboardController = new DashboardController();
-
                 try {
                     dashboardController.getInstance().courseSelected(newValue.getCourseId());
                 } catch (IOException | InterruptedException e) {

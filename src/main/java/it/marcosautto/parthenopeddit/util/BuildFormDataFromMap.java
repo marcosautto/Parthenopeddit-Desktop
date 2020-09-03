@@ -5,6 +5,9 @@ import java.net.http.HttpRequest;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+/**
+ * Costruisce la stringa JSON da inviare tramite API
+ */
 public class BuildFormDataFromMap {
 
     public static HttpRequest.BodyPublisher build(Map<Object, Object> data) {

@@ -24,28 +24,21 @@ public class SearchCourseController implements Initializable {
 
     private ObservableList<Course> courseObservableList;
 
-    private ObservableList<Course> followed_courses;
-
     private DashboardController dashboardController;
 
-    private Mockdatabase mockdatabase;
-
     private static SearchCourseController instance;
-    // static method to get instance of view
+
     public static SearchCourseController getInstance() {
         return instance;
     }
 
     public void setDashboardController(DashboardController dashboardController) {
         this.dashboardController = dashboardController;
-
-        // Add observable list data to the table
     }
 
     public SearchCourseController(){
 
         instance = this;
-
         courseObservableList = FXCollections.observableArrayList();
 
     }
@@ -59,11 +52,6 @@ public class SearchCourseController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends Course> observable, Course oldValue, Course newValue) {
-                // Your action here
-                System.out.println("Selected item: " + newValue.getName());
-
-                //DashboardController dashboardController = new DashboardController();
-
                 try {
                     dashboardController.getInstance().courseSelected(newValue.getCourseId());
                 } catch (IOException | InterruptedException e) {

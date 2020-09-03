@@ -29,7 +29,7 @@ public class SearchController implements Initializable {
     private UserRequests UserRequests;
     private GroupsRequests GroupsRequests;
 
-   @FXML
+    @FXML
     private TextField queryTextField;
 
     @FXML
@@ -56,24 +56,20 @@ public class SearchController implements Initializable {
     @FXML
     public SearchUserController SearchUserController;
 
-    private it.marcosautto.parthenopeddit.api.Mockdatabase Mockdatabase;
-
     private DashboardController DashboardController;
 
     private static SearchController instance;
-    // static method to get instance of view
+
+    public SearchController()  {
+        instance = this;
+    }
+
     public static SearchController getInstance() {
         return instance;
     }
 
     public void setDashboardController(DashboardController dashboardController) {
         this.DashboardController = dashboardController;
-
-        // Add observable list data to the table
-    }
-
-    public SearchController()  {
-        instance = this;
     }
 
     @Override
@@ -129,8 +125,6 @@ public class SearchController implements Initializable {
             ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
             ObservableList<Post> foundPosts = PostsRequests.searchPost(queryTextField.getText());
             ObservableList<User> foundUsers = UserRequests.searchUser(queryTextField.getText());
-
-
 
             SearchCourseController.getInstance().sendCourses(foundCourses);
             SearchPostController.getInstance().sendPosts(foundPosts);

@@ -24,10 +24,8 @@ public class SearchUserController implements Initializable {
 
     private DashboardController DashboardController;
 
-
     private static SearchUserController instance;
 
-    // static method to get instance of view
     public static SearchUserController getInstance() {
         return instance;
     }
@@ -37,24 +35,15 @@ public class SearchUserController implements Initializable {
         instance = this;
         userObservableList = FXCollections.observableArrayList();
 
-        userObservableList.addAll(
-        );
-
-
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //postListView.setItems(postObservableList);
-        //postListView.setCellFactory(postListView -> new PostListViewController());
 
         userListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<User>() {
 
             @Override
             public void changed(ObservableValue<? extends User> observable, User oldValue, User newValue) {
-                // Your action here
-                System.out.println("Selected item: " + newValue.getId());
-
                 try {
                     DashboardController.getInstance().profileSelected(newValue.getId());
                 } catch (IOException | InterruptedException e) {

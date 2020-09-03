@@ -19,6 +19,11 @@ public class CommentsRequests {
     private ApiClient ApiClient;
     private ApiRoute ApiRoute;
 
+    /**
+     *  - publishNewComment -
+     *  Pubblica un nuovo commento passando il contenuto del commento
+     *  e l'ID del contenuto commentato
+     */
     public int publishNewComment(String body, int commented_content_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
         data.put("body", body);
@@ -26,22 +31,24 @@ public class CommentsRequests {
 
         HttpRequest request = HttpRequest.newBuilder()
                 .POST(BuildFormDataFromMap.build(data))
-                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"comments/"))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/comments/"))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .header("Content-Type", "application/x-www-form-urlencoded")
                 .build();
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-
         return response.statusCode();
-
     }
 
+    /**
+     *  - getContent -
+     *  Ottieni un commento dato il suo ID
+     */
     public Comment getComment(int commentId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
-                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"comments/"+commentId))
+                .uri(URI.create(ApiClient.getInstance().getBaseUrl()+"/comments/"+commentId))
                 .setHeader("authorization", Auth.getInstance().getToken())
                 .build();
 
@@ -50,12 +57,15 @@ public class CommentsRequests {
         Gson gson = new Gson();
         String jsonOutput = response.body();
         System.out.println(response.body());
-
         Comment comment = new Gson().fromJson(response.body(), Comment.class);
 
         return comment;
     }
 
+    /**
+     *  - likeComment -
+     *  Invia un upvote al commento dato il suo ID
+     */
     public int likeComment(int comment_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
@@ -69,9 +79,12 @@ public class CommentsRequests {
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         return response.statusCode();
-
     }
 
+    /**
+     *  - dislikeComment -
+     *  Invia un downvote al commento dato il suo ID
+     */
     public int dislikeComment(int comment_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
@@ -84,8 +97,6 @@ public class CommentsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-
         return response.statusCode();
-
     }
 }

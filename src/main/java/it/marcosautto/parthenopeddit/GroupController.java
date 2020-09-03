@@ -30,18 +30,14 @@ public class GroupController implements Initializable {
     private ObservableList<GroupMember> user_group;
 
     private Auth Auth;
-    private GroupsRequests GroupsRequests;
 
-    private Mockdatabase Mockdatabase;
+    private GroupsRequests GroupsRequests;
 
     private DashboardController DashboardController;
 
     public GroupController() throws IOException, InterruptedException {
 
         groupObservableList = FXCollections.observableArrayList();
-
-
-
 
     }
 
@@ -71,11 +67,6 @@ public class GroupController implements Initializable {
 
             @Override
             public void changed(ObservableValue<? extends GroupMember> observable, GroupMember oldValue, GroupMember newValue) {
-                // Your action here
-                System.out.println("Selected item: " + newValue.getGroup().getName());
-
-                //DashboardController dashboardController = new DashboardController();
-
                 try {
                     DashboardController.getInstance().groupSelected(newValue.getGroup().getId());
                 } catch (IOException | InterruptedException | ParseException e) {

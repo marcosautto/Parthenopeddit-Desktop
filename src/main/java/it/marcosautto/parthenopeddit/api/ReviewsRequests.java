@@ -18,7 +18,10 @@ public class ReviewsRequests {
     private ApiClient ApiClient;
     private ApiRoute ApiRoute;
 
-
+    /**
+     *  - publishNewReview -
+     *  Pubblica una recensione al corso di cui è passato l'ID
+     */
     public int publishNewReview(String body, int reviewed_course_id, int score_liking, int score_difficulty) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
         data.put("body", body);
@@ -35,10 +38,13 @@ public class ReviewsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-
         return response.statusCode();
     }
-    
+
+    /**
+     *  - getReview -
+     *  Ottieni la recensione di cui si passa l'ID
+     */
     public Review getReview(int reviewId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -48,15 +54,15 @@ public class ReviewsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        Gson gson = new Gson();
-        String jsonOutput = response.body();
-        System.out.println(response.body());
-
         Review review = new Gson().fromJson(response.body(), Review.class);
 
         return review;
     }
-    
+
+    /**
+     *  - getReviewWithComments -
+     *  Ottieni la recensione con i commenti di cui si passa l'ID
+     */
     public Review getReviewWithComments(int reviewId) throws IOException, InterruptedException {
         HttpRequest request = HttpRequest.newBuilder()
                 .GET()
@@ -66,27 +72,15 @@ public class ReviewsRequests {
 
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
-        Gson gson = new Gson();
-        String jsonOutput = response.body();
-        System.out.println(response.body());
-        System.out.println("Lol0");
-
         Review review = new Gson().fromJson(response.body(), Review.class);
-
-        System.out.println("Lol1");
-
-        //Devo convertire la lista di commenti
-        //Type listType = new TypeToken<List<Comment>>(){}.getType();
-        //List<Comment> list = new ArrayList<Comment>();
-        //list = gson.fromJson(jsonOutput, listType);
-        //ObservableList<Comment> comments = FXCollections.observableList(list);
-        System.out.println("Lol2");
-        //post.setComments(comments);
-
 
         return review;
     }
 
+    /**
+     *  - likeReview -
+     *  Invia un upvote alla recensione dato il suo ID
+     */
     public int likeReview(int review_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
@@ -100,9 +94,12 @@ public class ReviewsRequests {
         HttpResponse<String> response = ApiClient.getInstance().getHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
 
         return response.statusCode();
-
     }
 
+    /**
+     *  - dislikeReview -
+     *  Invia un downvote alla recensione dato il suo ID
+     */
     public int dislikeReview(int review_id) throws IOException, InterruptedException {
         Map<Object, Object> data = new HashMap<>();
 
@@ -117,6 +114,5 @@ public class ReviewsRequests {
 
 
         return response.statusCode();
-
     }
 }
