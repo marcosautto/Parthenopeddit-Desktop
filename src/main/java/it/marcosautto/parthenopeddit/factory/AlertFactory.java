@@ -7,6 +7,8 @@ public class AlertFactory {
             return new GroupMemberAlert(name);
         else if(alertType.equals("INVITE_ALERT"))
             return new GroupInviteAlert(name);
+        else if(alertType.equals("QUERY_LENGTH_ALERT"))
+            return new SearchAlert();
 
         return null;
     }

@@ -1,6 +1,8 @@
 package it.marcosautto.parthenopeddit;
 
 import it.marcosautto.parthenopeddit.api.*;
+import it.marcosautto.parthenopeddit.factory.AlertFactory;
+import it.marcosautto.parthenopeddit.factory.AlertType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -17,6 +19,7 @@ import it.marcosautto.parthenopeddit.searchPage.SearchCourseController;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -28,6 +31,7 @@ public class SearchController implements Initializable {
     private PostsRequests PostsRequests;
     private UserRequests UserRequests;
     private GroupsRequests GroupsRequests;
+    private AlertFactory alertFactory;
 
     @FXML
     private TextField queryTextField;
@@ -81,6 +85,7 @@ public class SearchController implements Initializable {
         PostsRequests = new PostsRequests();
         UserRequests = new UserRequests();
         GroupsRequests = new GroupsRequests();
+        alertFactory = new AlertFactory();
 
         try
         {
@@ -117,10 +122,8 @@ public class SearchController implements Initializable {
 
         String query = queryTextField.getText();
         if(query.length()<3){
-            Alert alert = new Alert(Alert.AlertType.NONE);
-            alert.setAlertType(Alert.AlertType.WARNING);
-            alert.setContentText("La ricerca deve essere lunga almeno 3 caratteri.");
-            alert.show();
+            //FACTORY PATTERN
+            AlertType alert = alertFactory.getAlert("QUERY_LENGTH_ALERT", "");
         } else{
             ObservableList<Course> foundCourses = CoursesRequests.searchByName(queryTextField.getText());
             ObservableList<Post> foundPosts = PostsRequests.searchPost(queryTextField.getText());
