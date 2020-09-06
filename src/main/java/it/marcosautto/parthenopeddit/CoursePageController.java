@@ -175,6 +175,7 @@ public class CoursePageController implements Initializable {
             followButton.setText("Lascia corso");
             isFollowed = true;
             CoursesRequests.followCourse(courseId);
+            DashboardController.getInstance().courseSelected(courseId);
         }
 
     }

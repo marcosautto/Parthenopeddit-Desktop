@@ -13,7 +13,7 @@ public class SearchAlert extends AlertType {
     }
 
     @Override
-    public void createAlert(String groupName){
+    public void createAlert(String name){
         alert = new Alert(Alert.AlertType.NONE);
         alert.setAlertType(Alert.AlertType.WARNING);
         alert.setContentText("La ricerca deve essere lunga almeno 3 caratteri.");

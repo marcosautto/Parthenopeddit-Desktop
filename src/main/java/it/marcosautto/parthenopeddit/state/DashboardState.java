@@ -78,8 +78,6 @@ public class DashboardState implements State {
     @Override
     public void groupInvite(Pane pane, Button button) throws IOException {
         setButtonSelected(button);
-        if(pane == null)
-            System.out.println("null");
         state.groupInvite(pane, button);
     }
 
@@ -87,7 +85,6 @@ public class DashboardState implements State {
     public void info(Pane pane, Button button) throws IOException {
         setButtonSelected(button);
         state.info(pane, button);
-
     }
 
     @Override
